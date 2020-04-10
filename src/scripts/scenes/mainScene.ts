@@ -16,19 +16,26 @@ export default class MainScene extends Phaser.Scene {
   private item: any;
   private items: Array<any>;
   private dragObj: any;
-
+  private paper:any;
+  private camisaX: any;
 
   constructor() {
     super({ key: 'MainScene' });
   }
 
   create() {
+    this.camisaX=40;
+    this.paper=this.add.image(70, 110, "paper");
+    this.paper.setScale(1.2);
 
+    this.checkmark=this.add.image(30, 30, "checkmark");
+    this.checkmark.setScale(0.04);
+    this.checkmark.setAlpha(0.0);
     this.items = ["shirt", "shoes", "skirt"];
-    this.add.text(30,5, "Shopping List:",{fill:"#000000", fontSize:"16px"});
-    this.add.text(30,25, "camisa",{fill:"#000000", fontSize:"16px"});
-    this.add.text(30,40, "zapatos",{fill:"#000000", fontSize:"16px"});
-    this.add.text(30,55, "falda",{fill:"#000000", fontSize:"16px"});
+    this.add.text(15,5, "Shopping List:",{fill:"#000000", fontSize:"16px"});
+    this.add.text(this.camisaX,30, "camisa",{fill:"#000000", fontSize:"16px"});
+    this.add.text(40,50, "zapatos",{fill:"#000000", fontSize:"16px"});
+    this.add.text(40,70, "falda",{fill:"#000000", fontSize:"16px"});
 
     this.basket=this.physics.add.image(150,300,"basket");
     this.basket.setScale(0.5);
@@ -90,6 +97,7 @@ export default class MainScene extends Phaser.Scene {
       this.word = "shirt";
       if (this.items.indexOf(this.word) != -1){
         this.shirt.disableBody(true,true);
+        this.checkmark.setAlpha(1.0);
       }
     }
 
