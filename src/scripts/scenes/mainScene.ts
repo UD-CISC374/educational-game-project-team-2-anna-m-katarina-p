@@ -10,15 +10,31 @@ export default class MainScene extends Phaser.Scene {
   private dress: any;
   private pjs: any;
   private sweater: any;
+  private basket: any;
+  private checkmark: any;
+  private word: any;
+  private item: any;
+  private items: Array<any>;
   private dragObj: any;
+
 
   constructor() {
     super({ key: 'MainScene' });
   }
 
   create() {
-    this.shirt=this.physics.add.image(60,60,"shirt");
-    this.shirt.setScale(0.18);
+
+    this.items = ["shirt", "shoes", "skirt"];
+    this.add.text(30,5, "Shopping List:",{fill:"#000000", fontSize:"16px"});
+    this.add.text(30,25, "camisa",{fill:"#000000", fontSize:"16px"});
+    this.add.text(30,40, "zapatos",{fill:"#000000", fontSize:"16px"});
+    this.add.text(30,55, "falda",{fill:"#000000", fontSize:"16px"});
+
+    this.basket=this.physics.add.image(150,300,"basket");
+    this.basket.setScale(0.5);
+    
+    this.shirt=this.physics.add.image(150,60,"shirt");
+    this.shirt.setScale(0.15);
     this.shirt.setInteractive();
     this.input.setDraggable(this.shirt);
 
@@ -27,8 +43,8 @@ export default class MainScene extends Phaser.Scene {
     this.pants.setInteractive();
     this.input.setDraggable(this.pants);
 
-    this.shoes=this.physics.add.image(190,60,"shoes");
-    this.shoes.setScale(0.18);
+    this.shoes=this.physics.add.image(245,60,"shoes");
+    this.shoes.setScale(0.15);
     this.shoes.setInteractive();
     this.input.setDraggable(this.shoes);
 
@@ -47,8 +63,8 @@ export default class MainScene extends Phaser.Scene {
     this.pjs.setInteractive();
     this.input.setDraggable(this.pjs);
 
-    this.skirt=this.physics.add.image(300,60,"skirt");
-    this.skirt.setScale(0.2);
+    this.skirt=this.physics.add.image(340,60,"skirt");
+    this.skirt.setScale(0.12);
     this.skirt.setInteractive();
     this.input.setDraggable(this.pjs);
 
@@ -60,12 +76,30 @@ export default class MainScene extends Phaser.Scene {
 
     this.input.on('pointerdown', this.startDrag, this);
 
-
+    this.physics.add.overlap(this.basket, this.shirt, this.pick, undefined, this);
+    this.physics.add.overlap(this.basket, this.skirt, this.pick, undefined, this);
 
     //this.exampleObject = new ExampleObject(this, 0, 0);
   }
 
   update() {
+  }
+
+  pick(basket,item){
+    if (item == this.shirt){
+      this.word = "shirt";
+      if (this.items.indexOf(this.word) != -1){
+        this.shirt.disableBody(true,true);
+      }
+    }
+
+    if (item == this.skirt){
+      this.word = "skirt";
+      if (this.items.indexOf(this.word) != -1){
+        this.skirt.disableBody(true,true);
+      }
+    }
+    
   }
 
   startDrag(pointer, targets){
