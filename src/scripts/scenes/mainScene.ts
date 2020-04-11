@@ -24,67 +24,85 @@ export default class MainScene extends Phaser.Scene {
   }
 
   create() {
-    this.camisaX=40;
+    //Add paper and shopping list
     this.paper=this.add.image(70, 110, "paper");
     this.paper.setScale(1.2);
-
-    this.checkmark=this.add.image(30, 30, "checkmark");
-    this.checkmark.setScale(0.04);
-    this.checkmark.setAlpha(0.0);
-    this.items = ["shirt", "shoes", "skirt"];
     this.add.text(15,5, "Shopping List:",{fill:"#000000", fontSize:"16px"});
+    this.camisaX = 40;
     this.add.text(this.camisaX,30, "camisa",{fill:"#000000", fontSize:"16px"});
     this.add.text(40,50, "zapatos",{fill:"#000000", fontSize:"16px"});
     this.add.text(40,70, "falda",{fill:"#000000", fontSize:"16px"});
 
-    this.basket=this.physics.add.image(150,300,"basket");
+    //Add checkmark
+    this.checkmark=this.add.image(30, 30, "checkmark");
+    this.checkmark.setScale(0.04);
+    this.checkmark.setAlpha(0.0);
+
+    //Make list of items for this level
+    this.items = ["shirt", "shoes", "skirt"];
+    
+    //Make basket
+    this.basket=this.physics.add.image(200,360,"basket");
     this.basket.setScale(0.5);
     
-    this.shirt=this.physics.add.image(150,60,"shirt");
+    //Make shirt
+    this.shirt=this.physics.add.image(200,60,"shirt");
     this.shirt.setScale(0.15);
     this.shirt.setInteractive();
     this.input.setDraggable(this.shirt);
 
-    this.pants=this.physics.add.image(180, 200, "pants");
+    //Make pants
+    this.pants=this.physics.add.image(320, 240, "pants");
     this.pants.setScale(0.2);
     this.pants.setInteractive();
     this.input.setDraggable(this.pants);
 
-    this.shoes=this.physics.add.image(245,60,"shoes");
+    //Make shoes
+    this.shoes=this.physics.add.image(285,60,"shoes");
     this.shoes.setScale(0.15);
     this.shoes.setInteractive();
     this.input.setDraggable(this.shoes);
 
-    this.dress=this.physics.add.image(60,190,"dress");
+    //Make dress
+    this.dress=this.physics.add.image(230,240,"dress");
     this.dress.setScale(0.2);
     this.dress.setInteractive();
     this.input.setDraggable(this.dress);
 
-    this.shorts=this.physics.add.image(250,320,"shorts");
-    this.shorts.setScale(0.2);
+    //Make shorts
+    this.shorts=this.physics.add.image(280,140,"shorts");
+    this.shorts.setScale(0.15);
     this.shorts.setInteractive();
     this.input.setDraggable(this.shorts);
 
-    this.pjs=this.physics.add.image(300,200,"pjs");
-    this.pjs.setScale(0.25);
+    //Make pjs
+    this.pjs=this.physics.add.image(360,140,"pjs");
+    this.pjs.setScale(0.20);
     this.pjs.setInteractive();
     this.input.setDraggable(this.pjs);
 
-    this.skirt=this.physics.add.image(340,60,"skirt");
+    //Make skirt
+    this.skirt=this.physics.add.image(360,60,"skirt");
     this.skirt.setScale(0.12);
     this.skirt.setInteractive();
     this.input.setDraggable(this.pjs);
 
-    this.sweater=this.physics.add.image(120,320,"sweater");
-    this.sweater.setScale(0.2);
+    //Make sweater
+    this.sweater=this.physics.add.image(195,145,"sweater");
+    this.sweater.setScale(0.15);
     this.sweater.setInteractive();
     this.input.setDraggable(this.sweater);
 
-
+    //Set up dragging into basket
     this.input.on('pointerdown', this.startDrag, this);
-
     this.physics.add.overlap(this.basket, this.shirt, this.pick, undefined, this);
     this.physics.add.overlap(this.basket, this.skirt, this.pick, undefined, this);
+    this.physics.add.overlap(this.basket, this.pjs, this.pick, undefined, this);
+    this.physics.add.overlap(this.basket, this.shoes, this.pick, undefined, this);
+    this.physics.add.overlap(this.basket, this.pants, this.pick, undefined, this);
+    this.physics.add.overlap(this.basket, this.shorts, this.pick, undefined, this);
+    this.physics.add.overlap(this.basket, this.dress, this.pick, undefined, this);
+    this.physics.add.overlap(this.basket, this.sweater, this.pick, undefined, this);
 
     //this.exampleObject = new ExampleObject(this, 0, 0);
   }
@@ -99,12 +117,93 @@ export default class MainScene extends Phaser.Scene {
         this.shirt.disableBody(true,true);
         this.checkmark.setAlpha(1.0);
       }
+      else{
+        this.shirt.setX(200);
+        this.shirt.setY(60);
+      }
     }
 
     if (item == this.skirt){
       this.word = "skirt";
       if (this.items.indexOf(this.word) != -1){
         this.skirt.disableBody(true,true);
+        this.checkmark.setAlpha(1.0);
+      }
+      else{
+        this.skirt.setX(360);
+        this.skirt.setY(60);
+      }
+    }
+
+    if (item == this.pjs){
+      this.word = "pjs";
+      if (this.items.indexOf(this.word) != -1){
+        this.pjs.disableBody(true,true);
+        this.checkmark.setAlpha(1.0);
+      }
+      else{
+        this.pjs.setX(360);
+        this.pjs.setY(140);
+      }
+    }
+
+    if (item == this.sweater){
+      this.word = "sweater";
+      if (this.items.indexOf(this.word) != -1){
+        this.sweater.disableBody(true,true);
+        this.checkmark.setAlpha(1.0);
+      }
+      else{
+        this.sweater.setX(195);
+        this.sweater.setY(145);
+      }
+    }
+
+    if (item == this.shoes){
+      this.word = "shoes";
+      if (this.items.indexOf(this.word) != -1){
+        this.shoes.disableBody(true,true);
+        this.checkmark.setAlpha(1.0);
+      }
+      else{
+        this.shoes.setX(285);
+        this.shoes.setY(60);
+      }
+    }
+
+    if (item == this.pants){
+      this.word = "pants";
+      if (this.items.indexOf(this.word) != -1){
+        this.pants.disableBody(true,true);
+        this.checkmark.setAlpha(1.0);
+      }
+      else{
+        this.pants.setX(320);
+        this.pants.setY(240);
+      }
+    }
+
+    if (item == this.shorts){
+      this.word = "shorts";
+      if (this.items.indexOf(this.word) != -1){
+        this.shorts.disableBody(true,true);
+        this.checkmark.setAlpha(1.0);
+      }
+      else{
+        this.shorts.setX(280);
+        this.shorts.setY(140);
+      }
+    }
+
+    if (item == this.dress){
+      this.word = "dress";
+      if (this.items.indexOf(this.word) != -1){
+        this.dress.disableBody(true,true);
+        this.checkmark.setAlpha(1.0);
+      }
+      else{
+        this.dress.setX(230);
+        this.dress.setY(240);
       }
     }
     
