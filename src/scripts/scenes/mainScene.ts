@@ -18,12 +18,24 @@ export default class MainScene extends Phaser.Scene {
   private dragObj: any;
   private paper:any;
   private camisaX: any;
+  private checkmark2: any;
+  private checkmark3: any;
+  private mapButton: any;
+  private yellowBackground: any;
 
   constructor() {
     super({ key: 'MainScene' });
   }
 
   create() {
+    //Add background and map button
+    this.yellowBackground=this.add.image(200, 200, "yellowBackground");
+
+    this.mapButton=this.add.image(70, 300, "mapButton")
+     .setInteractive()
+     .on('pointerdown', ()=>this.doThing());
+    this.mapButton.setScale(0.6);
+
     //Add paper and shopping list
     this.paper=this.add.image(70, 110, "paper");
     this.paper.setScale(1.2);
@@ -38,11 +50,21 @@ export default class MainScene extends Phaser.Scene {
     this.checkmark.setScale(0.04);
     this.checkmark.setAlpha(0.0);
 
+    //Second checkmark
+    this.checkmark2=this.add.image(30, 51, "checkmark");
+    this.checkmark2.setScale(0.04);
+    this.checkmark2.setAlpha(0.0);
+
+    //Third checkmark
+    this.checkmark3=this.add.image(30, 72, "checkmark");
+    this.checkmark3.setScale(0.04);
+    this.checkmark3.setAlpha(0.0);
+
     //Make list of items for this level
     this.items = ["shirt", "shoes", "skirt"];
     
     //Make basket
-    this.basket=this.physics.add.image(200,360,"basket");
+    this.basket=this.physics.add.image(270,360,"basket");
     this.basket.setScale(0.5);
     
     //Make shirt
@@ -110,6 +132,10 @@ export default class MainScene extends Phaser.Scene {
   update() {
   }
 
+  doThing(){
+
+  }
+
   pick(basket,item){
     if (item == this.shirt){
       this.word = "shirt";
@@ -127,7 +153,7 @@ export default class MainScene extends Phaser.Scene {
       this.word = "skirt";
       if (this.items.indexOf(this.word) != -1){
         this.skirt.disableBody(true,true);
-        this.checkmark.setAlpha(1.0);
+        this.checkmark3.setAlpha(1.0);
       }
       else{
         this.skirt.setX(360);
@@ -163,7 +189,7 @@ export default class MainScene extends Phaser.Scene {
       this.word = "shoes";
       if (this.items.indexOf(this.word) != -1){
         this.shoes.disableBody(true,true);
-        this.checkmark.setAlpha(1.0);
+        this.checkmark2.setAlpha(1.0);
       }
       else{
         this.shoes.setX(285);
