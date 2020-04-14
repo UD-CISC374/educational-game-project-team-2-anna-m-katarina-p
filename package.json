@@ -5,7 +5,7 @@
   "homepage": "https://github.com/acbart/educational-phaser-game-template#readme",
   "main": "index.js",
   "game": {
-    "url": "educational-phaser-game-template",
+    "url": "educational-game-project-team-2-anna-m-katarina-p",
     "shortName": "EdGame",
     "name": "Educational Phaser Game Template"
   },
