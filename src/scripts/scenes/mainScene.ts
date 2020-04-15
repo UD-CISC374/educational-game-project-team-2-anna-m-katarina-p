@@ -23,6 +23,7 @@ export default class MainScene extends Phaser.Scene {
   private mapButton: any;
   private yellowBackground: any;
   private listDone: any;
+  private itemsSelected: any;
 
   constructor() {
     super({ key: 'MainScene' });
@@ -34,8 +35,8 @@ export default class MainScene extends Phaser.Scene {
     this.yellowBackground=this.add.image(200, 200, "yellowBackground");
 
     this.mapButton=this.add.image(70, 300, "mapButton")
-     .setInteractive()
-     .on('pointerdown', ()=>this.doThing());
+    .setInteractive()
+    .on('pointerdown', ()=>this.doThing());
     this.mapButton.setScale(0.6);
 
     //Add paper and shopping list
@@ -64,6 +65,9 @@ export default class MainScene extends Phaser.Scene {
 
     //Make list of items for this level
     this.items = ["shirt", "shoes", "skirt"];
+
+    //Make list of items selected
+    this.itemsSelected = [];
     
     //Make basket
     this.basket=this.physics.add.image(270,360,"basket");
@@ -141,7 +145,7 @@ export default class MainScene extends Phaser.Scene {
 
   checkList(){
     if (this.listDone){
-      this.scene.start('otherScene');
+      this.scene.start('otherScene', {picked: this.itemsSelected});
     }
   }
 
@@ -151,6 +155,7 @@ export default class MainScene extends Phaser.Scene {
       if (this.items.indexOf(this.word) != -1){
         this.shirt.disableBody(true,true);
         this.checkmark.setAlpha(1.0);
+        this.itemsSelected.push("shirt");
         this.listDone=true;
       }
       else{
@@ -164,6 +169,7 @@ export default class MainScene extends Phaser.Scene {
       if (this.items.indexOf(this.word) != -1){
         this.skirt.disableBody(true,true);
         this.checkmark3.setAlpha(1.0);
+        this.itemsSelected.push("skirt");
       }
       else{
         this.skirt.setX(360);
@@ -200,6 +206,7 @@ export default class MainScene extends Phaser.Scene {
       if (this.items.indexOf(this.word) != -1){
         this.shoes.disableBody(true,true);
         this.checkmark2.setAlpha(1.0);
+        this.itemsSelected.push("shoes");
       }
       else{
         this.shoes.setX(285);
