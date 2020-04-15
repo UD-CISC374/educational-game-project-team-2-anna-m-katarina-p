@@ -22,12 +22,14 @@ export default class MainScene extends Phaser.Scene {
   private checkmark3: any;
   private mapButton: any;
   private yellowBackground: any;
+  private listDone: any;
 
   constructor() {
     super({ key: 'MainScene' });
   }
 
   create() {
+    this.listDone=false;
     //Add background and map button
     this.yellowBackground=this.add.image(200, 200, "yellowBackground");
 
@@ -130,10 +132,17 @@ export default class MainScene extends Phaser.Scene {
   }
 
   update() {
+    this.checkList();
   }
 
   doThing(){
 
+  }
+
+  checkList(){
+    if (this.listDone){
+      this.scene.start('otherScene');
+    }
   }
 
   pick(basket,item){
@@ -142,6 +151,7 @@ export default class MainScene extends Phaser.Scene {
       if (this.items.indexOf(this.word) != -1){
         this.shirt.disableBody(true,true);
         this.checkmark.setAlpha(1.0);
+        this.listDone=true;
       }
       else{
         this.shirt.setX(200);
