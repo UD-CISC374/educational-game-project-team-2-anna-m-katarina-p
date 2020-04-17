@@ -36,7 +36,7 @@ export default class MainScene extends Phaser.Scene {
 
     this.mapButton=this.add.image(70, 300, "mapButton")
     .setInteractive()
-    .on('pointerdown', ()=>this.doThing());
+    .on('pointerdown', ()=>this.goToMap());
     this.mapButton.setScale(0.6);
 
     //Add paper and shopping list
@@ -139,7 +139,8 @@ export default class MainScene extends Phaser.Scene {
     this.checkList();
   }
 
-  doThing(){
+  goToMap(){
+    this.scene.start('mapScene');
 
   }
 
