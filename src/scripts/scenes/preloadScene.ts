@@ -35,6 +35,7 @@ export default class PreloadScene extends Phaser.Scene {
     this.load.image("milk", "assets/images/milk.png");
     this.load.image("soda", "assets/images/soda.png");
     this.load.image("water", "assets/images/waterbottle.png");
+    this.load.image("green", "assets/images/green.png");
     
     //party
     this.load.image("bowl", "assets/images/bowl.png");
@@ -45,6 +46,7 @@ export default class PreloadScene extends Phaser.Scene {
     this.load.image("redBalloon", "assets/images/red balloon.png");
     this.load.image("streamers", "assets/images/streamers.png");
     this.load.image("utensils", "assets/images/utensils.png");
+    this.load.image("blue", "assets/images/blue.png");
     
     
     
