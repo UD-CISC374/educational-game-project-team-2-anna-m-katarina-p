@@ -33,6 +33,8 @@ export default class partyScene extends Phaser.Scene {
         this.add.text(40,50, "zapatos",{fill:"#000000", fontSize:"16px"});
         this.add.text(40,70, "falda",{fill:"#000000", fontSize:"16px"});
 
+        this.add.text(5,350,"Drag item to basket.",{fill:"#000000", fontSize:"16px"});
+
         this.mapButton=this.add.image(70, 300, "mapButton")
         .setInteractive()
         .on('pointerdown', ()=>this.goToMap());

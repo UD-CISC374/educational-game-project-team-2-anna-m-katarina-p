@@ -48,6 +48,8 @@ export default class MainScene extends Phaser.Scene {
     this.add.text(40,50, "zapatos",{fill:"#000000", fontSize:"16px"});
     this.add.text(40,70, "falda",{fill:"#000000", fontSize:"16px"});
 
+    this.add.text(5,350,"Drag item to basket.",{fill:"#000000", fontSize:"16px"});
+
     //Add checkmark
     this.checkmark=this.add.image(30, 30, "checkmark");
     this.checkmark.setScale(0.04);

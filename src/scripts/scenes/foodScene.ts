@@ -41,6 +41,8 @@ export default class foodScene extends Phaser.Scene {
         this.add.text(40,50, "zapatos",{fill:"#000000", fontSize:"16px"});
         this.add.text(40,70, "falda",{fill:"#000000", fontSize:"16px"});
 
+        this.add.text(5,350,"Drag item to basket.",{fill:"#000000", fontSize:"16px"});
+
         //Make basket
         this.basket=this.physics.add.image(270,360,"basket");
         this.basket.setScale(0.5);
