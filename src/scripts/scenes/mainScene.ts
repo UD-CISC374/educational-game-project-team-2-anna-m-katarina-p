@@ -24,6 +24,7 @@ export default class MainScene extends Phaser.Scene {
   private yellowBackground: any;
   private listDone: any;
   private itemsSelected: any;
+  private x: any;
 
   constructor() {
     super({ key: 'MainScene' });
@@ -189,6 +190,7 @@ export default class MainScene extends Phaser.Scene {
       else{
         this.pjs.setX(360);
         this.pjs.setY(140);
+        this.wrong();
       }
     }
 
@@ -253,6 +255,22 @@ export default class MainScene extends Phaser.Scene {
       }
     }
     
+  }
+
+  wrong(){
+    this.x = this.physics.add.image(200,200,"x");
+    this.x.setScale(0.3);
+    this.time.addEvent({
+      delay: 300,
+      callback: this.hide,
+      callbackScope: this,
+      loop: false
+    });
+  }
+
+  hide(){
+    this.x.setAlpha(0.0);
+    this.pjs.setAlpha(0.0);
   }
 
   startDrag(pointer, targets){
