@@ -1,7 +1,6 @@
 import 'phaser';
-import MainScene from './scenes/mainScene';
+import MainScene from './scenes/clothingScene';
 import PreloadScene from './scenes/preloadScene';
-import OtherScene from './scenes/otherScene';
 import MapScene from './scenes/mapScene';
 import PartyScene from './scenes/partyScene';
 import FoodScene from './scenes/foodScene';
@@ -21,7 +20,7 @@ const config: GameConfig = {
         width: DEFAULT_WIDTH,
         height: DEFAULT_HEIGHT
     },
-    scene: [PreloadScene, MainScene, OtherScene, MapScene, PartyScene, FoodScene],
+    scene: [PreloadScene, MainScene, MapScene, PartyScene, FoodScene],
     physics: {
         default: 'arcade',
         arcade: {

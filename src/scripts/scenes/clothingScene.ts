@@ -1,6 +1,6 @@
 import ExampleObject from '../objects/exampleObject';
 
-export default class MainScene extends Phaser.Scene {
+export default class clothingScene extends Phaser.Scene {
   private exampleObject: ExampleObject;
   private shirt: any;
   private pants: any;
@@ -24,7 +24,6 @@ export default class MainScene extends Phaser.Scene {
   private yellowBackground: any;
   private listDone: any;
   private itemsSelected: any;
-  private x: any;
 
   constructor() {
     super({ key: 'MainScene' });
@@ -135,22 +134,25 @@ export default class MainScene extends Phaser.Scene {
     this.physics.add.overlap(this.basket, this.dress, this.pick, undefined, this);
     this.physics.add.overlap(this.basket, this.sweater, this.pick, undefined, this);
 
-    //this.exampleObject = new ExampleObject(this, 0, 0);
   }
 
   update() {
-    this.checkList();
+    let allThere = 0;
+    for (let index = 0; index < this.items.length; index++){
+      allThere = this.itemsSelected.includes(this.items[index]) + allThere;
+    }
+    if (allThere == this.items.length){
+      this.listDone == true;
+      this.pjs.setAlpha(0.0);
+    }
+    else{
+      this.listDone == false;
+    }
   }
 
   goToMap(){
     this.scene.start('mapScene');
 
-  }
-
-  checkList(){
-    if (this.listDone){
-      this.scene.start('otherScene', {picked: this.itemsSelected});
-    }
   }
 
   pick(basket,item){
@@ -160,7 +162,6 @@ export default class MainScene extends Phaser.Scene {
         this.shirt.disableBody(true,true);
         this.checkmark.setAlpha(1.0);
         this.itemsSelected.push("shirt");
-        this.listDone=true;
       }
       else{
         this.shirt.setX(200);
@@ -190,7 +191,6 @@ export default class MainScene extends Phaser.Scene {
       else{
         this.pjs.setX(360);
         this.pjs.setY(140);
-        this.wrong();
       }
     }
 
@@ -255,22 +255,6 @@ export default class MainScene extends Phaser.Scene {
       }
     }
     
-  }
-
-  wrong(){
-    this.x = this.physics.add.image(200,200,"x");
-    this.x.setScale(0.3);
-    this.time.addEvent({
-      delay: 300,
-      callback: this.hide,
-      callbackScope: this,
-      loop: false
-    });
-  }
-
-  hide(){
-    this.x.setAlpha(0.0);
-    this.pjs.setAlpha(0.0);
   }
 
   startDrag(pointer, targets){
