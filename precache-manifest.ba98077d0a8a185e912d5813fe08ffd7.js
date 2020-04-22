@@ -24,11 +24,11 @@ self.__precacheManifest = (self.__precacheManifest || []).concat([
     "url": "assets/icons/icons8-game-controller-16.png"
   },
   {
-    "revision": "50d221f1501ba18f7f666bbf9f5a1547",
+    "revision": "2e078b5e8e22c0bb6ac5316e6d8e8c3a",
     "url": "assets/images/apple.png"
   },
   {
-    "revision": "7acea10a2d82a16fc777d3bce8f66045",
+    "revision": "250405263fedceb0892a3833ae4f0d3e",
     "url": "assets/images/banana.png"
   },
   {
@@ -36,11 +36,15 @@ self.__precacheManifest = (self.__precacheManifest || []).concat([
     "url": "assets/images/basket.png"
   },
   {
+    "revision": "ec2d322cc3894d03054fc006d109c0b6",
+    "url": "assets/images/blue.png"
+  },
+  {
     "revision": "10bbb6817c6800508055faf7007cd519",
     "url": "assets/images/bowl.png"
   },
   {
-    "revision": "732af4a63aa6572a4d59078ecbae7f99",
+    "revision": "d336c7f452d1abbebe30f5de21eb23f4",
     "url": "assets/images/bread.png"
   },
   {
@@ -50,6 +54,10 @@ self.__precacheManifest = (self.__precacheManifest || []).concat([
   {
     "revision": "a823ba8c2908854ca2dec10167a9b793",
     "url": "assets/images/chips.png"
+  },
+  {
+    "revision": "acbaa6797a09dfe9bd3fb92e6efd5366",
+    "url": "assets/images/clothesButton.png"
   },
   {
     "revision": "453b3fbce290f96433d0ec808cc7f3cd",
@@ -68,15 +76,23 @@ self.__precacheManifest = (self.__precacheManifest || []).concat([
     "url": "assets/images/firework.png"
   },
   {
+    "revision": "d651736bc3192b919a6163b0cc2261dd",
+    "url": "assets/images/foodButton.png"
+  },
+  {
     "revision": "b1f5ed016d9e403e5943ab7f563c2cb5",
     "url": "assets/images/green balloon.png"
+  },
+  {
+    "revision": "72dda8c46e90664d5f3829c50f1f133f",
+    "url": "assets/images/green.png"
   },
   {
     "revision": "2b87972947df1b5071a379bfe7cb44f3",
     "url": "assets/images/hat.png"
   },
   {
-    "revision": "fb08cbbeffc5723503b646a6c00ca9fe",
+    "revision": "43e38f0875f638f722ce4d9d46903a19",
     "url": "assets/images/hotdog.png"
   },
   {
@@ -92,7 +108,7 @@ self.__precacheManifest = (self.__precacheManifest || []).concat([
     "url": "assets/images/mapbutton.png"
   },
   {
-    "revision": "9543f90876447626958b32728eca1db4",
+    "revision": "0983c5a77d91217a1319ee6a3049a0e8",
     "url": "assets/images/milk.png"
   },
   {
@@ -102,6 +118,10 @@ self.__precacheManifest = (self.__precacheManifest || []).concat([
   {
     "revision": "eaa25d2442dca37986406d370a594404",
     "url": "assets/images/paper.png"
+  },
+  {
+    "revision": "e32a77eef7149d228061150f2cc37c47",
+    "url": "assets/images/partyButton.png"
   },
   {
     "revision": "beca26fc6371788af69e5f82feb6208e",
@@ -148,8 +168,12 @@ self.__precacheManifest = (self.__precacheManifest || []).concat([
     "url": "assets/images/utensils.png"
   },
   {
-    "revision": "88f47580ab4a0b82cfee92b934a2b9bc",
+    "revision": "5adbb35fdbc95c3393589b54e9e6a3f6",
     "url": "assets/images/waterbottle.png"
+  },
+  {
+    "revision": "97970d4eea5e85758b2c5d418171a81c",
+    "url": "assets/images/x.png"
   },
   {
     "revision": "1ade6f9b00c80025fa3902b7db736ff9",
@@ -160,12 +184,12 @@ self.__precacheManifest = (self.__precacheManifest || []).concat([
     "url": "favicon.ico"
   },
   {
-    "revision": "5ca9198cd7fd4dd84c36548b24485a12",
+    "revision": "3ce57908babc6153171ba5b1646da983",
     "url": "index.html"
   },
   {
-    "revision": "15f26994ba6f6dbc9eed",
-    "url": "main.2c533922608b25473e46.bundle.js"
+    "revision": "94af48b553de113d7709",
+    "url": "main.edb6d25e0ab0c3ce2f78.bundle.js"
   },
   {
     "revision": "003187cab0ecf7a20e343e2ba6db4a34",
