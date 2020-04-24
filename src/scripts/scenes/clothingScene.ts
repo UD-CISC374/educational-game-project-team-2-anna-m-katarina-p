@@ -143,7 +143,6 @@ export default class clothingScene extends Phaser.Scene {
     }
     if (allThere == this.items.length){
       this.listDone == true;
-      this.pjs.setAlpha(0.0);
     }
     else{
       this.listDone == false;

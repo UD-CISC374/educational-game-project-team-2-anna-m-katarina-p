@@ -16,12 +16,24 @@ export default class foodScene extends Phaser.Scene {
     private paper: any;
     private camisaX:any;
     private dragObj: any;
+    private word: any;
+    private item: any;
+    private items: any;
+    private itemsSelected: any;
+    private listDone: any;
+    private checkmark: any;
+    private checkmark2: any;
+    private checkmark3: any;
 
     constructor(){
         super({key: 'foodScene'});
     }
 
     create(){
+        this.listDone = false;
+        this.items = ["shirt", "shoes", "skirt"];
+        this.itemsSelected = [];
+
         this.background=this.add.image(200, 200, "green");
         this.add.text(15, 15, "food Scene", {fill: '#000000', fontSize: '20px'});
         
@@ -102,14 +114,152 @@ export default class foodScene extends Phaser.Scene {
         this.input.setDraggable(this.chips);
 
         this.input.on('pointerdown', this.startDrag, this);
+        this.physics.add.overlap(this.basket, this.apple, this.pick, undefined, this);
+        this.physics.add.overlap(this.basket, this.banana, this.pick, undefined, this);
+        this.physics.add.overlap(this.basket, this.bread, this.pick, undefined, this);
+        this.physics.add.overlap(this.basket, this.soda, this.pick, undefined, this);
+        this.physics.add.overlap(this.basket, this.water, this.pick, undefined, this);
+        this.physics.add.overlap(this.basket, this.hotdog, this.pick, undefined, this);
+        this.physics.add.overlap(this.basket, this.cookie, this.pick, undefined, this);
+        this.physics.add.overlap(this.basket, this.milk, this.pick, undefined, this);
+        this.physics.add.overlap(this.basket, this.chips, this.pick, undefined, this);
     }
 
     update(){
-
+      let allThere = 0;
+      for (let index = 0; index < this.items.length; index++){
+        allThere = this.itemsSelected.includes(this.items[index]) + allThere;
+      }
+      if (allThere == this.items.length){
+        this.listDone == true;
+      }
+      else{
+        this.listDone == false;
+      }
     }
 
     goToMap(){
         this.scene.start('mapScene');
+    }
+
+    pick(basket,item){
+      if (item == this.apple){
+        this.word = "apple";
+        if (this.items.indexOf(this.word) != -1){
+          this.apple.disableBody(true,true);
+          this.checkmark.setAlpha(1.0);
+          this.itemsSelected.push("apple");
+        }
+        else{
+          this.apple.setX(200);
+          this.apple.setY(60);
+        }
+      }
+  
+      if (item == this.banana){
+        this.word = "banana";
+        if (this.items.indexOf(this.word) != -1){
+          this.banana.disableBody(true,true);
+          this.checkmark3.setAlpha(1.0);
+          this.itemsSelected.push("banana");
+        }
+        else{
+          this.banana.setX(280);
+          this.banana.setY(240);
+        }
+      }
+  
+      if (item == this.bread){
+        this.word = "bread";
+        if (this.items.indexOf(this.word) != -1){
+          this.bread.disableBody(true,true);
+          this.checkmark.setAlpha(1.0);
+          this.itemsSelected.push("bread");
+        }
+        else{
+          this.bread.setX(285);
+          this.bread.setY(60);
+        }
+      }
+  
+      if (item == this.soda){
+        this.word = "soda";
+        if (this.items.indexOf(this.word) != -1){
+          this.soda.disableBody(true,true);
+          this.checkmark.setAlpha(1.0);
+          this.itemsSelected.push("soda");
+        }
+        else{
+          this.soda.setX(195);
+          this.soda.setY(240);
+        }
+      }
+  
+      if (item == this.water){
+        this.word = "water";
+        if (this.items.indexOf(this.word) != -1){
+          this.water.disableBody(true,true);
+          this.checkmark2.setAlpha(1.0);
+          this.itemsSelected.push("water");
+        }
+        else{
+          this.water.setX(280);
+          this.water.setY(140);
+        }
+      }
+  
+      if (item == this.hotdog){
+        this.word = "hotdog";
+        if (this.items.indexOf(this.word) != -1){
+          this.hotdog.disableBody(true,true);
+          this.checkmark.setAlpha(1.0);
+          this.itemsSelected.push("hotdog");
+        }
+        else{
+          this.hotdog.setX(360);
+          this.hotdog.setY(140);
+        }
+      }
+  
+      if (item == this.cookie){
+        this.word = "cookie";
+        if (this.items.indexOf(this.word) != -1){
+          this.cookie.disableBody(true,true);
+          this.checkmark.setAlpha(1.0);
+          this.itemsSelected.push("cookie");
+        }
+        else{
+          this.cookie.setX(360);
+          this.cookie.setY(60);
+        }
+      }
+  
+      if (item == this.milk){
+        this.word = "milk";
+        if (this.items.indexOf(this.word) != -1){
+          this.milk.disableBody(true,true);
+          this.checkmark.setAlpha(1.0);
+          this.itemsSelected.push("milk");
+        }
+        else{
+          this.milk.setX(195);
+          this.milk.setY(145);
+        }
+      }
+      
+      if (item == this.chips){
+        this.word = "chips";
+        if (this.items.indexOf(this.word) != -1){
+          this.chips.disableBody(true,true);
+          this.checkmark.setAlpha(1.0);
+          this.itemsSelected.push("chips");
+        }
+        else{
+          this.chips.setX(360);
+          this.chips.setY(240);
+        }
+      }
+      
     }
 
     startDrag(pointer, targets){

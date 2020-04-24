@@ -15,12 +15,24 @@ export default class partyScene extends Phaser.Scene {
     private camisaX: any;
     private basket: any;
     private dragObj: any;
+    private word: any;
+    private item: any;
+    private items: any;
+    private itemsSelected: any;
+    private listDone: any;
+    private checkmark: any;
+    private checkmark2: any;
+    private checkmark3: any;
 
     constructor(){
         super({key: 'partyScene'});
     }
 
     create(){
+        this.listDone = false;
+        this.items = ["shirt", "shoes", "skirt"];
+        this.itemsSelected = [];
+
         this.background=this.add.image(200, 200, "blue");
         this.background.setScale(3.0);
 
@@ -86,21 +98,145 @@ export default class partyScene extends Phaser.Scene {
         this.streamers.setInteractive();
         this.input.setDraggable(this.streamers);
 
-        //Make shirt
+        //Make utensils
         this.utensils=this.physics.add.image(195,145,"utensils");
         this.utensils.setScale(0.15);
         this.utensils.setInteractive();
         this.input.setDraggable(this.utensils);
 
         this.input.on('pointerdown', this.startDrag, this);
+        this.physics.add.overlap(this.basket, this.bowl, this.pick, undefined, this);
+        this.physics.add.overlap(this.basket, this.firework, this.pick, undefined, this);
+        this.physics.add.overlap(this.basket, this.greenBalloon, this.pick, undefined, this);
+        this.physics.add.overlap(this.basket, this.hat, this.pick, undefined, this);
+        this.physics.add.overlap(this.basket, this.plate, this.pick, undefined, this);
+        this.physics.add.overlap(this.basket, this.redBalloon, this.pick, undefined, this);
+        this.physics.add.overlap(this.basket, this.streamers, this.pick, undefined, this);
+        this.physics.add.overlap(this.basket, this.utensils, this.pick, undefined, this);
     }
 
     update(){
-        
+      let allThere = 0;
+      for (let index = 0; index < this.items.length; index++){
+        allThere = this.itemsSelected.includes(this.items[index]) + allThere;
+      }
+      if (allThere == this.items.length){
+        this.listDone == true;
+      }
+      else{
+        this.listDone == false;
+      }
     }
 
     goToMap(){
         this.scene.start('mapScene');
+    }
+
+    pick(basket,item){
+      if (item == this.bowl){
+        this.word = "bowl";
+        if (this.items.indexOf(this.word) != -1){
+          this.bowl.disableBody(true,true);
+          this.checkmark.setAlpha(1.0);
+          this.itemsSelected.push("bowl");
+        }
+        else{
+          this.bowl.setX(200);
+          this.bowl.setY(60);
+        }
+      }
+  
+      if (item == this.firework){
+        this.word = "firework";
+        if (this.items.indexOf(this.word) != -1){
+          this.firework.disableBody(true,true);
+          this.checkmark3.setAlpha(1.0);
+          this.itemsSelected.push("firework");
+        }
+        else{
+          this.firework.setX(320);
+          this.firework.setY(240);
+        }
+      }
+  
+      if (item == this.greenBalloon){
+        this.word = "greenBalloon";
+        if (this.items.indexOf(this.word) != -1){
+          this.greenBalloon.disableBody(true,true);
+          this.checkmark.setAlpha(1.0);
+          this.itemsSelected.push("greenBalloon");
+        }
+        else{
+          this.greenBalloon.setX(285);
+          this.greenBalloon.setY(60);
+        }
+      }
+  
+      if (item == this.hat){
+        this.word = "hat";
+        if (this.items.indexOf(this.word) != -1){
+          this.hat.disableBody(true,true);
+          this.checkmark.setAlpha(1.0);
+          this.itemsSelected.push("hat");
+        }
+        else{
+          this.hat.setX(230);
+          this.hat.setY(240);
+        }
+      }
+  
+      if (item == this.plate){
+        this.word = "plate";
+        if (this.items.indexOf(this.word) != -1){
+          this.plate.disableBody(true,true);
+          this.checkmark2.setAlpha(1.0);
+          this.itemsSelected.push("plate");
+        }
+        else{
+          this.plate.setX(280);
+          this.plate.setY(140);
+        }
+      }
+  
+      if (item == this.redBalloon){
+        this.word = "redBalloon";
+        if (this.items.indexOf(this.word) != -1){
+          this.redBalloon.disableBody(true,true);
+          this.checkmark.setAlpha(1.0);
+          this.itemsSelected.push("redBalloon");
+        }
+        else{
+          this.redBalloon.setX(360);
+          this.redBalloon.setY(140);
+        }
+      }
+  
+      if (item == this.streamers){
+        this.word = "streamers";
+        if (this.items.indexOf(this.word) != -1){
+          this.streamers.disableBody(true,true);
+          this.checkmark.setAlpha(1.0);
+          this.itemsSelected.push("streamers");
+        }
+        else{
+          this.streamers.setX(360);
+          this.streamers.setY(60);
+        }
+      }
+  
+      if (item == this.utensils){
+        this.word = "utennsils";
+        if (this.items.indexOf(this.word) != -1){
+          this.utensils.disableBody(true,true);
+          this.checkmark.setAlpha(1.0);
+          this.itemsSelected.push("utensils");
+        }
+        else{
+          this.utensils.setX(195);
+          this.utensils.setY(145);
+        }
+      }
+      
     }
 
     startDrag(pointer, targets){
