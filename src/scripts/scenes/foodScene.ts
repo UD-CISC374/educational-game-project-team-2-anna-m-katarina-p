@@ -24,6 +24,8 @@ export default class foodScene extends Phaser.Scene {
     private checkmark: any;
     private checkmark2: any;
     private checkmark3: any;
+    private picked: any;
+    private pickedList:any;
 
     constructor(){
         super({key: 'foodScene'});
@@ -31,7 +33,7 @@ export default class foodScene extends Phaser.Scene {
 
     create(){
         this.listDone = false;
-        this.items = ["shirt", "shoes", "skirt"];
+        this.items = ["shirt", "shoes", "skirt", "apple"];
         this.itemsSelected = [];
 
         this.background=this.add.image(200, 200, "green");
@@ -123,7 +125,9 @@ export default class foodScene extends Phaser.Scene {
         this.physics.add.overlap(this.basket, this.cookie, this.pick, undefined, this);
         this.physics.add.overlap(this.basket, this.milk, this.pick, undefined, this);
         this.physics.add.overlap(this.basket, this.chips, this.pick, undefined, this);
-    }
+   
+        this.picked=new Array();
+      }
 
     update(){
       let allThere = 0;
@@ -139,7 +143,10 @@ export default class foodScene extends Phaser.Scene {
     }
 
     goToMap(){
-        this.scene.start('mapScene');
+      for (let index in this.picked){
+        this.pickedList.push(this.picked[index]);
+      }
+        this.scene.start('mapScene', this.pickedList);
     }
 
     pick(basket,item){
@@ -147,8 +154,9 @@ export default class foodScene extends Phaser.Scene {
         this.word = "apple";
         if (this.items.indexOf(this.word) != -1){
           this.apple.disableBody(true,true);
-          this.checkmark.setAlpha(1.0);
+          //this.checkmark.setAlpha(1.0);
           this.itemsSelected.push("apple");
+          this.picked.push("apple");
         }
         else{
           this.apple.setX(200);
@@ -162,6 +170,7 @@ export default class foodScene extends Phaser.Scene {
           this.banana.disableBody(true,true);
           this.checkmark3.setAlpha(1.0);
           this.itemsSelected.push("banana");
+          this.picked.push("banana");
         }
         else{
           this.banana.setX(280);
@@ -175,6 +184,7 @@ export default class foodScene extends Phaser.Scene {
           this.bread.disableBody(true,true);
           this.checkmark.setAlpha(1.0);
           this.itemsSelected.push("bread");
+          this.picked.push("bread");
         }
         else{
           this.bread.setX(285);
@@ -188,6 +198,7 @@ export default class foodScene extends Phaser.Scene {
           this.soda.disableBody(true,true);
           this.checkmark.setAlpha(1.0);
           this.itemsSelected.push("soda");
+          this.picked.push("soda");
         }
         else{
           this.soda.setX(195);
@@ -201,6 +212,7 @@ export default class foodScene extends Phaser.Scene {
           this.water.disableBody(true,true);
           this.checkmark2.setAlpha(1.0);
           this.itemsSelected.push("water");
+          this.picked.push("water");
         }
         else{
           this.water.setX(280);
@@ -214,6 +226,7 @@ export default class foodScene extends Phaser.Scene {
           this.hotdog.disableBody(true,true);
           this.checkmark.setAlpha(1.0);
           this.itemsSelected.push("hotdog");
+          this.picked.push("hotdog");
         }
         else{
           this.hotdog.setX(360);
@@ -227,6 +240,7 @@ export default class foodScene extends Phaser.Scene {
           this.cookie.disableBody(true,true);
           this.checkmark.setAlpha(1.0);
           this.itemsSelected.push("cookie");
+          this.picked.push("cookie");
         }
         else{
           this.cookie.setX(360);
@@ -240,6 +254,7 @@ export default class foodScene extends Phaser.Scene {
           this.milk.disableBody(true,true);
           this.checkmark.setAlpha(1.0);
           this.itemsSelected.push("milk");
+          this.picked.push("milk");
         }
         else{
           this.milk.setX(195);
@@ -253,6 +268,7 @@ export default class foodScene extends Phaser.Scene {
           this.chips.disableBody(true,true);
           this.checkmark.setAlpha(1.0);
           this.itemsSelected.push("chips");
+          this.picked.push("chips");
         }
         else{
           this.chips.setX(360);
@@ -278,5 +294,41 @@ export default class foodScene extends Phaser.Scene {
         this.input.on('pointerdown', this.startDrag, this);
         this.input.off('pointermove', this.doDrag, this);
         this.input.off('pointerup', this.stopDrag, this);
+      }
+
+      init(data){
+        this.pickedList=Array.from(data);
+      }
+
+      removeFood(){
+        for (let index in this.pickedList){
+          if (this.pickedList[index]=="sapple"){
+            this.apple.disableBody(true, true);
+          }
+          if (this.pickedList[index]=="bread"){
+            this.bread.disableBody(true, true);
+          }
+          if (this.pickedList[index]=="cookie"){
+            this.cookie.disableBody(true, true);
+          }
+          if (this.pickedList[index]=="milk"){
+            this.milk.disableBody(true, true);
+          }
+          if (this.pickedList[index]=="water"){
+            this.water.disableBody(true, true);
+          }
+          if (this.pickedList[index]=="hotdog"){
+            this.hotdog.disableBody(true, true);
+          }
+          if (this.pickedList[index]=="soda"){
+            this.soda.disableBody(true, true);
+          }
+          if (this.pickedList[index]=="banana"){
+            this.banana.disableBody(true, true);
+          }
+          if (this.pickedList[index]=="chips"){
+            this.chips.disableBody(true, true);
+          }
+        }
       }
 }

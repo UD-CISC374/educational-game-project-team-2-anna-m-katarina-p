@@ -23,6 +23,8 @@ export default class partyScene extends Phaser.Scene {
     private checkmark: any;
     private checkmark2: any;
     private checkmark3: any;
+    private picked: any;
+    private pickedList: any;
 
     constructor(){
         super({key: 'partyScene'});
@@ -30,7 +32,7 @@ export default class partyScene extends Phaser.Scene {
 
     create(){
         this.listDone = false;
-        this.items = ["shirt", "shoes", "skirt"];
+        this.items = ["shirt", "shoes", "skirt", "streamers"];
         this.itemsSelected = [];
 
         this.background=this.add.image(200, 200, "blue");
@@ -113,7 +115,10 @@ export default class partyScene extends Phaser.Scene {
         this.physics.add.overlap(this.basket, this.redBalloon, this.pick, undefined, this);
         this.physics.add.overlap(this.basket, this.streamers, this.pick, undefined, this);
         this.physics.add.overlap(this.basket, this.utensils, this.pick, undefined, this);
-    }
+    
+        this.picked=new Array();
+        this.removeParty();
+      }
 
     update(){
       let allThere = 0;
@@ -129,7 +134,10 @@ export default class partyScene extends Phaser.Scene {
     }
 
     goToMap(){
-        this.scene.start('mapScene');
+        for (let index in this.picked){
+          this.pickedList.push(this.picked[index]);
+        }
+        this.scene.start('mapScene', this.pickedList);
     }
 
     pick(basket,item){
@@ -139,6 +147,7 @@ export default class partyScene extends Phaser.Scene {
           this.bowl.disableBody(true,true);
           this.checkmark.setAlpha(1.0);
           this.itemsSelected.push("bowl");
+          this.picked.push("bowl");
         }
         else{
           this.bowl.setX(200);
@@ -152,6 +161,7 @@ export default class partyScene extends Phaser.Scene {
           this.firework.disableBody(true,true);
           this.checkmark3.setAlpha(1.0);
           this.itemsSelected.push("firework");
+          this.picked.push("firework");
         }
         else{
           this.firework.setX(320);
@@ -165,6 +175,7 @@ export default class partyScene extends Phaser.Scene {
           this.greenBalloon.disableBody(true,true);
           this.checkmark.setAlpha(1.0);
           this.itemsSelected.push("greenBalloon");
+          this.picked.push("greenBalloon");
         }
         else{
           this.greenBalloon.setX(285);
@@ -178,6 +189,7 @@ export default class partyScene extends Phaser.Scene {
           this.hat.disableBody(true,true);
           this.checkmark.setAlpha(1.0);
           this.itemsSelected.push("hat");
+          this.picked.push("hat");
         }
         else{
           this.hat.setX(230);
@@ -191,6 +203,7 @@ export default class partyScene extends Phaser.Scene {
           this.plate.disableBody(true,true);
           this.checkmark2.setAlpha(1.0);
           this.itemsSelected.push("plate");
+          this.picked.push("plate");
         }
         else{
           this.plate.setX(280);
@@ -204,6 +217,7 @@ export default class partyScene extends Phaser.Scene {
           this.redBalloon.disableBody(true,true);
           this.checkmark.setAlpha(1.0);
           this.itemsSelected.push("redBalloon");
+          this.picked.push("redBalloon");
         }
         else{
           this.redBalloon.setX(360);
@@ -215,8 +229,9 @@ export default class partyScene extends Phaser.Scene {
         this.word = "streamers";
         if (this.items.indexOf(this.word) != -1){
           this.streamers.disableBody(true,true);
-          this.checkmark.setAlpha(1.0);
+          //this.checkmark.setAlpha(1.0);
           this.itemsSelected.push("streamers");
+          this.picked.push("streamers")
         }
         else{
           this.streamers.setX(360);
@@ -225,11 +240,12 @@ export default class partyScene extends Phaser.Scene {
       }
   
       if (item == this.utensils){
-        this.word = "utennsils";
+        this.word = "utensils";
         if (this.items.indexOf(this.word) != -1){
           this.utensils.disableBody(true,true);
           this.checkmark.setAlpha(1.0);
           this.itemsSelected.push("utensils");
+          this.picked.push("utensils");
         }
         else{
           this.utensils.setX(195);
@@ -255,5 +271,38 @@ export default class partyScene extends Phaser.Scene {
         this.input.on('pointerdown', this.startDrag, this);
         this.input.off('pointermove', this.doDrag, this);
         this.input.off('pointerup', this.stopDrag, this);
+      }
+
+      init(data){
+        this.pickedList=Array.from(data);
+      }
+      
+      removeParty(){
+        for (let index in this.pickedList){
+          if (this.pickedList[index]=="bowl"){
+            this.bowl.disableBody(true, true);
+          }
+          if (this.pickedList[index]=="greenBalloon"){
+            this.greenBalloon.disableBody(true, true);
+          }
+          if (this.pickedList[index]=="streamers"){
+            this.streamers.disableBody(true, true);
+          }
+          if (this.pickedList[index]=="utensils"){
+            this.utensils.disableBody(true, true);
+          }
+          if (this.pickedList[index]=="plate"){
+            this.plate.disableBody(true, true);
+          }
+          if (this.pickedList[index]=="redBalloon"){
+            this.redBalloon.disableBody(true, true);
+          }
+          if (this.pickedList[index]=="hat"){
+            this.hat.disableBody(true, true);
+          }
+          if (this.pickedList[index]=="firework"){
+            this.firework.disableBody(true, true);
+          }
+        }
       }
 }

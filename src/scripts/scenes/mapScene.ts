@@ -4,6 +4,7 @@ export default class mapScene extends Phaser.Scene {
     private foodButton: any;
     private partyButton: any;
     private clothesButton: any;
+    private picked: any;
 
     constructor(){
         super({key: 'mapScene'});
@@ -35,14 +36,19 @@ export default class mapScene extends Phaser.Scene {
     }
 
     goToClothes(){
-        this.scene.start('MainScene');
+        this.scene.start('MainScene', this.picked);
     }
 
     goToParty(){
-        this.scene.start('partyScene');
+        this.scene.start('partyScene', this.picked);
     }
 
     goToFood(){
-        this.scene.start('foodScene');
+        this.scene.start('foodScene', this.picked);
+    }
+
+    init(data){
+        this.picked=data;
+        console.log("picked list is: "+ this.picked);
     }
 }

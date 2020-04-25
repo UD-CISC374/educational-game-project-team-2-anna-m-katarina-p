@@ -24,6 +24,9 @@ export default class clothingScene extends Phaser.Scene {
   private yellowBackground: any;
   private listDone: any;
   private itemsSelected: any;
+  private pickedList: any;
+  private picked: any;
+  private previouslyPicked: any;
 
   constructor() {
     super({ key: 'MainScene' });
@@ -134,6 +137,8 @@ export default class clothingScene extends Phaser.Scene {
     this.physics.add.overlap(this.basket, this.dress, this.pick, undefined, this);
     this.physics.add.overlap(this.basket, this.sweater, this.pick, undefined, this);
 
+    this.picked=new Array();   
+    this.removeClothes(); 
   }
 
   update() {
@@ -150,7 +155,12 @@ export default class clothingScene extends Phaser.Scene {
   }
 
   goToMap(){
-    this.scene.start('mapScene');
+    
+    for (var index in this.picked){
+      this.pickedList.push(this.picked[index]);
+    }
+
+    this.scene.start('mapScene', this.pickedList);
 
   }
 
@@ -161,6 +171,7 @@ export default class clothingScene extends Phaser.Scene {
         this.shirt.disableBody(true,true);
         this.checkmark.setAlpha(1.0);
         this.itemsSelected.push("shirt");
+        this.picked.push("shirt");
       }
       else{
         this.shirt.setX(200);
@@ -174,6 +185,7 @@ export default class clothingScene extends Phaser.Scene {
         this.skirt.disableBody(true,true);
         this.checkmark3.setAlpha(1.0);
         this.itemsSelected.push("skirt");
+        this.picked.push("skirt");
       }
       else{
         this.skirt.setX(360);
@@ -186,6 +198,7 @@ export default class clothingScene extends Phaser.Scene {
       if (this.items.indexOf(this.word) != -1){
         this.pjs.disableBody(true,true);
         this.checkmark.setAlpha(1.0);
+        this.picked.push("pjs");
       }
       else{
         this.pjs.setX(360);
@@ -198,6 +211,7 @@ export default class clothingScene extends Phaser.Scene {
       if (this.items.indexOf(this.word) != -1){
         this.sweater.disableBody(true,true);
         this.checkmark.setAlpha(1.0);
+        this.picked.push("sweater");
       }
       else{
         this.sweater.setX(195);
@@ -211,6 +225,7 @@ export default class clothingScene extends Phaser.Scene {
         this.shoes.disableBody(true,true);
         this.checkmark2.setAlpha(1.0);
         this.itemsSelected.push("shoes");
+        this.picked.push("shoes");
       }
       else{
         this.shoes.setX(285);
@@ -223,6 +238,7 @@ export default class clothingScene extends Phaser.Scene {
       if (this.items.indexOf(this.word) != -1){
         this.pants.disableBody(true,true);
         this.checkmark.setAlpha(1.0);
+        this.picked.push("pants");
       }
       else{
         this.pants.setX(320);
@@ -235,6 +251,7 @@ export default class clothingScene extends Phaser.Scene {
       if (this.items.indexOf(this.word) != -1){
         this.shorts.disableBody(true,true);
         this.checkmark.setAlpha(1.0);
+        this.picked.push("shorts");
       }
       else{
         this.shorts.setX(280);
@@ -247,6 +264,7 @@ export default class clothingScene extends Phaser.Scene {
       if (this.items.indexOf(this.word) != -1){
         this.dress.disableBody(true,true);
         this.checkmark.setAlpha(1.0);
+        this.picked.push("dress");
       }
       else{
         this.dress.setX(230);
@@ -272,5 +290,39 @@ export default class clothingScene extends Phaser.Scene {
     this.input.on('pointerdown', this.startDrag, this);
     this.input.off('pointermove', this.doDrag, this);
     this.input.off('pointerup', this.stopDrag, this);
+  }
+
+  init(data){
+    this.pickedList=Array.from(data);
+    
+  }
+
+  removeClothes(){
+    for (let index in this.pickedList){
+      if (this.pickedList[index]=="shirt"){
+        this.shirt.disableBody(true, true);
+      }
+      if (this.pickedList[index]=="shoes"){
+        this.shoes.disableBody(true, true);
+      }
+      if (this.pickedList[index]=="skirt"){
+        this.skirt.disableBody(true, true);
+      }
+      if (this.pickedList[index]=="sweater"){
+        this.sweater.disableBody(true, true);
+      }
+      if (this.pickedList[index]=="pjs"){
+        this.pjs.disableBody(true, true);
+      }
+      if (this.pickedList[index]=="dress"){
+        this.dress.disableBody(true, true);
+      }
+      if (this.pickedList[index]=="shorts"){
+        this.shorts.disableBody(true, true);
+      }
+      if (this.pickedList[index]=="pants"){
+        this.pants.disableBody(true, true);
+      }
+    }
   }
 }
