@@ -32,7 +32,7 @@ export default class partyScene extends Phaser.Scene {
 
     create(){
         this.listDone = false;
-        this.items = ["shirt", "shoes", "skirt", "streamers"];
+        this.items = ["shirt", "apple", "plate"];
         this.itemsSelected = [];
 
         this.background=this.add.image(200, 200, "blue");
@@ -44,8 +44,8 @@ export default class partyScene extends Phaser.Scene {
         this.add.text(15,5, "Shopping List:",{fill:"#000000", fontSize:"16px"});
         this.camisaX = 40;
         this.add.text(this.camisaX,30, "camisa",{fill:"#000000", fontSize:"16px"});
-        this.add.text(40,50, "zapatos",{fill:"#000000", fontSize:"16px"});
-        this.add.text(40,70, "falda",{fill:"#000000", fontSize:"16px"});
+        this.add.text(40,50, "manzana",{fill:"#000000", fontSize:"16px"});
+        this.add.text(40,70, "plato",{fill:"#000000", fontSize:"16px"});
 
         this.add.text(5,350,"Drag item to basket.",{fill:"#000000", fontSize:"16px"});
 
@@ -53,6 +53,21 @@ export default class partyScene extends Phaser.Scene {
         .setInteractive()
         .on('pointerdown', ()=>this.goToMap());
         this.mapButton.setScale(0.6);
+
+        //Add checkmark
+        this.checkmark=this.add.image(30, 30, "checkmark");
+        this.checkmark.setScale(0.04);
+        this.checkmark.setAlpha(0.0);
+
+        //Second checkmark
+        this.checkmark2=this.add.image(30, 51, "checkmark");
+        this.checkmark2.setScale(0.04);
+        this.checkmark2.setAlpha(0.0);
+
+        //Third checkmark
+        this.checkmark3=this.add.image(30, 72, "checkmark");
+        this.checkmark3.setScale(0.04);
+        this.checkmark3.setAlpha(0.0);
 
         //Make basket
         this.basket=this.physics.add.image(270,360,"basket");
@@ -118,6 +133,8 @@ export default class partyScene extends Phaser.Scene {
     
         this.picked=new Array();
         this.removeParty();
+
+        this.addChecks();
       }
 
     update(){
@@ -145,7 +162,6 @@ export default class partyScene extends Phaser.Scene {
         this.word = "bowl";
         if (this.items.indexOf(this.word) != -1){
           this.bowl.disableBody(true,true);
-          this.checkmark.setAlpha(1.0);
           this.itemsSelected.push("bowl");
           this.picked.push("bowl");
         }
@@ -159,7 +175,6 @@ export default class partyScene extends Phaser.Scene {
         this.word = "firework";
         if (this.items.indexOf(this.word) != -1){
           this.firework.disableBody(true,true);
-          this.checkmark3.setAlpha(1.0);
           this.itemsSelected.push("firework");
           this.picked.push("firework");
         }
@@ -173,7 +188,6 @@ export default class partyScene extends Phaser.Scene {
         this.word = "greenBalloon";
         if (this.items.indexOf(this.word) != -1){
           this.greenBalloon.disableBody(true,true);
-          this.checkmark.setAlpha(1.0);
           this.itemsSelected.push("greenBalloon");
           this.picked.push("greenBalloon");
         }
@@ -187,7 +201,6 @@ export default class partyScene extends Phaser.Scene {
         this.word = "hat";
         if (this.items.indexOf(this.word) != -1){
           this.hat.disableBody(true,true);
-          this.checkmark.setAlpha(1.0);
           this.itemsSelected.push("hat");
           this.picked.push("hat");
         }
@@ -201,7 +214,7 @@ export default class partyScene extends Phaser.Scene {
         this.word = "plate";
         if (this.items.indexOf(this.word) != -1){
           this.plate.disableBody(true,true);
-          this.checkmark2.setAlpha(1.0);
+          this.checkmark3.setAlpha(1.0);
           this.itemsSelected.push("plate");
           this.picked.push("plate");
         }
@@ -215,7 +228,6 @@ export default class partyScene extends Phaser.Scene {
         this.word = "redBalloon";
         if (this.items.indexOf(this.word) != -1){
           this.redBalloon.disableBody(true,true);
-          this.checkmark.setAlpha(1.0);
           this.itemsSelected.push("redBalloon");
           this.picked.push("redBalloon");
         }
@@ -229,7 +241,6 @@ export default class partyScene extends Phaser.Scene {
         this.word = "streamers";
         if (this.items.indexOf(this.word) != -1){
           this.streamers.disableBody(true,true);
-          //this.checkmark.setAlpha(1.0);
           this.itemsSelected.push("streamers");
           this.picked.push("streamers")
         }
@@ -243,7 +254,6 @@ export default class partyScene extends Phaser.Scene {
         this.word = "utensils";
         if (this.items.indexOf(this.word) != -1){
           this.utensils.disableBody(true,true);
-          this.checkmark.setAlpha(1.0);
           this.itemsSelected.push("utensils");
           this.picked.push("utensils");
         }
@@ -302,6 +312,20 @@ export default class partyScene extends Phaser.Scene {
           }
           if (this.pickedList[index]=="firework"){
             this.firework.disableBody(true, true);
+          }
+        }
+      }
+
+      addChecks(){
+        for (let index in this.pickedList){
+          if (this.pickedList[index]=="shirt"){
+            this.checkmark.setAlpha(1.0);
+          }
+          if (this.pickedList[index]=="apple"){
+            this.checkmark2.setAlpha(1.0);
+          }
+          if (this.pickedList[index]=="plate"){
+            this.checkmark3.setAlpha(1.0);
           }
         }
       }

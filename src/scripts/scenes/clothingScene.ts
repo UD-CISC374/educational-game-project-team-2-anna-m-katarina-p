@@ -48,8 +48,8 @@ export default class clothingScene extends Phaser.Scene {
     this.add.text(15,5, "Shopping List:",{fill:"#000000", fontSize:"16px"});
     this.camisaX = 40;
     this.add.text(this.camisaX,30, "camisa",{fill:"#000000", fontSize:"16px"});
-    this.add.text(40,50, "zapatos",{fill:"#000000", fontSize:"16px"});
-    this.add.text(40,70, "falda",{fill:"#000000", fontSize:"16px"});
+    this.add.text(40,50, "manzana",{fill:"#000000", fontSize:"16px"});
+    this.add.text(40,70, "plato",{fill:"#000000", fontSize:"16px"});
 
     this.add.text(5,350,"Drag item to basket.",{fill:"#000000", fontSize:"16px"});
 
@@ -69,7 +69,7 @@ export default class clothingScene extends Phaser.Scene {
     this.checkmark3.setAlpha(0.0);
 
     //Make list of items for this level
-    this.items = ["shirt", "shoes", "skirt"];
+    this.items = ["shirt", "apple", "plate"];
 
     //Make list of items selected
     this.itemsSelected = [];
@@ -139,6 +139,8 @@ export default class clothingScene extends Phaser.Scene {
 
     this.picked=new Array();   
     this.removeClothes(); 
+
+    this.addChecks();
   }
 
   update() {
@@ -183,7 +185,6 @@ export default class clothingScene extends Phaser.Scene {
       this.word = "skirt";
       if (this.items.indexOf(this.word) != -1){
         this.skirt.disableBody(true,true);
-        this.checkmark3.setAlpha(1.0);
         this.itemsSelected.push("skirt");
         this.picked.push("skirt");
       }
@@ -197,7 +198,7 @@ export default class clothingScene extends Phaser.Scene {
       this.word = "pjs";
       if (this.items.indexOf(this.word) != -1){
         this.pjs.disableBody(true,true);
-        this.checkmark.setAlpha(1.0);
+        this.itemsSelected.push("pjs");
         this.picked.push("pjs");
       }
       else{
@@ -210,7 +211,7 @@ export default class clothingScene extends Phaser.Scene {
       this.word = "sweater";
       if (this.items.indexOf(this.word) != -1){
         this.sweater.disableBody(true,true);
-        this.checkmark.setAlpha(1.0);
+        this.itemsSelected.push("sweater");
         this.picked.push("sweater");
       }
       else{
@@ -223,7 +224,6 @@ export default class clothingScene extends Phaser.Scene {
       this.word = "shoes";
       if (this.items.indexOf(this.word) != -1){
         this.shoes.disableBody(true,true);
-        this.checkmark2.setAlpha(1.0);
         this.itemsSelected.push("shoes");
         this.picked.push("shoes");
       }
@@ -237,7 +237,7 @@ export default class clothingScene extends Phaser.Scene {
       this.word = "pants";
       if (this.items.indexOf(this.word) != -1){
         this.pants.disableBody(true,true);
-        this.checkmark.setAlpha(1.0);
+        this.itemsSelected.push("pants");
         this.picked.push("pants");
       }
       else{
@@ -250,7 +250,7 @@ export default class clothingScene extends Phaser.Scene {
       this.word = "shorts";
       if (this.items.indexOf(this.word) != -1){
         this.shorts.disableBody(true,true);
-        this.checkmark.setAlpha(1.0);
+        this.itemsSelected.push("shorts");
         this.picked.push("shorts");
       }
       else{
@@ -263,7 +263,7 @@ export default class clothingScene extends Phaser.Scene {
       this.word = "dress";
       if (this.items.indexOf(this.word) != -1){
         this.dress.disableBody(true,true);
-        this.checkmark.setAlpha(1.0);
+        this.itemsSelected.push("dress");
         this.picked.push("dress");
       }
       else{
@@ -322,6 +322,20 @@ export default class clothingScene extends Phaser.Scene {
       }
       if (this.pickedList[index]=="pants"){
         this.pants.disableBody(true, true);
+      }
+    }
+  }
+
+  addChecks(){
+    for (let index in this.pickedList){
+      if (this.pickedList[index]=="shirt"){
+        this.checkmark.setAlpha(1.0);
+      }
+      if (this.pickedList[index]=="apple"){
+        this.checkmark2.setAlpha(1.0);
+      }
+      if (this.pickedList[index]=="plate"){
+        this.checkmark3.setAlpha(1.0);
       }
     }
   }
