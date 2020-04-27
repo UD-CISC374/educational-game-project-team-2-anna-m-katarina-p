@@ -26,6 +26,8 @@ export default class foodScene extends Phaser.Scene {
     private checkmark3: any;
     private picked: any;
     private pickedList:any;
+    private x: any;
+    private scoreLabel: any;
 
     constructor(){
         super({key: 'foodScene'});
@@ -128,6 +130,9 @@ export default class foodScene extends Phaser.Scene {
         this.chips.setInteractive();
         this.input.setDraggable(this.chips);
 
+        this.scoreLabel = this.add.bitmapText(300, 300, "pixelFont", "SCORE ", 16);
+        this.scoreLabel.setAlpha(0.0);
+
         this.input.on('pointerdown', this.startDrag, this);
         this.physics.add.overlap(this.basket, this.apple, this.pick, undefined, this);
         this.physics.add.overlap(this.basket, this.banana, this.pick, undefined, this);
@@ -177,6 +182,14 @@ export default class foodScene extends Phaser.Scene {
         else{
           this.apple.setX(200);
           this.apple.setY(60);
+          this.scoreLabel.text = "No, es una manzana";
+          this.scoreLabel.setAlpha(1.0);
+          this.time.addEvent({
+            delay: 300,
+            callback: this.hideMess,
+            callbackScope: this,
+            loop: false
+          });
         }
       }
   
@@ -190,6 +203,14 @@ export default class foodScene extends Phaser.Scene {
         else{
           this.banana.setX(280);
           this.banana.setY(240);
+          this.scoreLabel.text = "No, es una banana";
+          this.scoreLabel.setAlpha(1.0);
+          this.time.addEvent({
+            delay: 300,
+            callback: this.hideMess,
+            callbackScope: this,
+            loop: false
+          });
         }
       }
   
@@ -203,6 +224,14 @@ export default class foodScene extends Phaser.Scene {
         else{
           this.bread.setX(285);
           this.bread.setY(60);
+          this.scoreLabel.text = "No, es un pan";
+          this.scoreLabel.setAlpha(1.0);
+          this.time.addEvent({
+            delay: 300,
+            callback: this.hideMess,
+            callbackScope: this,
+            loop: false
+          });
         }
       }
   
@@ -216,6 +245,14 @@ export default class foodScene extends Phaser.Scene {
         else{
           this.soda.setX(195);
           this.soda.setY(240);
+          this.scoreLabel.text = "No, es una soda";
+          this.scoreLabel.setAlpha(1.0);
+          this.time.addEvent({
+            delay: 300,
+            callback: this.hideMess,
+            callbackScope: this,
+            loop: false
+          });
         }
       }
   
@@ -229,6 +266,14 @@ export default class foodScene extends Phaser.Scene {
         else{
           this.water.setX(280);
           this.water.setY(140);
+          this.scoreLabel.text = "No, es una botella de agua";
+          this.scoreLabel.setAlpha(1.0);
+          this.time.addEvent({
+            delay: 300,
+            callback: this.hideMess,
+            callbackScope: this,
+            loop: false
+          });
         }
       }
   
@@ -242,6 +287,14 @@ export default class foodScene extends Phaser.Scene {
         else{
           this.hotdog.setX(360);
           this.hotdog.setY(140);
+          this.scoreLabel.text = "No, es un perro caliente";
+          this.scoreLabel.setAlpha(1.0);
+          this.time.addEvent({
+            delay: 300,
+            callback: this.hideMess,
+            callbackScope: this,
+            loop: false
+          });
         }
       }
   
@@ -255,6 +308,14 @@ export default class foodScene extends Phaser.Scene {
         else{
           this.cookie.setX(360);
           this.cookie.setY(60);
+          this.scoreLabel.text = "No, es una galleta";
+          this.scoreLabel.setAlpha(1.0);
+          this.time.addEvent({
+            delay: 300,
+            callback: this.hideMess,
+            callbackScope: this,
+            loop: false
+          });
         }
       }
   
@@ -268,6 +329,14 @@ export default class foodScene extends Phaser.Scene {
         else{
           this.milk.setX(195);
           this.milk.setY(145);
+          this.scoreLabel.text = "No, es una botella de leche";
+          this.scoreLabel.setAlpha(1.0);
+          this.time.addEvent({
+            delay: 300,
+            callback: this.hideMess,
+            callbackScope: this,
+            loop: false
+          });
         }
       }
       
@@ -281,9 +350,21 @@ export default class foodScene extends Phaser.Scene {
         else{
           this.chips.setX(360);
           this.chips.setY(240);
+          this.scoreLabel.text = "No, es una patata frita";
+          this.scoreLabel.setAlpha(1.0);
+          this.time.addEvent({
+            delay: 300,
+            callback: this.hideMess,
+            callbackScope: this,
+            loop: false
+          });
         }
       }
       
+    }
+
+    hideMess(){
+      this.scoreLabel.setAlpha(0.0);
     }
 
     startDrag(pointer, targets){
