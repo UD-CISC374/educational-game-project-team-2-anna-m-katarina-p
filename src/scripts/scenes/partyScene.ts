@@ -25,6 +25,7 @@ export default class partyScene extends Phaser.Scene {
     private checkmark3: any;
     private picked: any;
     private pickedList: any;
+    private message: any;
 
     constructor(){
         super({key: 'partyScene'});
@@ -134,6 +135,9 @@ export default class partyScene extends Phaser.Scene {
         this.picked=new Array();
         this.removeParty();
 
+        this.message=this.add.bitmapText(300,300, "pixelFont", "SCORE ", 16);
+        this.message.setAlpha(0.0);
+
         this.addChecks();
       }
 
@@ -168,6 +172,14 @@ export default class partyScene extends Phaser.Scene {
         else{
           this.bowl.setX(200);
           this.bowl.setY(60);
+          this.message.text = "No, es un bol";
+          this.message.setAlpha(1.0);
+          this.time.addEvent({
+            delay: 600,
+             callback: this.hideMess,
+             callbackScope: this,
+            loop: false
+          });
         }
       }
   
@@ -181,6 +193,14 @@ export default class partyScene extends Phaser.Scene {
         else{
           this.firework.setX(320);
           this.firework.setY(240);
+          this.message.text = "No, es unos fuegos de artificio";
+          this.message.setAlpha(1.0);
+          this.time.addEvent({
+            delay: 600,
+             callback: this.hideMess,
+             callbackScope: this,
+            loop: false
+          });
         }
       }
   
@@ -194,6 +214,14 @@ export default class partyScene extends Phaser.Scene {
         else{
           this.greenBalloon.setX(285);
           this.greenBalloon.setY(60);
+          this.message.text = "No, es un globo verde";
+          this.message.setAlpha(1.0);
+          this.time.addEvent({
+            delay: 600,
+             callback: this.hideMess,
+             callbackScope: this,
+            loop: false
+          });
         }
       }
   
@@ -207,6 +235,14 @@ export default class partyScene extends Phaser.Scene {
         else{
           this.hat.setX(230);
           this.hat.setY(240);
+          this.message.text = "No, es un sombrero";
+          this.message.setAlpha(1.0);
+          this.time.addEvent({
+            delay: 600,
+             callback: this.hideMess,
+             callbackScope: this,
+            loop: false
+          });
         }
       }
   
@@ -221,6 +257,14 @@ export default class partyScene extends Phaser.Scene {
         else{
           this.plate.setX(280);
           this.plate.setY(140);
+          this.message.text = "No, es un plato";
+          this.message.setAlpha(1.0);
+          this.time.addEvent({
+            delay: 600,
+             callback: this.hideMess,
+             callbackScope: this,
+            loop: false
+          });
         }
       }
   
@@ -234,6 +278,14 @@ export default class partyScene extends Phaser.Scene {
         else{
           this.redBalloon.setX(360);
           this.redBalloon.setY(140);
+          this.message.text = "No, es un globo rojo";
+          this.message.setAlpha(1.0);
+          this.time.addEvent({
+            delay: 600,
+             callback: this.hideMess,
+             callbackScope: this,
+            loop: false
+          });
         }
       }
   
@@ -247,6 +299,14 @@ export default class partyScene extends Phaser.Scene {
         else{
           this.streamers.setX(360);
           this.streamers.setY(60);
+          this.message.text = "No, es un serpentina";
+          this.message.setAlpha(1.0);
+          this.time.addEvent({
+            delay: 600,
+             callback: this.hideMess,
+             callbackScope: this,
+            loop: false
+          });
         }
       }
   
@@ -260,6 +320,14 @@ export default class partyScene extends Phaser.Scene {
         else{
           this.utensils.setX(195);
           this.utensils.setY(145);
+          this.message.text = "No, es los utensilios";
+          this.message.setAlpha(1.0);
+          this.time.addEvent({
+            delay: 600,
+             callback: this.hideMess,
+             callbackScope: this,
+            loop: false
+          });
         }
       }
       
@@ -314,6 +382,10 @@ export default class partyScene extends Phaser.Scene {
             this.firework.disableBody(true, true);
           }
         }
+      }
+
+      hideMess(){
+        this.message.setAlpha(0.0);
       }
 
       addChecks(){

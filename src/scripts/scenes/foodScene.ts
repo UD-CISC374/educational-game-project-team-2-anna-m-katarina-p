@@ -185,7 +185,7 @@ export default class foodScene extends Phaser.Scene {
           this.scoreLabel.text = "No, es una manzana";
           this.scoreLabel.setAlpha(1.0);
           this.time.addEvent({
-            delay: 300,
+            delay: 600,
             callback: this.hideMess,
             callbackScope: this,
             loop: false
@@ -206,7 +206,7 @@ export default class foodScene extends Phaser.Scene {
           this.scoreLabel.text = "No, es una banana";
           this.scoreLabel.setAlpha(1.0);
           this.time.addEvent({
-            delay: 300,
+            delay: 600,
             callback: this.hideMess,
             callbackScope: this,
             loop: false
@@ -227,7 +227,7 @@ export default class foodScene extends Phaser.Scene {
           this.scoreLabel.text = "No, es un pan";
           this.scoreLabel.setAlpha(1.0);
           this.time.addEvent({
-            delay: 300,
+            delay: 600,
             callback: this.hideMess,
             callbackScope: this,
             loop: false
@@ -248,7 +248,7 @@ export default class foodScene extends Phaser.Scene {
           this.scoreLabel.text = "No, es una soda";
           this.scoreLabel.setAlpha(1.0);
           this.time.addEvent({
-            delay: 300,
+            delay: 600,
             callback: this.hideMess,
             callbackScope: this,
             loop: false
@@ -269,7 +269,7 @@ export default class foodScene extends Phaser.Scene {
           this.scoreLabel.text = "No, es una botella de agua";
           this.scoreLabel.setAlpha(1.0);
           this.time.addEvent({
-            delay: 300,
+            delay: 600,
             callback: this.hideMess,
             callbackScope: this,
             loop: false
@@ -290,7 +290,7 @@ export default class foodScene extends Phaser.Scene {
           this.scoreLabel.text = "No, es un perro caliente";
           this.scoreLabel.setAlpha(1.0);
           this.time.addEvent({
-            delay: 300,
+            delay: 600,
             callback: this.hideMess,
             callbackScope: this,
             loop: false
@@ -311,7 +311,7 @@ export default class foodScene extends Phaser.Scene {
           this.scoreLabel.text = "No, es una galleta";
           this.scoreLabel.setAlpha(1.0);
           this.time.addEvent({
-            delay: 300,
+            delay: 600,
             callback: this.hideMess,
             callbackScope: this,
             loop: false
@@ -332,7 +332,7 @@ export default class foodScene extends Phaser.Scene {
           this.scoreLabel.text = "No, es una botella de leche";
           this.scoreLabel.setAlpha(1.0);
           this.time.addEvent({
-            delay: 300,
+            delay: 600,
             callback: this.hideMess,
             callbackScope: this,
             loop: false
@@ -353,7 +353,7 @@ export default class foodScene extends Phaser.Scene {
           this.scoreLabel.text = "No, es una patata frita";
           this.scoreLabel.setAlpha(1.0);
           this.time.addEvent({
-            delay: 300,
+            delay: 600,
             callback: this.hideMess,
             callbackScope: this,
             loop: false
