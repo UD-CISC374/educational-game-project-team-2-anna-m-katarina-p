@@ -135,22 +135,27 @@ export default class partyScene extends Phaser.Scene {
         this.picked=new Array();
         this.removeParty();
 
-        this.message=this.add.bitmapText(300,300, "pixelFont", "SCORE ", 16);
+        this.message=this.add.bitmapText(222,332, "pixelFont", "SCORE ", 16);
         this.message.setAlpha(0.0);
 
         this.addChecks();
       }
 
     update(){
-      let allThere = 0;
-      for (let index = 0; index < this.items.length; index++){
-        allThere = this.itemsSelected.includes(this.items[index]) + allThere;
+      let sum = 0;
+      for (let index in this.pickedList){
+        if (this.pickedList[index]=="shirt"){
+          sum += 1;
+        }
+        if (this.pickedList[index]=="apple"){
+          sum += 1;
+        }
+        if (this.pickedList[index]=="plate"){
+          sum += 1;
+        }
       }
-      if (allThere == this.items.length){
-        this.listDone == true;
-      }
-      else{
-        this.listDone == false;
+      if (sum==3){
+        this.goToMap();
       }
     }
 
@@ -175,9 +180,9 @@ export default class partyScene extends Phaser.Scene {
           this.message.text = "No, es un bol";
           this.message.setAlpha(1.0);
           this.time.addEvent({
-            delay: 600,
-             callback: this.hideMess,
-             callbackScope: this,
+            delay: 800,
+            callback: this.hideMess,
+            callbackScope: this,
             loop: false
           });
         }
@@ -196,9 +201,9 @@ export default class partyScene extends Phaser.Scene {
           this.message.text = "No, es unos fuegos de artificio";
           this.message.setAlpha(1.0);
           this.time.addEvent({
-            delay: 600,
-             callback: this.hideMess,
-             callbackScope: this,
+            delay: 800,
+            callback: this.hideMess,
+            callbackScope: this,
             loop: false
           });
         }
@@ -217,11 +222,15 @@ export default class partyScene extends Phaser.Scene {
           this.message.text = "No, es un globo verde";
           this.message.setAlpha(1.0);
           this.time.addEvent({
-            delay: 600,
-             callback: this.hideMess,
-             callbackScope: this,
+            delay: 800,
+            callback: this.hideMess,
+            callbackScope: this,
             loop: false
           });
+        }
+
+        for (let index in this.picked){
+          this.pickedList.push(this.picked[index]);
         }
       }
   
@@ -238,9 +247,9 @@ export default class partyScene extends Phaser.Scene {
           this.message.text = "No, es un sombrero";
           this.message.setAlpha(1.0);
           this.time.addEvent({
-            delay: 600,
-             callback: this.hideMess,
-             callbackScope: this,
+            delay: 800,
+            callback: this.hideMess,
+            callbackScope: this,
             loop: false
           });
         }
@@ -260,9 +269,9 @@ export default class partyScene extends Phaser.Scene {
           this.message.text = "No, es un plato";
           this.message.setAlpha(1.0);
           this.time.addEvent({
-            delay: 600,
-             callback: this.hideMess,
-             callbackScope: this,
+            delay: 800,
+            callback: this.hideMess,
+            callbackScope: this,
             loop: false
           });
         }
@@ -281,9 +290,9 @@ export default class partyScene extends Phaser.Scene {
           this.message.text = "No, es un globo rojo";
           this.message.setAlpha(1.0);
           this.time.addEvent({
-            delay: 600,
-             callback: this.hideMess,
-             callbackScope: this,
+            delay: 800,
+            callback: this.hideMess,
+            callbackScope: this,
             loop: false
           });
         }
@@ -302,9 +311,9 @@ export default class partyScene extends Phaser.Scene {
           this.message.text = "No, es un serpentina";
           this.message.setAlpha(1.0);
           this.time.addEvent({
-            delay: 600,
-             callback: this.hideMess,
-             callbackScope: this,
+            delay: 800,
+            callback: this.hideMess,
+            callbackScope: this,
             loop: false
           });
         }
@@ -323,9 +332,9 @@ export default class partyScene extends Phaser.Scene {
           this.message.text = "No, es los utensilios";
           this.message.setAlpha(1.0);
           this.time.addEvent({
-            delay: 600,
-             callback: this.hideMess,
-             callbackScope: this,
+            delay: 800,
+            callback: this.hideMess,
+            callbackScope: this,
             loop: false
           });
         }

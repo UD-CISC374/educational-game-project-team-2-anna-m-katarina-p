@@ -127,7 +127,7 @@ export default class clothingScene extends Phaser.Scene {
     this.sweater.setInteractive();
     this.input.setDraggable(this.sweater);
 
-    this.message=this.add.bitmapText(300,300, "pixelFont", "SCORE ", 16);
+    this.message=this.add.bitmapText(222,332, "pixelFont", "SCORE ", 16);
     this.message.setAlpha(0.0);
 
     //Set up dragging into basket
@@ -148,15 +148,20 @@ export default class clothingScene extends Phaser.Scene {
   }
 
   update() {
-    let allThere = 0;
-    for (let index = 0; index < this.items.length; index++){
-      allThere = this.itemsSelected.includes(this.items[index]) + allThere;
+    let sum = 0;
+    for (let index in this.pickedList){
+      if (this.pickedList[index]=="shirt"){
+        sum += 1;
+      }
+      if (this.pickedList[index]=="apple"){
+        sum += 1;
+      }
+      if (this.pickedList[index]=="plate"){
+        sum += 1;
+      }
     }
-    if (allThere == this.items.length){
-      this.listDone == true;
-    }
-    else{
-      this.listDone == false;
+    if (sum==3){
+      this.goToMap();
     }
   }
 
@@ -185,10 +190,10 @@ export default class clothingScene extends Phaser.Scene {
         this.message.text = "No, es una camisa";
         this.message.setAlpha(1.0);
         this.time.addEvent({
-          delay: 600,
-           callback: this.hideMess,
-           callbackScope: this,
-           loop: false
+          delay: 800,
+          callback: this.hideMess,
+          callbackScope: this,
+          loop: false
         });
       }
     }
@@ -206,10 +211,10 @@ export default class clothingScene extends Phaser.Scene {
         this.message.text = "No, es una falda";
         this.message.setAlpha(1.0);
         this.time.addEvent({
-          delay: 600,
-           callback: this.hideMess,
-           callbackScope: this,
-           loop: false
+          delay: 800,
+          callback: this.hideMess,
+          callbackScope: this,
+          loop: false
         });
       }
     }
@@ -227,10 +232,10 @@ export default class clothingScene extends Phaser.Scene {
         this.message.text = "No, es un pijama";
         this.message.setAlpha(1.0);
         this.time.addEvent({
-          delay: 600,
-           callback: this.hideMess,
-           callbackScope: this,
-           loop: false
+          delay: 800,
+          callback: this.hideMess,
+          callbackScope: this,
+          loop: false
         });
       }
     }
@@ -248,11 +253,15 @@ export default class clothingScene extends Phaser.Scene {
         this.message.text = "No, es un sueter";
         this.message.setAlpha(1.0);
         this.time.addEvent({
-          delay: 600,
-           callback: this.hideMess,
-           callbackScope: this,
-           loop: false
+          delay: 800,
+          callback: this.hideMess,
+          callbackScope: this,
+          loop: false
         });
+      }
+
+      for (let index in this.picked){
+        this.pickedList.push(this.picked[index]);
       }
     }
 
@@ -269,10 +278,10 @@ export default class clothingScene extends Phaser.Scene {
         this.message.text = "No, es los zapatos";
         this.message.setAlpha(1.0);
         this.time.addEvent({
-          delay: 600,
-           callback: this.hideMess,
-           callbackScope: this,
-           loop: false
+          delay: 800,
+          callback: this.hideMess,
+          callbackScope: this,
+          loop: false
         });
       }
     }
@@ -290,10 +299,10 @@ export default class clothingScene extends Phaser.Scene {
         this.message.text = "No, es un pantalones";
         this.message.setAlpha(1.0);
         this.time.addEvent({
-          delay: 600,
-           callback: this.hideMess,
-           callbackScope: this,
-           loop: false
+          delay: 800,
+          callback: this.hideMess,
+          callbackScope: this,
+          loop: false
         });
       }
     }
@@ -311,10 +320,10 @@ export default class clothingScene extends Phaser.Scene {
         this.message.text = "No, es los pantalones cortos";
         this.message.setAlpha(1.0);
         this.time.addEvent({
-          delay: 600,
-           callback: this.hideMess,
-           callbackScope: this,
-           loop: false
+          delay: 800,
+          callback: this.hideMess,
+          callbackScope: this,
+          loop: false
         });
       }
     }
@@ -332,10 +341,10 @@ export default class clothingScene extends Phaser.Scene {
         this.message.text = "No, es un vestido";
         this.message.setAlpha(1.0);
         this.time.addEvent({
-          delay: 600,
-           callback: this.hideMess,
-           callbackScope: this,
-           loop: false
+          delay: 800,
+          callback: this.hideMess,
+          callbackScope: this,
+          loop: false
         });
       }
     }
