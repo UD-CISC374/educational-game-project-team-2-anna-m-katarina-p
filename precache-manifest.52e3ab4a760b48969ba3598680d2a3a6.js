@@ -4,6 +4,14 @@ self.__precacheManifest = (self.__precacheManifest || []).concat([
     "url": "assets/citations.md"
   },
   {
+    "revision": "9d79a2ec01455afa082d23e42f457801",
+    "url": "assets/font/font.png"
+  },
+  {
+    "revision": "872f41e77eae3bfc4fba291b0145b12a",
+    "url": "assets/font/font.xml"
+  },
+  {
     "revision": "53cefca2a0f75654486b180949686165",
     "url": "assets/icons/favicon.ico"
   },
@@ -72,7 +80,7 @@ self.__precacheManifest = (self.__precacheManifest || []).concat([
     "url": "assets/images/firework.jpg"
   },
   {
-    "revision": "c518dcb79109f8a121a2907e9421aa1b",
+    "revision": "30a6bbc4b8fa5b8c2214abc7cd960eb7",
     "url": "assets/images/firework.png"
   },
   {
@@ -110,6 +118,14 @@ self.__precacheManifest = (self.__precacheManifest || []).concat([
   {
     "revision": "0983c5a77d91217a1319ee6a3049a0e8",
     "url": "assets/images/milk.png"
+  },
+  {
+    "revision": "7a2ec6e0884124167460ca6dd27cfc37",
+    "url": "assets/images/pH indicators.jpg"
+  },
+  {
+    "revision": "e19c7faf5ba407eba3e96a8e49c43684",
+    "url": "assets/images/pH strips.jpg"
   },
   {
     "revision": "a02e7620ec965c78700d111a1458b982",
@@ -184,12 +200,12 @@ self.__precacheManifest = (self.__precacheManifest || []).concat([
     "url": "favicon.ico"
   },
   {
-    "revision": "3ce57908babc6153171ba5b1646da983",
+    "revision": "ca93f9db95f43bf3aad1d353f5dac1ad",
     "url": "index.html"
   },
   {
-    "revision": "94af48b553de113d7709",
-    "url": "main.edb6d25e0ab0c3ce2f78.bundle.js"
+    "revision": "0f5b335a2208c287f15b",
+    "url": "main.58adafb5af482e3cb13f.bundle.js"
   },
   {
     "revision": "003187cab0ecf7a20e343e2ba6db4a34",
