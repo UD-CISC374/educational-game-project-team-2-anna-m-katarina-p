@@ -29,6 +29,7 @@ export default class mapScene extends Phaser.Scene {
         }
 
         this.add.text(0, 0, "Map", {fill: '#000000', fontSize: '20px'});
+        this.add.text(180,5,"Click a store to enter", {fill: '#000000', fontSize: '16px'});
         
         this.clothesButton=this.add.image(100,100,"clothesButton")
         .setInteractive()
