@@ -28,6 +28,8 @@ export default class clothingScene extends Phaser.Scene {
   private picked: any;
   private x: any;
   private message: any;
+  private level: any;
+  private level2List: any;
 
   constructor() {
     super({ key: 'MainScene' });
@@ -47,10 +49,18 @@ export default class clothingScene extends Phaser.Scene {
     this.paper=this.add.image(70, 110, "paper");
     this.paper.setScale(1.2);
     this.add.text(15,5, "Shopping List:",{fill:"#000000", fontSize:"16px"});
-    this.camisaX = 40;
-    this.add.text(this.camisaX,30, "camisa",{fill:"#000000", fontSize:"16px"});
-    this.add.text(40,50, "manzana",{fill:"#000000", fontSize:"16px"});
-    this.add.text(40,70, "plato",{fill:"#000000", fontSize:"16px"});
+
+    if (this.level=="1"){
+      this.add.text(40,30, "camisa",{fill:"#000000", fontSize:"16px"});
+      this.add.text(40,50, "manzana",{fill:"#000000", fontSize:"16px"});
+      this.add.text(40,70, "plato",{fill:"#000000", fontSize:"16px"});
+    }
+    
+    if (this.level=="2"){
+      this.add.text(40,30, "pantalones",{fill:"#000000", fontSize:"16px"});
+      this.add.text(40,50, "agua",{fill:"#000000", fontSize:"16px"});
+      this.add.text(40,70, "sombrero de \nfiesta",{fill:"#000000", fontSize:"16px"});
+    }    
 
     this.add.text(5,350,"Drag item to basket.",{fill:"#000000", fontSize:"16px"});
 
@@ -71,6 +81,9 @@ export default class clothingScene extends Phaser.Scene {
 
     //Make list of items for this level
     this.items = ["shirt", "apple", "plate"];
+
+    //Make list of items for level 2
+    this.level2List=["pants, hat, water"];
 
     //Make list of items selected
     this.itemsSelected = [];
@@ -148,21 +161,7 @@ export default class clothingScene extends Phaser.Scene {
   }
 
   update() {
-    let sum = 0;
-    for (let index in this.pickedList){
-      if (this.pickedList[index]=="shirt"){
-        sum += 1;
-      }
-      if (this.pickedList[index]=="apple"){
-        sum += 1;
-      }
-      if (this.pickedList[index]=="plate"){
-        sum += 1;
-      }
-    }
-    if (sum==3){
-      this.goToMap();
-    }
+    this.checkDone();
   }
 
   goToMap(){
@@ -170,9 +169,21 @@ export default class clothingScene extends Phaser.Scene {
     for (var index in this.picked){
       this.pickedList.push(this.picked[index]);
     }
-
     this.scene.start('mapScene', this.pickedList);
 
+  }
+
+  checkDone(){
+    if (this.level=="1"){
+      if (this.pickedList.length==5){
+        this.scene.start('mapScene', ["2", "false"]);
+      }
+    }
+    if (this.level=="2"){
+      if (this.pickedList.length==5){
+        this.scene.start('mapScene', ["3", "false"]);
+      }
+    }
   }
 
   pick(basket,item){
@@ -288,10 +299,11 @@ export default class clothingScene extends Phaser.Scene {
 
     if (item == this.pants){
       this.word = "pants";
-      if (this.items.indexOf(this.word) != -1){
+      if (this.level=="2"){
         this.pants.disableBody(true,true);
         this.itemsSelected.push("pants");
         this.picked.push("pants");
+        this.checkmark.setAlpha(1.0);
       }
       else{
         this.pants.setX(320);
@@ -348,7 +360,11 @@ export default class clothingScene extends Phaser.Scene {
         });
       }
     }
-    
+
+    for (let index in this.picked){
+      this.pickedList.push(this.picked[index]);
+      this.picked=[];
+    }    
   }
 
   startDrag(pointer, targets){
@@ -371,6 +387,7 @@ export default class clothingScene extends Phaser.Scene {
 
   init(data){
     this.pickedList=Array.from(data);
+    this.level=this.pickedList[0];
     
   }
 
@@ -408,15 +425,31 @@ export default class clothingScene extends Phaser.Scene {
   }
 
   addChecks(){
-    for (let index in this.pickedList){
-      if (this.pickedList[index]=="shirt"){
-        this.checkmark.setAlpha(1.0);
+    if (this.level=="1"){
+      for (let index in this.pickedList){
+        if (this.pickedList[index]=="shirt"){
+          this.checkmark.setAlpha(1.0);
+        }
+        if (this.pickedList[index]=="apple"){
+          this.checkmark2.setAlpha(1.0);
+        }
+        if (this.pickedList[index]=="plate"){
+          this.checkmark3.setAlpha(1.0);
+        }
       }
-      if (this.pickedList[index]=="apple"){
-        this.checkmark2.setAlpha(1.0);
-      }
-      if (this.pickedList[index]=="plate"){
-        this.checkmark3.setAlpha(1.0);
+    }
+
+    if (this.level=="2"){
+      for (let index in this.pickedList){
+        if (this.pickedList[index]=="pants"){
+          this.checkmark.setAlpha(1.0);
+        }
+        if (this.pickedList[index]=="water"){
+          this.checkmark2.setAlpha(1.0);
+        }
+        if (this.pickedList[index]=="hat"){
+          this.checkmark3.setAlpha(1.0);
+        }
       }
     }
   }

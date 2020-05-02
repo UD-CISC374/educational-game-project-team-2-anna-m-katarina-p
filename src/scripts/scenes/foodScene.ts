@@ -28,6 +28,8 @@ export default class foodScene extends Phaser.Scene {
     private pickedList:any;
     private x: any;
     private scoreLabel: any;
+    private level2List: any;
+    private level: any;
 
     constructor(){
         super({key: 'foodScene'});
@@ -37,6 +39,8 @@ export default class foodScene extends Phaser.Scene {
         this.listDone = false;
         this.items = ["shirt", "apple", "plate"];
         this.itemsSelected = [];
+
+        this.level2List=["pants, hat, water"];
 
         this.background=this.add.image(200, 200, "green");     
         this.background.setScale(3.0);
@@ -50,10 +54,18 @@ export default class foodScene extends Phaser.Scene {
         this.paper=this.add.image(70, 110, "paper");
         this.paper.setScale(1.2);
         this.add.text(15,5, "Shopping List:",{fill:"#000000", fontSize:"16px"});
-        this.camisaX = 40;
-        this.add.text(this.camisaX,30, "camisa",{fill:"#000000", fontSize:"16px"});
-        this.add.text(40,50, "manzana",{fill:"#000000", fontSize:"16px"});
-        this.add.text(40,70, "plato",{fill:"#000000", fontSize:"16px"});
+
+        if (this.level=="1"){
+          this.add.text(40,30, "camisa",{fill:"#000000", fontSize:"16px"});
+          this.add.text(40,50, "manzana",{fill:"#000000", fontSize:"16px"});
+          this.add.text(40,70, "plato",{fill:"#000000", fontSize:"16px"});
+        }
+
+        if (this.level=="2"){
+          this.add.text(40,30, "pantalones",{fill:"#000000", fontSize:"16px"});
+          this.add.text(40,50, "agua",{fill:"#000000", fontSize:"16px"});
+          this.add.text(40,70, "sombrero de \nfiesta",{fill:"#000000", fontSize:"16px"});
+        }
 
         this.add.text(5,350,"Drag item to basket.",{fill:"#000000", fontSize:"16px"});
 
@@ -152,31 +164,29 @@ export default class foodScene extends Phaser.Scene {
       }
 
     update(){   
-      let sum = 0;
-      for (let index in this.pickedList){
-        if (this.pickedList[index]=="shirt"){
-          sum += 1;
-        }
-        if (this.pickedList[index]=="apple"){
-          sum += 1;
-        }
-        if (this.pickedList[index]=="plate"){
-          sum += 1;
-        }
-      }
-      if (sum==3){
-        this.goToMap();
-      }
+      this.checkDone();
     }
 
     goToMap(){
         this.scene.start('mapScene', this.pickedList);
     }
 
+    checkDone(){
+      if (this.level=="1"){
+        if (this.pickedList.length==5){
+          this.scene.start('mapScene', ["2", "false"]);
+        }
+      }
+      if (this.level=="2"){
+        if (this.pickedList.length==5){
+          this.scene.start('mapScene', ["3", "false"]);
+        }
+      }
+    }
+
     pick(basket,item){
       if (item == this.apple){
-        this.word = "apple";
-        if (this.items.indexOf(this.word) != -1){
+        if (this.level=="1"){
           this.apple.disableBody(true,true);
           this.checkmark2.setAlpha(1.0);
           this.itemsSelected.push("apple");
@@ -260,12 +270,12 @@ export default class foodScene extends Phaser.Scene {
       }
   
       if (item == this.water){
-        this.word = "water";
-        if (this.items.indexOf(this.word) != -1){
+        if (this.level=="2"){
           this.water.disableBody(true,true);
           this.itemsSelected.push("water");
           this.picked.push("water");
-        }
+          this.checkmark2.setAlpha(1.0);
+        }        
         else{
           this.water.setX(280);
           this.water.setY(140);
@@ -366,8 +376,8 @@ export default class foodScene extends Phaser.Scene {
 
       for (let index in this.picked){
         this.pickedList.push(this.picked[index]);
+        this.picked=[];
       }
-      
     }
 
     hideMess(){
@@ -394,6 +404,7 @@ export default class foodScene extends Phaser.Scene {
 
       init(data){
         this.pickedList=Array.from(data);
+        this.level=this.pickedList[0];
       }
 
       removeFood(){
@@ -429,15 +440,31 @@ export default class foodScene extends Phaser.Scene {
       }
 
       addChecks(){
-        for (let index in this.pickedList){
-          if (this.pickedList[index]=="shirt"){
-            this.checkmark.setAlpha(1.0);
+        if (this.level=="1"){
+          for (let index in this.pickedList){
+            if (this.pickedList[index]=="shirt"){
+              this.checkmark.setAlpha(1.0);
+            }
+            if (this.pickedList[index]=="apple"){
+              this.checkmark2.setAlpha(1.0);
+            }
+            if (this.pickedList[index]=="plate"){
+              this.checkmark3.setAlpha(1.0);
+            }
           }
-          if (this.pickedList[index]=="apple"){
-            this.checkmark2.setAlpha(1.0);
-          }
-          if (this.pickedList[index]=="plate"){
-            this.checkmark3.setAlpha(1.0);
+        }
+
+        if (this.level=="2"){
+          for (let index in this.pickedList){
+            if (this.pickedList[index]=="pants"){
+              this.checkmark.setAlpha(1.0);
+            }
+            if (this.pickedList[index]=="water"){
+              this.checkmark2.setAlpha(1.0);
+            }
+            if (this.pickedList[index]=="hat"){
+              this.checkmark3.setAlpha(1.0);
+            }
           }
         }
       }

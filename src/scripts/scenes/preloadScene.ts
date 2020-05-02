@@ -70,6 +70,6 @@ export default class PreloadScene extends Phaser.Scene {
   }
 
   create() {
-    this.scene.start('mapScene');
+    this.scene.start('mapScene', ["1", "false"]);
   }
 }
