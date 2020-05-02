@@ -189,7 +189,7 @@ export default class clothingScene extends Phaser.Scene {
   pick(basket,item){
     if (item == this.shirt){
       this.word = "shirt";
-      if (this.items.indexOf(this.word) != -1){
+      if (this.level=="1"&&this.items.indexOf(this.word) != -1){
         this.shirt.disableBody(true,true);
         this.checkmark.setAlpha(1.0);
         this.itemsSelected.push("shirt");
