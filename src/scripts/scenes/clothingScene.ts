@@ -30,6 +30,7 @@ export default class clothingScene extends Phaser.Scene {
   private message: any;
   private level: any;
   private level2List: any;
+  private level3List: any;
 
   constructor() {
     super({ key: 'MainScene' });
@@ -57,10 +58,16 @@ export default class clothingScene extends Phaser.Scene {
     }
     
     if (this.level=="2"){
-      this.add.text(40,30, "pantalones",{fill:"#000000", fontSize:"16px"});
-      this.add.text(40,50, "agua",{fill:"#000000", fontSize:"16px"});
-      this.add.text(40,70, "sombrero de \nfiesta",{fill:"#000000", fontSize:"16px"});
-    }    
+      this.add.text(35,30, "pantalones azules",{fill:"#000000", fontSize:"11px"});
+      this.add.text(35,50, "botella de agua",{fill:"#000000", fontSize:"11px"});
+      this.add.text(30,70, "sombrero de fiesta",{fill:"#000000", fontSize:"11px"});
+    }   
+    
+    if (this.level=="3"){
+      this.add.text(35,30, "fruta amarilla",{fill:"#000000", fontSize:"12px"});
+      this.add.text(35,50, "globo verde",{fill:"#000000", fontSize:"12px"});
+      this.add.text(35,70, "vestido roja",{fill:"#000000", fontSize:"12px"});
+    }
 
     this.add.text(5,350,"Drag item to basket.",{fill:"#000000", fontSize:"16px"});
 
@@ -84,6 +91,8 @@ export default class clothingScene extends Phaser.Scene {
 
     //Make list of items for level 2
     this.level2List=["pants, hat, water"];
+
+    this.level3List=["banana, greenBalloon, dress"];
 
     //Make list of items selected
     this.itemsSelected = [];
@@ -182,6 +191,11 @@ export default class clothingScene extends Phaser.Scene {
     if (this.level=="2"){
       if (this.pickedList.length==5){
         this.scene.start('mapScene', ["3", "false"]);
+      }
+    }
+    if (this.level=="3"){
+      if (this.pickedList.length==5){
+        this.scene.start('mapScene',["4", "false"]);
       }
     }
   }
@@ -342,10 +356,11 @@ export default class clothingScene extends Phaser.Scene {
 
     if (item == this.dress){
       this.word = "dress";
-      if (this.items.indexOf(this.word) != -1){
+      if (this.level=="3"){
         this.dress.disableBody(true,true);
         this.itemsSelected.push("dress");
         this.picked.push("dress");
+        this.checkmark3.setAlpha(1.0);
       }
       else{
         this.dress.setX(230);
@@ -448,6 +463,20 @@ export default class clothingScene extends Phaser.Scene {
           this.checkmark2.setAlpha(1.0);
         }
         if (this.pickedList[index]=="hat"){
+          this.checkmark3.setAlpha(1.0);
+        }
+      }
+    }
+
+    if (this.level=="3"){
+      for (let index in this.pickedList){
+        if (this.pickedList[index]=="banana"){
+          this.checkmark.setAlpha(1.0);
+        }
+        if (this.pickedList[index]=="greenBalloon"){
+          this.checkmark2.setAlpha(1.0);
+        }
+        if (this.pickedList[index]=="dress"){
           this.checkmark3.setAlpha(1.0);
         }
       }

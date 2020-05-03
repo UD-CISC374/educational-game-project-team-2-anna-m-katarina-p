@@ -44,7 +44,7 @@ export default class mapScene extends Phaser.Scene {
             this.picked[1]="true";
         }
         if (this.picked[0]=="4"&&this.picked[1]=="false"){
-            this.add.text(10, 190, "LEVEL 3 COMPLETE!!", {fill: '#000000', fontSize: '20px'});
+            this.add.text(10, 190, "YOU WIN!!", {fill: '#000000', fontSize: '20px'});
             this.picked[1]="true";
         }
         
