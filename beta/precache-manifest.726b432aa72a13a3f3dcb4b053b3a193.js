@@ -200,15 +200,15 @@ self.__precacheManifest = (self.__precacheManifest || []).concat([
     "url": "/educational-game-project-team-2-anna-m-katarina-p/betafavicon.ico"
   },
   {
-    "revision": "ede38aba105d4e18780d",
-    "url": "/educational-game-project-team-2-anna-m-katarina-p/betagen.main.7a3b18d43b456fdd2541.bundle.js"
+    "revision": "27ebb1e5f9b98162fc04",
+    "url": "/educational-game-project-team-2-anna-m-katarina-p/betagen.main.2d346bd6a33c7d7a117b.bundle.js"
   },
   {
     "revision": "5e69403aa42e950fedff",
     "url": "/educational-game-project-team-2-anna-m-katarina-p/betagen.vendors.0805bb80903235d40eaf.bundle.js"
   },
   {
-    "revision": "80a7d9dcbb6f29d3526513a1f979e51a",
+    "revision": "4d454f6e1856c9a75f7b62d7db3a7be3",
     "url": "/educational-game-project-team-2-anna-m-katarina-p/betaindex.html"
   },
   {
