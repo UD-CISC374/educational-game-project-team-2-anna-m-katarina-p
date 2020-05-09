@@ -50,7 +50,7 @@ export default class tutorialScene extends Phaser.Scene {
         this.abuela.setScale(0.5);
         this.abuela.setAlpha(1.0);
         this.time.addEvent({
-            delay: 5000,
+            delay: 10000,
             callback: this.hideAbuela,
             callbackScope: this,
             loop: false

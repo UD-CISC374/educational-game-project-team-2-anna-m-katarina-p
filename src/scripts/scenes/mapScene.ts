@@ -44,8 +44,7 @@ export default class mapScene extends Phaser.Scene {
             this.picked[1]="true";
         }
         if (this.picked[0]=="4"&&this.picked[1]=="false"){
-            this.add.text(10, 190, "YOU WIN!!", {fill: '#000000', fontSize: '20px'});
-            this.picked[1]="true";
+            this.goToEnd();
         }
         
     }
@@ -60,6 +59,10 @@ export default class mapScene extends Phaser.Scene {
 
     goToFood(){
         this.scene.start('foodScene', this.picked);
+    }
+
+    goToEnd(){
+        this.scene.start('finalScene');
     }
 
     init(data){
