@@ -4,6 +4,8 @@ import PreloadScene from './scenes/preloadScene';
 import MapScene from './scenes/mapScene';
 import PartyScene from './scenes/partyScene';
 import FoodScene from './scenes/foodScene';
+import TutorialScene from './scenes/tutorialScene';
+import TitleScene from './scenes/titleScene';
 
 import GameConfig = Phaser.Types.Core.GameConfig;
 
@@ -20,7 +22,7 @@ const config: GameConfig = {
         width: DEFAULT_WIDTH,
         height: DEFAULT_HEIGHT
     },
-    scene: [PreloadScene, MainScene, MapScene, PartyScene, FoodScene],
+    scene: [PreloadScene, MainScene, MapScene, PartyScene, FoodScene, TutorialScene, TitleScene],
     physics: {
         default: 'arcade',
         arcade: {
