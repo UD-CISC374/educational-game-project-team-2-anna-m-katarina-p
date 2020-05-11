@@ -14,13 +14,10 @@ export default class foodScene extends Phaser.Scene {
     private water: any;
     private basket: any;
     private paper: any;
-    private camisaX:any;
     private dragObj: any;
     private word: any;
     private item: any;
     private items: any;
-    private itemsSelected: any;
-    private listDone: any;
     private checkmark: any;
     private checkmark2: any;
     private checkmark3: any;
@@ -28,25 +25,14 @@ export default class foodScene extends Phaser.Scene {
     private checkmark5: any;
     private picked: any;
     private pickedList:any;
-    private x: any;
     private scoreLabel: any;
-    private level2List: any;
     private level: any;
-    private level3List: any;
 
     constructor(){
         super({key: 'foodScene'});
     }
 
     create(){
-        this.listDone = false;
-        this.items = ["shirt", "apple", "plate"];
-        this.itemsSelected = [];
-
-        this.level2List=["pants, hat, water"];
-
-        this.level3List=["banana, greenBalloon, dress, pjs, soda"];
-
         this.background=this.add.image(200, 200, "green");     
         this.background.setScale(3.0);
 
@@ -61,18 +47,21 @@ export default class foodScene extends Phaser.Scene {
         this.add.text(15,5, "La Lista",{fill:"#000000", fontSize:"16px"});
 
         if (this.level=="1"){
+          this.items = ["shirt", "apple", "plate"];
           this.add.text(40,30, "camisa",{fill:"#000000", fontSize:"16px"});
           this.add.text(40,50, "manzana",{fill:"#000000", fontSize:"16px"});
           this.add.text(40,70, "plato",{fill:"#000000", fontSize:"16px"});
         }
 
         if (this.level=="2"){
+          this.items=["pants", "hat", "water"];
           this.add.text(35,30, "pantalones azules",{fill:"#000000", fontSize:"11px"});
           this.add.text(35,50, "botella de agua",{fill:"#000000", fontSize:"11px"});
           this.add.text(30,70, "sombrero de fiesta",{fill:"#000000", fontSize:"11px"});
         }
 
         if (this.level=="3"){
+          this.items=["banana", "greenBalloon", "dress", "pjs", "soda"];
           this.add.text(35,30, "fruta amarilla",{fill:"#000000", fontSize:"12px"});
           this.add.text(35,50, "globo verde",{fill:"#000000", fontSize:"12px"});
           this.add.text(35,70, "vestido roja",{fill:"#000000", fontSize:"12px"});
@@ -214,10 +203,10 @@ export default class foodScene extends Phaser.Scene {
 
     pick(basket,item){
       if (item == this.apple){
-        if (this.level=="1"){
+        this.word = "apple";
+        if (this.items.indexOf(this.word) != -1){
           this.apple.disableBody(true,true);
           this.checkmark2.setAlpha(1.0);
-          this.itemsSelected.push("apple");
           this.picked.push("apple");
         }
         else{
@@ -236,9 +225,8 @@ export default class foodScene extends Phaser.Scene {
   
       if (item == this.banana){
         this.word = "banana";
-        if (this.level=="3"){
+        if (this.items.indexOf(this.word) != -1){
           this.banana.disableBody(true,true);
-          this.itemsSelected.push("banana");
           this.picked.push("banana");
           this.checkmark.setAlpha(1.0);
         }
@@ -260,7 +248,6 @@ export default class foodScene extends Phaser.Scene {
         this.word = "bread";
         if (this.items.indexOf(this.word) != -1){
           this.bread.disableBody(true,true);
-          this.itemsSelected.push("bread");
           this.picked.push("bread");
         }
         else{
@@ -279,10 +266,9 @@ export default class foodScene extends Phaser.Scene {
   
       if (item == this.soda){
         this.word = "soda";
-        if (this.level=="3"){
+        if (this.items.indexOf(this.word) != -1){
           this.soda.disableBody(true,true);
           this.checkmark5.setAlpha(1.0);
-          this.itemsSelected.push("soda");
           this.picked.push("soda");
         }
         else{
@@ -300,9 +286,9 @@ export default class foodScene extends Phaser.Scene {
       }
   
       if (item == this.water){
-        if (this.level=="2"){
+        this.word = "water";
+        if (this.items.indexOf(this.word) != -1){
           this.water.disableBody(true,true);
-          this.itemsSelected.push("water");
           this.picked.push("water");
           this.checkmark2.setAlpha(1.0);
         }        
@@ -324,7 +310,6 @@ export default class foodScene extends Phaser.Scene {
         this.word = "hotdog";
         if (this.items.indexOf(this.word) != -1){
           this.hotdog.disableBody(true,true);
-          this.itemsSelected.push("hotdog");
           this.picked.push("hotdog");
         }
         else{
@@ -345,7 +330,6 @@ export default class foodScene extends Phaser.Scene {
         this.word = "cookie";
         if (this.items.indexOf(this.word) != -1){
           this.cookie.disableBody(true,true);
-          this.itemsSelected.push("cookie");
           this.picked.push("cookie");
         }
         else{
@@ -366,7 +350,6 @@ export default class foodScene extends Phaser.Scene {
         this.word = "milk";
         if (this.items.indexOf(this.word) != -1){
           this.milk.disableBody(true,true);
-          this.itemsSelected.push("milk");
           this.picked.push("milk");
         }
         else{
@@ -387,7 +370,6 @@ export default class foodScene extends Phaser.Scene {
         this.word = "chips";
         if (this.items.indexOf(this.word) != -1){
           this.chips.disableBody(true,true);
-          this.itemsSelected.push("chips");
           this.picked.push("chips");
         }
         else{

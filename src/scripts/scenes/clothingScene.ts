@@ -1,7 +1,6 @@
 import ExampleObject from '../objects/exampleObject';
 
 export default class clothingScene extends Phaser.Scene {
-  private exampleObject: ExampleObject;
   private shirt: any;
   private pants: any;
   private shoes: any;
@@ -17,29 +16,22 @@ export default class clothingScene extends Phaser.Scene {
   private items: Array<any>;
   private dragObj: any;
   private paper:any;
-  private camisaX: any;
   private checkmark2: any;
   private checkmark3: any;
   private checkmark4: any;
   private checkmark5: any;
   private mapButton: any;
   private yellowBackground: any;
-  private listDone: any;
-  private itemsSelected: any;
   private pickedList: any;
   private picked: any;
-  private x: any;
   private message: any;
   private level: any;
-  private level2List: any;
-  private level3List: any;
 
   constructor() {
     super({ key: 'MainScene' });
   }
 
   create() {
-    this.listDone=false;
     //Add background and map button
     this.yellowBackground=this.add.image(200, 200, "yellowBackground");
 
@@ -54,18 +46,21 @@ export default class clothingScene extends Phaser.Scene {
     this.add.text(15,5, "La Lista",{fill:"#000000", fontSize:"16px"});
 
     if (this.level=="1"){
+      this.items = ["shirt", "apple", "plate"];
       this.add.text(40,30, "camisa",{fill:"#000000", fontSize:"16px"});
       this.add.text(40,50, "manzana",{fill:"#000000", fontSize:"16px"});
       this.add.text(40,70, "plato",{fill:"#000000", fontSize:"16px"});
     }
     
     if (this.level=="2"){
+      this.items =["pants", "hat", "water"];
       this.add.text(35,30, "pantalones azules",{fill:"#000000", fontSize:"11px"});
       this.add.text(35,50, "botella de agua",{fill:"#000000", fontSize:"11px"});
       this.add.text(30,70, "sombrero de fiesta",{fill:"#000000", fontSize:"11px"});
     }   
     
     if (this.level=="3"){
+      this.items =["banana", "greenBalloon", "dress", "pjs", "soda"];
       this.add.text(35,30, "fruta amarilla",{fill:"#000000", fontSize:"12px"});
       this.add.text(35,50, "globo verde",{fill:"#000000", fontSize:"12px"});
       this.add.text(35,70, "vestido roja",{fill:"#000000", fontSize:"12px"});
@@ -98,19 +93,8 @@ export default class clothingScene extends Phaser.Scene {
     //Fifth checkmark
     this.checkmark5=this.add.image(30,114,"checkmark");
     this.checkmark5.setScale(0.04);
-    this.checkmark5.setAlpha(0.0);
+    this.checkmark5.setAlpha(0.0);   
 
-    //Make list of items for this level
-    this.items = ["shirt", "apple", "plate"];
-
-    //Make list of items for level 2
-    this.level2List=["pants, hat, water"];
-
-    this.level3List=["banana, greenBalloon, dress, pjs, soda"];
-
-    //Make list of items selected
-    this.itemsSelected = [];
-    
     //Make basket
     this.basket=this.physics.add.image(270,360,"basket");
     this.basket.setScale(0.5);
@@ -187,8 +171,7 @@ export default class clothingScene extends Phaser.Scene {
     this.checkDone();
   }
 
-  goToMap(){
-    
+  goToMap(){  
     for (var index in this.picked){
       this.pickedList.push(this.picked[index]);
     }
@@ -217,10 +200,9 @@ export default class clothingScene extends Phaser.Scene {
   pick(basket,item){
     if (item == this.shirt){
       this.word = "shirt";
-      if (this.level=="1"&&this.items.indexOf(this.word) != -1){
+      if (this.items.indexOf(this.word) != -1){
         this.shirt.disableBody(true,true);
         this.checkmark.setAlpha(1.0);
-        this.itemsSelected.push("shirt");
         this.picked.push("shirt");
       }
       else{
@@ -241,7 +223,6 @@ export default class clothingScene extends Phaser.Scene {
       this.word = "skirt";
       if (this.items.indexOf(this.word) != -1){
         this.skirt.disableBody(true,true);
-        this.itemsSelected.push("skirt");
         this.picked.push("skirt");
       }
       else{
@@ -260,10 +241,9 @@ export default class clothingScene extends Phaser.Scene {
 
     if (item == this.pjs){
       this.word = "pjs";
-      if (this.level=="3"){
+      if (this.items.indexOf(this.word) != -1){
         this.pjs.disableBody(true,true);
         this.checkmark4.setAlpha(1.0);
-        this.itemsSelected.push("pjs");
         this.picked.push("pjs");
       }
       else{
@@ -284,7 +264,6 @@ export default class clothingScene extends Phaser.Scene {
       this.word = "sweater";
       if (this.items.indexOf(this.word) != -1){
         this.sweater.disableBody(true,true);
-        this.itemsSelected.push("sweater");
         this.picked.push("sweater");
       }
       else{
@@ -309,7 +288,6 @@ export default class clothingScene extends Phaser.Scene {
       this.word = "shoes";
       if (this.items.indexOf(this.word) != -1){
         this.shoes.disableBody(true,true);
-        this.itemsSelected.push("shoes");
         this.picked.push("shoes");
       }
       else{
@@ -328,9 +306,8 @@ export default class clothingScene extends Phaser.Scene {
 
     if (item == this.pants){
       this.word = "pants";
-      if (this.level=="2"){
+      if (this.items.indexOf(this.word) != -1){
         this.pants.disableBody(true,true);
-        this.itemsSelected.push("pants");
         this.picked.push("pants");
         this.checkmark.setAlpha(1.0);
       }
@@ -352,7 +329,6 @@ export default class clothingScene extends Phaser.Scene {
       this.word = "shorts";
       if (this.items.indexOf(this.word) != -1){
         this.shorts.disableBody(true,true);
-        this.itemsSelected.push("shorts");
         this.picked.push("shorts");
       }
       else{
@@ -371,9 +347,8 @@ export default class clothingScene extends Phaser.Scene {
 
     if (item == this.dress){
       this.word = "dress";
-      if (this.level=="3"){
+      if (this.items.indexOf(this.word) != -1){
         this.dress.disableBody(true,true);
-        this.itemsSelected.push("dress");
         this.picked.push("dress");
         this.checkmark3.setAlpha(1.0);
       }

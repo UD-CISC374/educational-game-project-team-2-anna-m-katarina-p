@@ -4,6 +4,10 @@ export default class PreloadScene extends Phaser.Scene {
   }
 
   preload() {
+    this.load.bitmapFont("pixelFont", "assets/font/font.png", "assets/font/font.xml");
+  
+    //title and tutorial
+    this.load.image("abuelaBubble", "assets/images/abuelaBubble.png");
     this.load.image("titleImage", "assets/images/titleImage.png");
     this.load.image("basket","assets/images/basket.png");
     this.load.image("paper", "assets/images/paper.png");
@@ -11,16 +15,10 @@ export default class PreloadScene extends Phaser.Scene {
     this.load.image("mapButton", "assets/images/mapB.png");
     this.load.image("yellowBackground", "assets/images/yellow.png");
 
+    //map
     this.load.image("clothesButton", "assets/images/clothesButton.png");
     this.load.image("partyButton", "assets/images/partyButton.png");
     this.load.image("foodButton", "assets/images/foodButton.png");
-
-    this.load.image("x", "assets/images/x.png");
-
-    this.load.bitmapFont("pixelFont", "assets/font/font.png", "assets/font/font.xml");
-  
-    //tutorial
-    this.load.image("abuelaBubble", "assets/images/abuelaBubble.png");
 
     //clothes
     this.load.image("shirt", "assets/images/shirt.png");

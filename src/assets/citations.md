@@ -1,3 +1,36 @@
-*Please be sure to list the source of all assets you used here.*
+# Citations
 
-*At least a URL, but also be sure to include any extra information that the artist/author requests you include.*
+<https://commons.wikimedia.org/wiki/File:Red_X.svg>
+<https://www.netclipart.com/isee/Tbmox_clip-art-freeuse-library-junk-food-chili-hot/>
+<https://www.mycutegraphics.com/graphics/tshirt-images.html>
+<http://clipart-library.com/pant-cliparts.html>
+<https://purepng.com/photo/10542/clipart-shopping-basket>
+<https://www.festivalclaca.cat/festvi/xJiTb_red-apple-fruits-png-transparent-images-clipart-icons/>
+<http://clipart-library.com/dress-cliparts.html>
+<http://clipart-library.com/pajamas-cliparts.html>
+<https://ya-webdesign.com/explore/skirt-clipart-png/>
+<https://www.mycutegraphics.com/graphics/sweater/green-orange-sweater.html>
+<https://webstockreview.net/explore/minion-clipart-banana-png/>
+<http://clipart-library.com/shorts-cliparts.html>
+<https://www.google.com/search?q=milk+png+transparent+cartoon&sxsrf=ALeKk00xiRMwGDuZSBri1yvVu11ZbHU68A:1586191714484&source=lnms&tbm=isch&sa=X&ved=2ahUKEwjMx7_NoNToAhUGmHIEHeizCcEQ_AUoAXoECAwQAw&biw=778&bih=695&dpr=1.25#imgrc=jNHU_c5PYBf3dM>
+<https://www.netclipart.com/isee/oiRmTJ_hot-dog-hamburger-fast-food-sandwich-bread-transparent/>
+<https://www.clipartmax.com/middle/m2i8i8H7A0b1b1Z5_chocolate-chip-cookie-cartoon/>
+<http://clipart-library.com/transparent-streamers-cliparts.html>
+<https://www.pinterest.com/pin/575968239822291188/>
+<https://ya-webdesign.com/explore/bread-cartoon-png/>
+<https://www.pinclipart.com/maxpin/hJRJxx/>
+<https://www.clipartmax.com/middle/m2i8i8d3G6A0A0Z5_food-illustrationsfood-clipartpajama-lay-chips-cartoon/>
+<https://www.clipart.email/clipart/soda-clipart-png-53666.html>
+<https://www.subpng.com/png-auze1d/>
+<https://www.clipartqueen.com/balloon-clipart.html>
+<https://www.clipart.email/clipart/empty-shelf-clipart-341607.html>
+<https://www.clipart.email/clipart/empty-book-shelf-clip-art-418326.html>
+<http://clipart-library.com/shoes-cliparts-transparent.html>
+<http://buttonoptimizer.com/>
+<https://www.pngkey.com/maxpic/u2t4t4u2u2t4a9q8/>
+<https://dlpng.com/png/5432333>
+<http://clipart-library.com/free-speech-bubble.html>
+<https://school-daze.fandom.com/wiki/Abuela>
+<https://www.pngwave.com/png-clip-art-azzhs/download>
+<https://www.kindpng.com/imgv/ixwhiow_house-cartoon-png-go-home-cartoon-png-transparent/#gal_house-cartoon-png-go-home-cartoon-png-transparent-png_ixwhiow_2712699.png>
+<http://clipart-library.com/clip-art/streamers-transparent-background-8.htm>

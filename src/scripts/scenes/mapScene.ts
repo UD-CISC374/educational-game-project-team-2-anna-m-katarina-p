@@ -11,11 +11,11 @@ export default class mapScene extends Phaser.Scene {
     }
 
     create(){
-        console.log("the level is: "+this.picked[0]);
-
+        //Add labels
         this.add.text(0, 0, "Map", {fill: '#000000', fontSize: '20px'});
         this.add.text(180,5,"Click a store to enter", {fill: '#000000', fontSize: '16px'});
         
+        //Add buttons
         this.clothesButton=this.add.image(100,100,"clothesButton")
         .setInteractive()
         .on('pointerdown', ()=>this.goToClothes());
@@ -30,11 +30,10 @@ export default class mapScene extends Phaser.Scene {
         .setInteractive()
         .on('pointerdown', ()=>this.goToFood());
         this.foodButton.setScale(0.6);
-
-
     }
 
     update(){
+        //Tell them where they're at in the levels
         if (this.picked[0]=="2"&&this.picked[1]=="false"){
             this.add.text(10, 190, "LEVEL 1 COMPLETE!!", {fill: '#000000', fontSize: '20px'});
             this.picked[1]="true";
@@ -45,8 +44,7 @@ export default class mapScene extends Phaser.Scene {
         }
         if (this.picked[0]=="4"&&this.picked[1]=="false"){
             this.goToEnd();
-        }
-        
+        }        
     }
 
     goToClothes(){

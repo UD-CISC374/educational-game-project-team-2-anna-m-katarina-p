@@ -12,14 +12,11 @@ export default class partyScene extends Phaser.Scene {
     private streamers: any;
     private utensils: any;
     private paper: any;
-    private camisaX: any;
     private basket: any;
     private dragObj: any;
     private word: any;
     private item: any;
     private items: any;
-    private itemsSelected: any;
-    private listDone: any;
     private checkmark: any;
     private checkmark2: any;
     private checkmark3: any;
@@ -29,22 +26,13 @@ export default class partyScene extends Phaser.Scene {
     private pickedList: any;
     private message: any;
     private level: any;
-    private level2List: any;
-    private level3List: any;
 
     constructor(){
         super({key: 'partyScene'});
     }
 
     create(){
-        this.listDone = false;
-        this.items = ["shirt", "apple", "plate"];
-        this.itemsSelected = [];
-
-        this.level2List=["pants, hat, water"];
-
-        this.level3List=["banana, greenBalloon, dress, pjs, soda"];
-
+        //Create the background
         this.background=this.add.image(200, 200, "blue");
         this.background.setScale(3.0);
 
@@ -53,19 +41,23 @@ export default class partyScene extends Phaser.Scene {
         this.paper.setScale(1.2);
         this.add.text(15,5, "La Lista",{fill:"#000000", fontSize:"16px"});
 
+        //Determine what's on the list based on the level
         if (this.level=="1"){
+          this.items = ["shirt", "apple", "plate"];
           this.add.text(40,30, "camisa",{fill:"#000000", fontSize:"16px"});
           this.add.text(40,50, "manzana",{fill:"#000000", fontSize:"16px"});
           this.add.text(40,70, "plato",{fill:"#000000", fontSize:"16px"});
         }
 
         if (this.level=="2"){
+          this.items = ["pants", "hat", "water"];
           this.add.text(35,30, "pantalones azules",{fill:"#000000", fontSize:"11px"});
           this.add.text(35,50, "botella de agua",{fill:"#000000", fontSize:"11px"});
           this.add.text(30,70, "sombrero de fiesta",{fill:"#000000", fontSize:"11px"});
         }
 
         if (this.level=="3"){
+          this.items = ["banana", "greenBalloon", "dress", "pjs", "soda"];
           this.add.text(35,30, "fruta amarilla",{fill:"#000000", fontSize:"12px"});
           this.add.text(35,50, "globo verde",{fill:"#000000", fontSize:"12px"});
           this.add.text(35,70, "vestido roja",{fill:"#000000", fontSize:"12px"});
@@ -73,6 +65,7 @@ export default class partyScene extends Phaser.Scene {
           this.add.text(25,110,"bebida carbonatada",{fill:"#000000", fontSize:"12px"});
         }
 
+        //Add instructions and return to map button
         this.add.text(5,350,"Drag item to basket.",{fill:"#000000", fontSize:"16px"});
 
         this.mapButton=this.add.image(70, 300, "mapButton")
@@ -157,6 +150,7 @@ export default class partyScene extends Phaser.Scene {
         this.utensils.setInteractive();
         this.input.setDraggable(this.utensils);
 
+        //Determine what happens when items enter basket
         this.input.on('pointerdown', this.startDrag, this);
         this.physics.add.overlap(this.basket, this.bowl, this.pick, undefined, this);
         this.physics.add.overlap(this.basket, this.firework, this.pick, undefined, this);
@@ -166,20 +160,25 @@ export default class partyScene extends Phaser.Scene {
         this.physics.add.overlap(this.basket, this.redBalloon, this.pick, undefined, this);
         this.physics.add.overlap(this.basket, this.streamers, this.pick, undefined, this);
         this.physics.add.overlap(this.basket, this.utensils, this.pick, undefined, this);
-    
+        
+        //Make array for picked items
         this.picked=new Array();
-        this.removeParty();
 
+        //Remove selected items and add checkmarks
+        this.removeParty();
+        this.addChecks();
+
+        //Create incorrect item message
         this.message=this.add.bitmapText(222,332, "pixelFont", "SCORE ", 16);
         this.message.setAlpha(0.0);
-
-        this.addChecks();
       }
 
     update(){
+      //Check if they've gotten everything they need
       this.checkDone();
     }
 
+    //Return to the map
     goToMap(){
         for (let index in this.picked){
           this.pickedList.push(this.picked[index]);
@@ -187,6 +186,7 @@ export default class partyScene extends Phaser.Scene {
         this.scene.start('mapScene', this.pickedList);
     }
 
+    //Check if they're done the list
     checkDone(){
       if (this.level=="1"){
         if (this.pickedList.length==5){
@@ -205,12 +205,12 @@ export default class partyScene extends Phaser.Scene {
       }
     }
 
+    //Figure out what happens when you add item to basket
     pick(basket,item){
       if (item == this.bowl){
         this.word = "bowl";
         if (this.items.indexOf(this.word) != -1){
           this.bowl.disableBody(true,true);
-          this.itemsSelected.push("bowl");
           this.picked.push("bowl");
         }
         else{
@@ -231,7 +231,6 @@ export default class partyScene extends Phaser.Scene {
         this.word = "firework";
         if (this.items.indexOf(this.word) != -1){
           this.firework.disableBody(true,true);
-          this.itemsSelected.push("firework");
           this.picked.push("firework");
         }
         else{
@@ -250,9 +249,8 @@ export default class partyScene extends Phaser.Scene {
   
       if (item == this.greenBalloon){
         this.word = "greenBalloon";
-        if (this.level=="3"){
+        if (this.items.indexOf(this.word) != -1){
           this.greenBalloon.disableBody(true,true);
-          this.itemsSelected.push("greenBalloon");
           this.picked.push("greenBalloon");
           this.checkmark2.setAlpha(1.0);
         }
@@ -271,9 +269,9 @@ export default class partyScene extends Phaser.Scene {
       }
   
       if (item == this.hat){
-        if (this.level=="2"){
+        this.word = "hat";
+        if (this.items.indexOf(this.word) != -1){
           this.hat.disableBody(true,true);
-          this.itemsSelected.push("hat");
           this.picked.push("hat");
           this.checkmark3.setAlpha(1.0);
         }
@@ -296,7 +294,6 @@ export default class partyScene extends Phaser.Scene {
         if (this.items.indexOf(this.word) != -1){
           this.plate.disableBody(true,true);
           this.checkmark3.setAlpha(1.0);
-          this.itemsSelected.push("plate");
           this.picked.push("plate");
         }
         else{
@@ -317,7 +314,6 @@ export default class partyScene extends Phaser.Scene {
         this.word = "redBalloon";
         if (this.items.indexOf(this.word) != -1){
           this.redBalloon.disableBody(true,true);
-          this.itemsSelected.push("redBalloon");
           this.picked.push("redBalloon");
         }
         else{
@@ -338,7 +334,6 @@ export default class partyScene extends Phaser.Scene {
         this.word = "streamers";
         if (this.items.indexOf(this.word) != -1){
           this.streamers.disableBody(true,true);
-          this.itemsSelected.push("streamers");
           this.picked.push("streamers")
         }
         else{
@@ -359,7 +354,6 @@ export default class partyScene extends Phaser.Scene {
         this.word = "utensils";
         if (this.items.indexOf(this.word) != -1){
           this.utensils.disableBody(true,true);
-          this.itemsSelected.push("utensils");
           this.picked.push("utensils");
         }
         else{
@@ -383,6 +377,7 @@ export default class partyScene extends Phaser.Scene {
       
     }
 
+    //Allow dragging of items
     startDrag(pointer, targets){
         this.input.off('pointerdown', this.startDrag, this);
         this.dragObj=targets[0];
@@ -406,6 +401,7 @@ export default class partyScene extends Phaser.Scene {
         this.level=this.pickedList[0];
       }
       
+      //Remove items if they've been selected
       removeParty(){
         for (let index in this.pickedList){
           if (this.pickedList[index]=="bowl"){
@@ -435,10 +431,12 @@ export default class partyScene extends Phaser.Scene {
         }
       }
 
+      //Hide the message after a bit
       hideMess(){
         this.message.setAlpha(0.0);
       }
 
+      //Add checkmarks if they're selected
       addChecks(){
         if (this.level=="1"){
           for (let index in this.pickedList){
