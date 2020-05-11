@@ -58,7 +58,7 @@ export default class foodScene extends Phaser.Scene {
         //Add paper and shopping list
         this.paper=this.add.image(70, 110, "paper");
         this.paper.setScale(1.2);
-        this.add.text(15,5, "Shopping List:",{fill:"#000000", fontSize:"16px"});
+        this.add.text(15,5, "La Lista",{fill:"#000000", fontSize:"16px"});
 
         if (this.level=="1"){
           this.add.text(40,30, "camisa",{fill:"#000000", fontSize:"16px"});
