@@ -169,7 +169,8 @@ export default class partyScene extends Phaser.Scene {
         this.addChecks();
 
         //Create incorrect item message
-        this.message=this.add.bitmapText(222,332, "pixelFont", "SCORE ", 16);
+        this.message=this.add.bitmapText(222,322, "pixelFont", "SCORE ", 16);
+        this.message.tint = 0xFF0000;
         this.message.setAlpha(0.0);
       }
 

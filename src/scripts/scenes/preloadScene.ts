@@ -16,9 +16,9 @@ export default class PreloadScene extends Phaser.Scene {
     this.load.image("yellowBackground", "assets/images/yellow.png");
 
     //map
-    this.load.image("clothesButton", "assets/images/clothesButton.png");
-    this.load.image("partyButton", "assets/images/partyButton.png");
-    this.load.image("foodButton", "assets/images/foodButton.png");
+    this.load.image("clothingStore", "assets/images/clothingStore.PNG");
+    this.load.image("partyStore", "assets/images/partyStore.PNG");
+    this.load.image("foodStore", "assets/images/foodStore.png");
 
     //clothes
     this.load.image("shirt", "assets/images/shirt.png");

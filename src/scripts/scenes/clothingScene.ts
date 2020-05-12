@@ -147,7 +147,8 @@ export default class clothingScene extends Phaser.Scene {
     this.sweater.setInteractive();
     this.input.setDraggable(this.sweater);
 
-    this.message=this.add.bitmapText(222,332, "pixelFont", "SCORE ", 16);
+    this.message=this.add.bitmapText(222,322, "pixelFont", "SCORE ", 16);
+    this.message.tint = 0xFF0000;
     this.message.setAlpha(0.0);
 
     //Set up dragging into basket

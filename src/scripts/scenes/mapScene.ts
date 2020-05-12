@@ -14,22 +14,22 @@ export default class mapScene extends Phaser.Scene {
         //Add labels
         this.add.text(0, 0, "Map", {fill: '#000000', fontSize: '20px'});
         this.add.text(180,5,"Click a store to enter", {fill: '#000000', fontSize: '16px'});
-        
+
         //Add buttons
-        this.clothesButton=this.add.image(100,100,"clothesButton")
+        this.clothesButton=this.add.image(100,100,"clothingStore")
         .setInteractive()
         .on('pointerdown', ()=>this.goToClothes());
-        this.clothesButton.setScale(0.75);
+        this.clothesButton.setScale(0.5);
 
-        this.partyButton=this.add.image(300, 175, "partyButton")
+        this.partyButton=this.add.image(300, 175, "partyStore")
         .setInteractive()
         .on('pointerdown', ()=>this.goToParty());
-        this.partyButton.setScale(0.6);
+        this.partyButton.setScale(0.5);
 
-        this.foodButton=this.add.image(100, 300, "foodButton")
+        this.foodButton=this.add.image(100, 300, "foodStore")
         .setInteractive()
         .on('pointerdown', ()=>this.goToFood());
-        this.foodButton.setScale(0.6);
+        this.foodButton.setScale(0.5);
     }
 
     update(){

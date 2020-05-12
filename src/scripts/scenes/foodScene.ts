@@ -154,7 +154,8 @@ export default class foodScene extends Phaser.Scene {
         this.chips.setInteractive();
         this.input.setDraggable(this.chips);
 
-        this.scoreLabel = this.add.bitmapText(222, 332, "pixelFont", "SCORE ", 16);
+        this.scoreLabel = this.add.bitmapText(222, 322, "pixelFont", "SCORE ", 16);
+        this.scoreLabel.tint = 0xFF0000;
         this.scoreLabel.setAlpha(0.0);
 
         this.input.on('pointerdown', this.startDrag, this);
