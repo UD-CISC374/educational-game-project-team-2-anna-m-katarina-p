@@ -111,11 +111,11 @@ export default class clothingScene extends Phaser.Scene {
     */
 
     //Make pants
-    //this.pants=new items(this, 320, 240, "pants", 0.2, "No, es pantalones");
-    this.pants=this.physics.add.image(320, 240, "pants");
-    this.pants.setScale(0.2);
-    this.pants.setInteractive();
-    this.input.setDraggable(this.pants);
+    this.pants=new items(this, 320, 240, "pants", 0.2, "No, es pantalones");
+    //this.pants=this.physics.add.image(320, 240, "pants");
+    //this.pants.setScale(0.2);
+    //this.pants.setInteractive();
+    //this.input.setDraggable(this.pants);
 
     //Make shoes
     this.shoes=this.physics.add.image(285,60,"shoes");

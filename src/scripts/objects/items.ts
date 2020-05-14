@@ -14,7 +14,7 @@ export class items extends Phaser.Physics.Arcade.Image{
         this.originalx=x;
         this.originaly=y;
 
-        scene.add.existing(this);
+        scene.physics.add.existing(this);
     }
 
     updateCoordinates(pointer){
