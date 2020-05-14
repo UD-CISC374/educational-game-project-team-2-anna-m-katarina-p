@@ -1,4 +1,5 @@
 import ExampleObject from '../objects/exampleObject';
+import {items} from '../objects/items';
 
 export default class clothingScene extends Phaser.Scene {
   private shirt: any;
@@ -26,6 +27,7 @@ export default class clothingScene extends Phaser.Scene {
   private picked: any;
   private message: any;
   private level: any;
+  private stuff: any;
 
   constructor() {
     super({ key: 'MainScene' });
@@ -100,12 +102,16 @@ export default class clothingScene extends Phaser.Scene {
     this.basket.setScale(0.5);
     
     //Make shirt
-    this.shirt=this.physics.add.image(200,60,"shirt");
+    this.shirt=new items(this, 200, 60, "shirt", 0.15, "No, es una camisa");
+    /*this.shirt=this.physics.add.image(200,60,"shirt");
     this.shirt.setScale(0.15);
+    
     this.shirt.setInteractive();
     this.input.setDraggable(this.shirt);
+    */
 
     //Make pants
+    //this.pants=new items(this, 320, 240, "pants", 0.2, "No, es pantalones");
     this.pants=this.physics.add.image(320, 240, "pants");
     this.pants.setScale(0.2);
     this.pants.setInteractive();
@@ -151,6 +157,8 @@ export default class clothingScene extends Phaser.Scene {
     this.message.tint = 0xFF0000;
     this.message.setAlpha(0.0);
 
+    //this.stuff=this.physics.add.group([this.item, this.pjs, this.skirt, this.sweater, this.shirt, this.pants, this.shoes, this.dress, this.shorts]);
+
     //Set up dragging into basket
     this.input.on('pointerdown', this.startDrag, this);
     this.physics.add.overlap(this.basket, this.shirt, this.pick, undefined, this);
@@ -161,7 +169,6 @@ export default class clothingScene extends Phaser.Scene {
     this.physics.add.overlap(this.basket, this.shorts, this.pick, undefined, this);
     this.physics.add.overlap(this.basket, this.dress, this.pick, undefined, this);
     this.physics.add.overlap(this.basket, this.sweater, this.pick, undefined, this);
-
     this.picked=new Array();   
     this.removeClothes(); 
 
@@ -173,6 +180,7 @@ export default class clothingScene extends Phaser.Scene {
   }
 
   goToMap(){  
+    console.log(this.pickedList);
     for (var index in this.picked){
       this.pickedList.push(this.picked[index]);
     }
@@ -199,6 +207,8 @@ export default class clothingScene extends Phaser.Scene {
   }
 
   pick(basket,item){
+
+    console.log("in pick");
     if (item == this.shirt){
       this.word = "shirt";
       if (this.items.indexOf(this.word) != -1){
@@ -373,6 +383,7 @@ export default class clothingScene extends Phaser.Scene {
     }    
   }
 
+
   startDrag(pointer, targets){
     this.input.off('pointerdown', this.startDrag, this);
     this.dragObj=targets[0];
@@ -383,6 +394,8 @@ export default class clothingScene extends Phaser.Scene {
   doDrag(pointer){
     this.dragObj.x=pointer.x;
     this.dragObj.y=pointer.y;
+
+    console.log("dragObj x is " + this.dragObj.x);
   }
 
   stopDrag(){

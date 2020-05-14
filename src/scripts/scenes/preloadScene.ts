@@ -73,6 +73,6 @@ export default class PreloadScene extends Phaser.Scene {
   }
 
   create() {
-    this.scene.start('titleScene');
+    this.scene.start('MainScene', ["1", "false"]);
   }
 }
