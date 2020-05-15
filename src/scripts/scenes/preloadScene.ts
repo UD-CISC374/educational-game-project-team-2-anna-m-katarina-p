@@ -73,6 +73,6 @@ export default class PreloadScene extends Phaser.Scene {
   }
 
   create() {
-    this.scene.start('MainScene', ["1", "false"]);
+    this.scene.start('foodScene', ["1", "false"]);
   }
 }

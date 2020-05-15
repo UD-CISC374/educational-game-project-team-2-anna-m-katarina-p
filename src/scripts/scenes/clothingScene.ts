@@ -1,5 +1,6 @@
 import ExampleObject from '../objects/exampleObject';
 import {items} from '../objects/items';
+import { checkMarks } from '../objects/checkMarks';
 
 export default class clothingScene extends Phaser.Scene {
   private shirt: any;
@@ -72,105 +73,38 @@ export default class clothingScene extends Phaser.Scene {
 
     this.add.text(5,350,"Drag item to basket.",{fill:"#000000", fontSize:"16px"});
 
-    //Add checkmark
-    this.checkmark=this.add.image(30, 30, "checkmark");
-    this.checkmark.setScale(0.04);
-    this.checkmark.setAlpha(0.0);
-
-    //Second checkmark
-    this.checkmark2=this.add.image(30, 51, "checkmark");
-    this.checkmark2.setScale(0.04);
-    this.checkmark2.setAlpha(0.0);
-
-    //Third checkmark
-    this.checkmark3=this.add.image(30, 72, "checkmark");
-    this.checkmark3.setScale(0.04);
-    this.checkmark3.setAlpha(0.0);
-
-    //Fourth checkmark
-    this.checkmark4=this.add.image(30,93,"checkmark");
-    this.checkmark4.setScale(0.04);
-    this.checkmark4.setAlpha(0.0);
-
-    //Fifth checkmark
-    this.checkmark5=this.add.image(30,114,"checkmark");
-    this.checkmark5.setScale(0.04);
-    this.checkmark5.setAlpha(0.0);   
+    //Add checkmarks
+    this.checkmark=new checkMarks(this, 30, 30);
+    this.checkmark2=new checkMarks(this, 30, 51);
+    this.checkmark3=new checkMarks(this, 30, 72);
+    this.checkmark4=new checkMarks(this, 30, 93);
+    this.checkmark5=new checkMarks(this, 30, 114);  
 
     //Make basket
     this.basket=this.physics.add.image(270,360,"basket");
     this.basket.setScale(0.5);
     
-    //Make shirt
     this.shirt=new items(this, 200, 60, "shirt", 0.15, "No, es una camisa");
-    /*this.shirt=this.physics.add.image(200,60,"shirt");
-    this.shirt.setScale(0.15);
-    
-    this.shirt.setInteractive();
-    this.input.setDraggable(this.shirt);
-    */
-
-    //Make pants
     this.pants=new items(this, 320, 240, "pants", 0.2, "No, es pantalones");
-    //this.pants=this.physics.add.image(320, 240, "pants");
-    //this.pants.setScale(0.2);
-    //this.pants.setInteractive();
-    //this.input.setDraggable(this.pants);
-
-    //Make shoes
-    this.shoes=this.physics.add.image(285,60,"shoes");
-    this.shoes.setScale(0.15);
-    this.shoes.setInteractive();
-    this.input.setDraggable(this.shoes);
-
-    //Make dress
-    this.dress=this.physics.add.image(230,240,"dress");
-    this.dress.setScale(0.2);
-    this.dress.setInteractive();
-    this.input.setDraggable(this.dress);
-
-    //Make shorts
-    this.shorts=this.physics.add.image(280,140,"shorts");
-    this.shorts.setScale(0.15);
-    this.shorts.setInteractive();
-    this.input.setDraggable(this.shorts);
-
-    //Make pjs
-    this.pjs=this.physics.add.image(360,140,"pjs");
-    this.pjs.setScale(0.20);
-    this.pjs.setInteractive();
-    this.input.setDraggable(this.pjs);
-
-    //Make skirt
-    this.skirt=this.physics.add.image(360,60,"skirt");
-    this.skirt.setScale(0.12);
-    this.skirt.setInteractive();
-    this.input.setDraggable(this.pjs);
-
-    //Make sweater
-    this.sweater=this.physics.add.image(195,145,"sweater");
-    this.sweater.setScale(0.15);
-    this.sweater.setInteractive();
-    this.input.setDraggable(this.sweater);
+    this.shoes=new items(this, 285, 60, "shoes", 0.15, "No, son los zapatos");
+    this.dress=new items(this, 230, 240, "dress", 0.2, "No, es el vestido");
+    this.shorts=new items(this, 280, 140, "shorts", 0.15, "No, son los cortos");
+    this.pjs=new items(this, 360, 140, "pjs", 0.20, "No, es un pijama");
+    this.skirt=new items(this, 360, 60, "skirt", 0.12, "No, es una falda");
+    this.sweater=new items(this, 195, 145, "sweater", 0.15, "No, es un sueter");
 
     this.message=this.add.bitmapText(222,322, "pixelFont", "SCORE ", 16);
     this.message.tint = 0xFF0000;
     this.message.setAlpha(0.0);
 
-    //this.stuff=this.physics.add.group([this.item, this.pjs, this.skirt, this.sweater, this.shirt, this.pants, this.shoes, this.dress, this.shorts]);
-
     //Set up dragging into basket
     this.input.on('pointerdown', this.startDrag, this);
-    this.physics.add.overlap(this.basket, this.shirt, this.pick, undefined, this);
-    this.physics.add.overlap(this.basket, this.skirt, this.pick, undefined, this);
-    this.physics.add.overlap(this.basket, this.pjs, this.pick, undefined, this);
-    this.physics.add.overlap(this.basket, this.shoes, this.pick, undefined, this);
-    this.physics.add.overlap(this.basket, this.pants, this.pick, undefined, this);
-    this.physics.add.overlap(this.basket, this.shorts, this.pick, undefined, this);
-    this.physics.add.overlap(this.basket, this.dress, this.pick, undefined, this);
-    this.physics.add.overlap(this.basket, this.sweater, this.pick, undefined, this);
+
+    this.stuff = this.physics.add.group([this.shirt, this.pants, this.shoes, this.dress, this.shorts, this.pjs, this.skirt, this.sweater]);
+    this.physics.add.overlap(this.basket, this.stuff, this.pick, undefined, this);
     this.picked=new Array();   
     this.removeClothes(); 
+    
 
     this.addChecks();
   }
@@ -207,8 +141,6 @@ export default class clothingScene extends Phaser.Scene {
   }
 
   pick(basket,item){
-
-    console.log("in pick");
     if (item == this.shirt){
       this.word = "shirt";
       if (this.items.indexOf(this.word) != -1){
@@ -217,16 +149,8 @@ export default class clothingScene extends Phaser.Scene {
         this.picked.push("shirt");
       }
       else{
-        this.shirt.setX(200);
-        this.shirt.setY(60);
-        this.message.text = "No, es una camisa";
-        this.message.setAlpha(1.0);
-        this.time.addEvent({
-          delay: 800,
-          callback: this.hideMess,
-          callbackScope: this,
-          loop: false
-        });
+        this.shirt.goBack();
+        this.reset(this.shirt);
       }
     }
 
@@ -237,16 +161,8 @@ export default class clothingScene extends Phaser.Scene {
         this.picked.push("skirt");
       }
       else{
-        this.skirt.setX(360);
-        this.skirt.setY(60);
-        this.message.text = "No, es una falda";
-        this.message.setAlpha(1.0);
-        this.time.addEvent({
-          delay: 800,
-          callback: this.hideMess,
-          callbackScope: this,
-          loop: false
-        });
+        this.skirt.goBack();
+        this.reset(this.skirt);
       }
     }
 
@@ -258,16 +174,8 @@ export default class clothingScene extends Phaser.Scene {
         this.picked.push("pjs");
       }
       else{
-        this.pjs.setX(360);
-        this.pjs.setY(140);
-        this.message.text = "No, es un pijama";
-        this.message.setAlpha(1.0);
-        this.time.addEvent({
-          delay: 800,
-          callback: this.hideMess,
-          callbackScope: this,
-          loop: false
-        });
+        this.pjs.goBack();
+        this.reset(this.pjs);
       }
     }
 
@@ -278,16 +186,8 @@ export default class clothingScene extends Phaser.Scene {
         this.picked.push("sweater");
       }
       else{
-        this.sweater.setX(195);
-        this.sweater.setY(145);
-        this.message.text = "No, es un sueter";
-        this.message.setAlpha(1.0);
-        this.time.addEvent({
-          delay: 800,
-          callback: this.hideMess,
-          callbackScope: this,
-          loop: false
-        });
+        this.sweater.goBack();
+        this.reset(this.sweater);
       }
 
       for (let index in this.picked){
@@ -302,16 +202,8 @@ export default class clothingScene extends Phaser.Scene {
         this.picked.push("shoes");
       }
       else{
-        this.shoes.setX(285);
-        this.shoes.setY(60);
-        this.message.text = "No, es los zapatos";
-        this.message.setAlpha(1.0);
-        this.time.addEvent({
-          delay: 800,
-          callback: this.hideMess,
-          callbackScope: this,
-          loop: false
-        });
+        this.shoes.goBack();
+        this.reset(this.shoes);
       }
     }
 
@@ -323,16 +215,8 @@ export default class clothingScene extends Phaser.Scene {
         this.checkmark.setAlpha(1.0);
       }
       else{
-        this.pants.setX(320);
-        this.pants.setY(240);
-        this.message.text = "No, es un pantalones";
-        this.message.setAlpha(1.0);
-        this.time.addEvent({
-          delay: 800,
-          callback: this.hideMess,
-          callbackScope: this,
-          loop: false
-        });
+        this.pants.goBack();
+        this.reset(this.pants);
       }
     }
 
@@ -343,16 +227,8 @@ export default class clothingScene extends Phaser.Scene {
         this.picked.push("shorts");
       }
       else{
-        this.shorts.setX(280);
-        this.shorts.setY(140);
-        this.message.text = "No, es los pantalones cortos";
-        this.message.setAlpha(1.0);
-        this.time.addEvent({
-          delay: 800,
-          callback: this.hideMess,
-          callbackScope: this,
-          loop: false
-        });
+        this.shorts.goBack();
+        this.reset(this.shorts);
       }
     }
 
@@ -364,16 +240,8 @@ export default class clothingScene extends Phaser.Scene {
         this.checkmark3.setAlpha(1.0);
       }
       else{
-        this.dress.setX(230);
-        this.dress.setY(240);
-        this.message.text = "No, es un vestido";
-        this.message.setAlpha(1.0);
-        this.time.addEvent({
-          delay: 800,
-          callback: this.hideMess,
-          callbackScope: this,
-          loop: false
-        });
+        this.dress.goBack();
+        this.reset(this.dress);
       }
     }
 
@@ -394,8 +262,6 @@ export default class clothingScene extends Phaser.Scene {
   doDrag(pointer){
     this.dragObj.x=pointer.x;
     this.dragObj.y=pointer.y;
-
-    console.log("dragObj x is " + this.dragObj.x);
   }
 
   stopDrag(){
@@ -491,5 +357,16 @@ export default class clothingScene extends Phaser.Scene {
         }
       }
     }
+  }
+
+  reset(item: items){
+    this.message.text=item.message;
+    this.message.setAlpha(1.0);
+    this.time.addEvent({
+      delay:800,
+      callback: this.hideMess,
+      callbackScope: this,
+      loop: false
+    });
   }
 }

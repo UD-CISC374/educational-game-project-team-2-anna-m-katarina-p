@@ -1,4 +1,6 @@
 import ExampleObject from '../objects/exampleObject';
+import {checkMarks} from '../objects/checkMarks';
+import {items} from '../objects/items';
 
 export default class foodScene extends Phaser.Scene {
     private mapButton: any;
@@ -25,8 +27,9 @@ export default class foodScene extends Phaser.Scene {
     private checkmark5: any;
     private picked: any;
     private pickedList:any;
-    private scoreLabel: any;
+    private message: any;
     private level: any;
+    private stuff: any;
 
     constructor(){
         super({key: 'foodScene'});
@@ -71,103 +74,36 @@ export default class foodScene extends Phaser.Scene {
 
         this.add.text(5,350,"Drag item to basket.",{fill:"#000000", fontSize:"16px"});
 
-        //Add checkmark
-        this.checkmark=this.add.image(30, 30, "checkmark");
-        this.checkmark.setScale(0.04);
-        this.checkmark.setAlpha(0.0);
-
-        //Second checkmark
-        this.checkmark2=this.add.image(30, 51, "checkmark");
-        this.checkmark2.setScale(0.04);
-        this.checkmark2.setAlpha(0.0);
-
-        //Third checkmark
-        this.checkmark3=this.add.image(30, 72, "checkmark");
-        this.checkmark3.setScale(0.04);
-        this.checkmark3.setAlpha(0.0);
-
-        //Fourth checkmark
-        this.checkmark4=this.add.image(30,93,"checkmark");
-        this.checkmark4.setScale(0.04);
-        this.checkmark4.setAlpha(0.0);
-
-        //Fifth checkmark
-        this.checkmark5=this.add.image(30,114,"checkmark");
-        this.checkmark5.setScale(0.04);
-        this.checkmark5.setAlpha(0.0);
+        //Add checkmarks
+        this.checkmark=new checkMarks(this, 30, 30);
+        this.checkmark2=new checkMarks(this, 30, 51);
+        this.checkmark3=new checkMarks(this, 30, 72);
+        this.checkmark4=new checkMarks(this, 30, 93);
+        this.checkmark5=new checkMarks(this, 30, 114)
 
         //Make basket
         this.basket=this.physics.add.image(270,360,"basket");
         this.basket.setScale(0.5);
 
-        //Make apple
-        this.apple=this.physics.add.image(200,60,"apple");
-        this.apple.setScale(0.2);
-        this.apple.setInteractive();
-        this.input.setDraggable(this.apple);
+        //Make items
+        this.apple=new items(this, 200, 60, "apple", 0.2, "No, es una manzana");
+        this.banana=new items(this, 280, 240, "banana", 0.3, "No, es una banana");
+        this.bread= new items(this, 285, 60, "bread", 0.25, "No, es un pan");
+        this.soda=new items(this, 195,240, "soda", 0.03, "No, es una soda");
+        this.water=new items(this, 280, 140, "water", 0.15, "No, es una botella de agua");
+        this.hotdog=new items(this, 360, 140, "hotdog", 0.25, "No, es un perro caliente");
+        this.cookie=new items(this, 360, 60, "cookie", 0.15, "No, es una galleta");
+        this.milk=new items(this, 195, 145, "milk", 0.25, "No, es una botella de leche");
+        this.chips=new items(this, 360, 240, "chips", 0.1, "No, es una patata frita");
 
-        //Make banana
-        this.banana=this.physics.add.image(280,240,"banana");
-        this.banana.setScale(0.3);
-        this.banana.setInteractive();
-        this.input.setDraggable(this.banana);
+        this.message = this.add.bitmapText(222, 322, "pixelFont", "SCORE ", 16);
+        this.message.tint = 0xFF0000;
+        this.message.setAlpha(0.0);
 
-        //Make bread
-        this.bread=this.physics.add.image(285,60,"bread");
-        this.bread.setScale(0.25);
-        this.bread.setInteractive();
-        this.input.setDraggable(this.bread);
-
-        //Make soda
-        this.soda=this.physics.add.image(195,240,"soda");
-        this.soda.setScale(0.03);
-        this.soda.setInteractive();
-        this.input.setDraggable(this.soda);
-
-        //Make water
-        this.water=this.physics.add.image(280,140,"water");
-        this.water.setScale(0.08);
-        this.water.setInteractive();
-        this.input.setDraggable(this.water);
-
-        //Make hotdog
-        this.hotdog=this.physics.add.image(360,140,"hotdog");
-        this.hotdog.setScale(0.25);
-        this.hotdog.setInteractive();
-        this.input.setDraggable(this.hotdog);
-
-        //Make cookie
-        this.cookie=this.physics.add.image(360,60,"cookie");
-        this.cookie.setScale(0.15);
-        this.cookie.setInteractive();
-        this.input.setDraggable(this.cookie);
-
-        //Make milk
-        this.milk=this.physics.add.image(195,145,"milk");
-        this.milk.setScale(0.25);
-        this.milk.setInteractive();
-        this.input.setDraggable(this.milk);
-
-        //Make chips
-        this.chips=this.physics.add.image(360,240,"chips");
-        this.chips.setScale(0.1);
-        this.chips.setInteractive();
-        this.input.setDraggable(this.chips);
-
-        this.scoreLabel = this.add.bitmapText(222, 322, "pixelFont", "SCORE ", 16);
-        this.scoreLabel.tint = 0xFF0000;
-        this.scoreLabel.setAlpha(0.0);
-
+        this.stuff=this.physics.add.group([this.apple, this.bread, this.cookie, this.milk, this.water, this.hotdog, this.soda, this.banana, this.chips]);
         this.input.on('pointerdown', this.startDrag, this);
-        this.physics.add.overlap(this.basket, this.apple, this.pick, undefined, this);
-        this.physics.add.overlap(this.basket, this.banana, this.pick, undefined, this);
-        this.physics.add.overlap(this.basket, this.bread, this.pick, undefined, this);
-        this.physics.add.overlap(this.basket, this.soda, this.pick, undefined, this);
-        this.physics.add.overlap(this.basket, this.water, this.pick, undefined, this);
-        this.physics.add.overlap(this.basket, this.hotdog, this.pick, undefined, this);
-        this.physics.add.overlap(this.basket, this.cookie, this.pick, undefined, this);
-        this.physics.add.overlap(this.basket, this.milk, this.pick, undefined, this);
-        this.physics.add.overlap(this.basket, this.chips, this.pick, undefined, this);
+
+        this.physics.add.overlap(this.basket, this.stuff, this.pick, undefined, this);
 
         this.picked=new Array();
         this.removeFood();
@@ -211,16 +147,8 @@ export default class foodScene extends Phaser.Scene {
           this.picked.push("apple");
         }
         else{
-          this.apple.setX(200);
-          this.apple.setY(60);
-          this.scoreLabel.text = "No, es una manzana";
-          this.scoreLabel.setAlpha(1.0);
-          this.time.addEvent({
-            delay: 800,
-            callback: this.hideMess,
-            callbackScope: this,
-            loop: false
-          });
+          this.apple.goBack();
+          this.reset(this.apple);
         }
       }
   
@@ -232,16 +160,8 @@ export default class foodScene extends Phaser.Scene {
           this.checkmark.setAlpha(1.0);
         }
         else{
-          this.banana.setX(280);
-          this.banana.setY(240);
-          this.scoreLabel.text = "No, es una banana";
-          this.scoreLabel.setAlpha(1.0);
-          this.time.addEvent({
-            delay: 800,
-            callback: this.hideMess,
-            callbackScope: this,
-            loop: false
-          });
+          this.banana.goBack();
+          this.reset(this.banana);
         }
       }
   
@@ -252,16 +172,8 @@ export default class foodScene extends Phaser.Scene {
           this.picked.push("bread");
         }
         else{
-          this.bread.setX(285);
-          this.bread.setY(60);
-          this.scoreLabel.text = "No, es un pan";
-          this.scoreLabel.setAlpha(1.0);
-          this.time.addEvent({
-            delay: 800,
-            callback: this.hideMess,
-            callbackScope: this,
-            loop: false
-          });
+          this.bread.goBack();
+          this.reset(this.bread);
         }
       }
   
@@ -273,16 +185,8 @@ export default class foodScene extends Phaser.Scene {
           this.picked.push("soda");
         }
         else{
-          this.soda.setX(195);
-          this.soda.setY(240);
-          this.scoreLabel.text = "No, es una soda";
-          this.scoreLabel.setAlpha(1.0);
-          this.time.addEvent({
-            delay: 800,
-            callback: this.hideMess,
-            callbackScope: this,
-            loop: false
-          });
+          this.soda.goBack();
+          this.reset(this.soda);
         }
       }
   
@@ -294,16 +198,8 @@ export default class foodScene extends Phaser.Scene {
           this.checkmark2.setAlpha(1.0);
         }        
         else{
-          this.water.setX(280);
-          this.water.setY(140);
-          this.scoreLabel.text = "No, es una botella de agua";
-          this.scoreLabel.setAlpha(1.0);
-          this.time.addEvent({
-            delay: 800,
-            callback: this.hideMess,
-            callbackScope: this,
-            loop: false
-          });
+          this.water.goBack();
+          this.reset(this.water);
         }
       }
   
@@ -314,16 +210,8 @@ export default class foodScene extends Phaser.Scene {
           this.picked.push("hotdog");
         }
         else{
-          this.hotdog.setX(360);
-          this.hotdog.setY(140);
-          this.scoreLabel.text = "No, es un perro caliente";
-          this.scoreLabel.setAlpha(1.0);
-          this.time.addEvent({
-            delay: 800,
-            callback: this.hideMess,
-            callbackScope: this,
-            loop: false
-          });
+          this.hotdog.goBack();
+          this.reset(this.hotdog);
         }
       }
   
@@ -334,16 +222,8 @@ export default class foodScene extends Phaser.Scene {
           this.picked.push("cookie");
         }
         else{
-          this.cookie.setX(360);
-          this.cookie.setY(60);
-          this.scoreLabel.text = "No, es una galleta";
-          this.scoreLabel.setAlpha(1.0);
-          this.time.addEvent({
-            delay: 800,
-            callback: this.hideMess,
-            callbackScope: this,
-            loop: false
-          });
+          this.cookie.goBack();
+          this.reset(this.cookie);
         }
       }
   
@@ -354,16 +234,8 @@ export default class foodScene extends Phaser.Scene {
           this.picked.push("milk");
         }
         else{
-          this.milk.setX(195);
-          this.milk.setY(145);
-          this.scoreLabel.text = "No, es una botella de leche";
-          this.scoreLabel.setAlpha(1.0);
-          this.time.addEvent({
-            delay: 800,
-            callback: this.hideMess,
-            callbackScope: this,
-            loop: false
-          });
+          this.milk.goBack();
+          this.reset(this.milk);
         }
       }
       
@@ -374,16 +246,8 @@ export default class foodScene extends Phaser.Scene {
           this.picked.push("chips");
         }
         else{
-          this.chips.setX(360);
-          this.chips.setY(240);
-          this.scoreLabel.text = "No, es una patata frita";
-          this.scoreLabel.setAlpha(1.0);
-          this.time.addEvent({
-            delay: 800,
-            callback: this.hideMess,
-            callbackScope: this,
-            loop: false
-          });
+          this.chips.goBack();
+          this.reset(this.chips);
         }
       }
 
@@ -394,7 +258,7 @@ export default class foodScene extends Phaser.Scene {
     }
 
     hideMess(){
-      this.scoreLabel.setAlpha(0.0);
+      this.message.setAlpha(0.0);
     }
 
     startDrag(pointer, targets){
@@ -500,5 +364,15 @@ export default class foodScene extends Phaser.Scene {
             }
           }
         }
+      }
+      reset(item: items){
+        this.message.text=item.message;
+        this.message.setAlpha(1.0);
+        this.time.addEvent({
+          delay:800,
+          callback: this.hideMess,
+          callbackScope: this,
+          loop: false
+        });
       }
 }

@@ -1,4 +1,6 @@
 import ExampleObject from '../objects/exampleObject';
+import {items} from '../objects/items';
+import {checkMarks} from '../objects/checkMarks';
 
 export default class partyScene extends Phaser.Scene {
     private mapButton: any;
@@ -26,6 +28,7 @@ export default class partyScene extends Phaser.Scene {
     private pickedList: any;
     private message: any;
     private level: any;
+    private stuff: any;
 
     constructor(){
         super({key: 'partyScene'});
@@ -74,92 +77,32 @@ export default class partyScene extends Phaser.Scene {
         this.mapButton.setScale(0.6);
 
         //Add checkmark
-        this.checkmark=this.add.image(30, 30, "checkmark");
-        this.checkmark.setScale(0.04);
-        this.checkmark.setAlpha(0.0);
-
-        //Second checkmark
-        this.checkmark2=this.add.image(30, 51, "checkmark");
-        this.checkmark2.setScale(0.04);
-        this.checkmark2.setAlpha(0.0);
-
-        //Third checkmark
-        this.checkmark3=this.add.image(30, 72, "checkmark");
-        this.checkmark3.setScale(0.04);
-        this.checkmark3.setAlpha(0.0);
-
-        //Fourth checkmark
-        this.checkmark4=this.add.image(30,93,"checkmark");
-        this.checkmark4.setScale(0.04);
-        this.checkmark4.setAlpha(0.0);
-
-        //Fifth checkmark
-        this.checkmark5=this.add.image(30,114,"checkmark");
-        this.checkmark5.setScale(0.04);
-        this.checkmark5.setAlpha(0.0);
+        this.checkmark=new checkMarks(this, 30, 30);
+        this.checkmark2=new checkMarks(this, 30, 51);
+        this.checkmark3=new checkMarks(this, 30, 72);
+        this.checkmark4=new checkMarks(this, 30, 93);
+        this.checkmark5=new checkMarks(this, 30, 114); 
 
         //Make basket
         this.basket=this.physics.add.image(270,360,"basket");
         this.basket.setScale(0.5);
 
         //Make bowl
-        this.bowl=this.physics.add.image(200,60,"bowl");
-        this.bowl.setScale(0.15);
-        this.bowl.setInteractive();
-        this.input.setDraggable(this.bowl);
-
-        //Make firework
-        this.firework=this.physics.add.image(320,240,"firework");
-        this.firework.setScale(0.15);
-        this.firework.setInteractive();
-        this.input.setDraggable(this.firework);
-
-        //Make green balloon
-        this.greenBalloon=this.physics.add.image(285,60,"greenBalloon");
-        this.greenBalloon.setScale(0.1);
-        this.greenBalloon.setInteractive();
-        this.input.setDraggable(this.greenBalloon);
-
-        //Make hat
-        this.hat=this.physics.add.image(230,240,"hat");
-        this.hat.setScale(0.15);
-        this.hat.setInteractive();
-        this.input.setDraggable(this.hat);
-
-        //Make plate
-        this.plate=this.physics.add.image(280,140,"plate");
-        this.plate.setScale(0.15);
-        this.plate.setInteractive();
-        this.input.setDraggable(this.plate);
-
-        //Make red balloon
-        this.redBalloon=this.physics.add.image(360,140,"redBalloon");
-        this.redBalloon.setScale(0.1);
-        this.redBalloon.setInteractive();
-        this.input.setDraggable(this.redBalloon);
-
-        //Make streamers
-        this.streamers=this.physics.add.image(360,60,"streamers");
-        this.streamers.setScale(0.15);
-        this.streamers.setInteractive();
-        this.input.setDraggable(this.streamers);
-
-        //Make utensils
-        this.utensils=this.physics.add.image(195,145,"utensils");
-        this.utensils.setScale(0.15);
-        this.utensils.setInteractive();
-        this.input.setDraggable(this.utensils);
+        this.bowl=new items(this, 200, 60, "bowl", 0.15, "No, es un bol");
+        this.firework= new items(this, 320, 240, "firework", 0.15, "No, es un fuegos de artificio");
+        this.greenBalloon=new items(this, 285, 60, "greenBalloon", 0.1, "No, es un globo verde");
+        this.hat=new items(this, 230, 240, "hat", 0.15, "No, es un sombrero");
+        this.plate=new items(this, 280, 140, "plate", 0.15, "No, es un plato");
+        this.redBalloon=new items(this, 360, 140, "redBalloon", 0.1, "No, es un globo rojo");
+        this.streamers=new items(this, 360, 60, "streamers", 0.15, "No, es una serpentina");
+        this.utensils=new items(this, 195, 145, "utensils", 0.15, "No, es el utensilio");
 
         //Determine what happens when items enter basket
         this.input.on('pointerdown', this.startDrag, this);
-        this.physics.add.overlap(this.basket, this.bowl, this.pick, undefined, this);
-        this.physics.add.overlap(this.basket, this.firework, this.pick, undefined, this);
-        this.physics.add.overlap(this.basket, this.greenBalloon, this.pick, undefined, this);
-        this.physics.add.overlap(this.basket, this.hat, this.pick, undefined, this);
-        this.physics.add.overlap(this.basket, this.plate, this.pick, undefined, this);
-        this.physics.add.overlap(this.basket, this.redBalloon, this.pick, undefined, this);
-        this.physics.add.overlap(this.basket, this.streamers, this.pick, undefined, this);
-        this.physics.add.overlap(this.basket, this.utensils, this.pick, undefined, this);
+
+        this.stuff=this.physics.add.group([this.bowl, this.utensils, this.firework, this.greenBalloon, this.streamers, this.redBalloon, this.hat, this.plate]);
+        this.physics.add.overlap(this.basket, this.stuff, this.pick, undefined, this);
+       
         
         //Make array for picked items
         this.picked=new Array();
@@ -215,16 +158,8 @@ export default class partyScene extends Phaser.Scene {
           this.picked.push("bowl");
         }
         else{
-          this.bowl.setX(200);
-          this.bowl.setY(60);
-          this.message.text = "No, es un bol";
-          this.message.setAlpha(1.0);
-          this.time.addEvent({
-            delay: 800,
-            callback: this.hideMess,
-            callbackScope: this,
-            loop: false
-          });
+          this.bowl.goBack();
+          this.reset(this.bowl);
         }
       }
   
@@ -235,16 +170,8 @@ export default class partyScene extends Phaser.Scene {
           this.picked.push("firework");
         }
         else{
-          this.firework.setX(320);
-          this.firework.setY(240);
-          this.message.text = "No, es unos fuegos de artificio";
-          this.message.setAlpha(1.0);
-          this.time.addEvent({
-            delay: 800,
-            callback: this.hideMess,
-            callbackScope: this,
-            loop: false
-          });
+          this.firework.goBack();
+          this.reset(this.firework);
         }
       }
   
@@ -256,16 +183,8 @@ export default class partyScene extends Phaser.Scene {
           this.checkmark2.setAlpha(1.0);
         }
         else{
-          this.greenBalloon.setX(285);
-          this.greenBalloon.setY(60);
-          this.message.text = "No, es un globo verde";
-          this.message.setAlpha(1.0);
-          this.time.addEvent({
-            delay: 800,
-            callback: this.hideMess,
-            callbackScope: this,
-            loop: false
-          });
+          this.greenBalloon.goBack();
+          this.reset(this.greenBalloon);
         }
       }
   
@@ -277,16 +196,8 @@ export default class partyScene extends Phaser.Scene {
           this.checkmark3.setAlpha(1.0);
         }
         else{
-          this.hat.setX(230);
-          this.hat.setY(240);
-          this.message.text = "No, es un sombrero";
-          this.message.setAlpha(1.0);
-          this.time.addEvent({
-            delay: 800,
-            callback: this.hideMess,
-            callbackScope: this,
-            loop: false
-          });
+          this.hat.goBack();
+          this.reset(this.hat);
         }
       }
   
@@ -298,16 +209,8 @@ export default class partyScene extends Phaser.Scene {
           this.picked.push("plate");
         }
         else{
-          this.plate.setX(280);
-          this.plate.setY(140);
-          this.message.text = "No, es un plato";
-          this.message.setAlpha(1.0);
-          this.time.addEvent({
-            delay: 800,
-            callback: this.hideMess,
-            callbackScope: this,
-            loop: false
-          });
+          this.plate.goBack();
+          this.reset(this.plate);
         }
       }
   
@@ -318,16 +221,8 @@ export default class partyScene extends Phaser.Scene {
           this.picked.push("redBalloon");
         }
         else{
-          this.redBalloon.setX(360);
-          this.redBalloon.setY(140);
-          this.message.text = "No, es un globo rojo";
-          this.message.setAlpha(1.0);
-          this.time.addEvent({
-            delay: 800,
-            callback: this.hideMess,
-            callbackScope: this,
-            loop: false
-          });
+          this.redBalloon.goBack();
+          this.reset(this.redBalloon);
         }
       }
   
@@ -338,16 +233,8 @@ export default class partyScene extends Phaser.Scene {
           this.picked.push("streamers")
         }
         else{
-          this.streamers.setX(360);
-          this.streamers.setY(60);
-          this.message.text = "No, es un serpentina";
-          this.message.setAlpha(1.0);
-          this.time.addEvent({
-            delay: 800,
-            callback: this.hideMess,
-            callbackScope: this,
-            loop: false
-          });
+          this.streamers.goBack();
+          this.reset(this.streamers);
         }
       }
   
@@ -358,16 +245,8 @@ export default class partyScene extends Phaser.Scene {
           this.picked.push("utensils");
         }
         else{
-          this.utensils.setX(195);
-          this.utensils.setY(145);
-          this.message.text = "No, es los utensilios";
-          this.message.setAlpha(1.0);
-          this.time.addEvent({
-            delay: 800,
-            callback: this.hideMess,
-            callbackScope: this,
-            loop: false
-          });
+          this.utensils.goBack();
+          this.reset(this.utensils);
         }
       }
 
@@ -486,5 +365,16 @@ export default class partyScene extends Phaser.Scene {
             }
           }
         }
+      }
+
+      reset(item: items){
+        this.message.text=item.message;
+        this.message.setAlpha(1.0);
+        this.time.addEvent({
+          delay:800,
+          callback: this.hideMess,
+          callbackScope: this,
+          loop: false
+        });
       }
 }
