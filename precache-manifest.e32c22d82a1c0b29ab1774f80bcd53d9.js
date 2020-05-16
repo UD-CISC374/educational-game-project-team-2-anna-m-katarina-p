@@ -1,6 +1,6 @@
 self.__precacheManifest = (self.__precacheManifest || []).concat([
   {
-    "revision": "e7087d5d91321d575b038366ef9f2407",
+    "revision": "8abb13560a1575b46d20d5db2853baec",
     "url": "assets/citations.md"
   },
   {
@@ -12,7 +12,7 @@ self.__precacheManifest = (self.__precacheManifest || []).concat([
     "url": "assets/font/font.xml"
   },
   {
-    "revision": "53cefca2a0f75654486b180949686165",
+    "revision": "75b87bb356c765c7ae66b09f95bc3d1c",
     "url": "assets/icons/favicon.ico"
   },
   {
@@ -20,16 +20,20 @@ self.__precacheManifest = (self.__precacheManifest || []).concat([
     "url": "assets/icons/icons-16.png"
   },
   {
-    "revision": "feee71db2bb3ba5d11b26658baf97783",
+    "revision": "93e83e8333e0425c0d77e568474c2883",
     "url": "assets/icons/icons-192.png"
   },
   {
-    "revision": "cb71713be71d0b8820c7ea6af9c5ddc6",
+    "revision": "2227bab5060a2f1301ede8d219851f53",
     "url": "assets/icons/icons-512.png"
   },
   {
     "revision": "200ce541edfaa71be93a1041736d1fee",
     "url": "assets/icons/icons8-game-controller-16.png"
+  },
+  {
+    "revision": "cf544f43e84234ab5de7d49a9eb319ad",
+    "url": "assets/images/abuelaBubble.png"
   },
   {
     "revision": "2e078b5e8e22c0bb6ac5316e6d8e8c3a",
@@ -64,8 +68,8 @@ self.__precacheManifest = (self.__precacheManifest || []).concat([
     "url": "assets/images/chips.png"
   },
   {
-    "revision": "acbaa6797a09dfe9bd3fb92e6efd5366",
-    "url": "assets/images/clothesButton.png"
+    "revision": "63d0fb80f4189799489fefec5305111f",
+    "url": "assets/images/clothingStore.PNG"
   },
   {
     "revision": "453b3fbce290f96433d0ec808cc7f3cd",
@@ -76,16 +80,16 @@ self.__precacheManifest = (self.__precacheManifest || []).concat([
     "url": "assets/images/dress.png"
   },
   {
-    "revision": "b0d4993ab53c8115ca44e24ffef865e1",
-    "url": "assets/images/firework.jpg"
+    "revision": "71314db0303eb6200902e02b79e63768",
+    "url": "assets/images/finalPic.PNG"
   },
   {
     "revision": "30a6bbc4b8fa5b8c2214abc7cd960eb7",
     "url": "assets/images/firework.png"
   },
   {
-    "revision": "d651736bc3192b919a6163b0cc2261dd",
-    "url": "assets/images/foodButton.png"
+    "revision": "6479b671320c3145350fbb637842d1f3",
+    "url": "assets/images/foodStore.png"
   },
   {
     "revision": "b1f5ed016d9e403e5943ab7f563c2cb5",
@@ -104,28 +108,12 @@ self.__precacheManifest = (self.__precacheManifest || []).concat([
     "url": "assets/images/hotdog.png"
   },
   {
-    "revision": "f2e32470b2bd3e7aeae766a18e4cf4da",
-    "url": "assets/images/map image.png"
-  },
-  {
     "revision": "db25658cb5ff1c9a3b7c2568434ed2cf",
     "url": "assets/images/mapB.png"
   },
   {
-    "revision": "45252dc956403e637d971fec3e481334",
-    "url": "assets/images/mapbutton.png"
-  },
-  {
     "revision": "0983c5a77d91217a1319ee6a3049a0e8",
     "url": "assets/images/milk.png"
-  },
-  {
-    "revision": "7a2ec6e0884124167460ca6dd27cfc37",
-    "url": "assets/images/pH indicators.jpg"
-  },
-  {
-    "revision": "e19c7faf5ba407eba3e96a8e49c43684",
-    "url": "assets/images/pH strips.jpg"
   },
   {
     "revision": "a02e7620ec965c78700d111a1458b982",
@@ -136,8 +124,8 @@ self.__precacheManifest = (self.__precacheManifest || []).concat([
     "url": "assets/images/paper.png"
   },
   {
-    "revision": "e32a77eef7149d228061150f2cc37c47",
-    "url": "assets/images/partyButton.png"
+    "revision": "3423f8ece261983e03f0b1998f015f23",
+    "url": "assets/images/partyStore.PNG"
   },
   {
     "revision": "beca26fc6371788af69e5f82feb6208e",
@@ -146,6 +134,10 @@ self.__precacheManifest = (self.__precacheManifest || []).concat([
   {
     "revision": "62bb28d96b7ab535acf6a258dce8c25f",
     "url": "assets/images/plate.png"
+  },
+  {
+    "revision": "88ab40d3fa1412524e147aedfcc86c6b",
+    "url": "assets/images/playButton.png"
   },
   {
     "revision": "7f84ab1b553d632c3c302fa8262b0656",
@@ -180,6 +172,10 @@ self.__precacheManifest = (self.__precacheManifest || []).concat([
     "url": "assets/images/sweater.png"
   },
   {
+    "revision": "163293c8c404cf1919ac64073b37fd5c",
+    "url": "assets/images/titleImage.png"
+  },
+  {
     "revision": "f133d6e1e9e95f90017a218be93e55b0",
     "url": "assets/images/utensils.png"
   },
@@ -188,24 +184,28 @@ self.__precacheManifest = (self.__precacheManifest || []).concat([
     "url": "assets/images/waterbottle.png"
   },
   {
-    "revision": "97970d4eea5e85758b2c5d418171a81c",
-    "url": "assets/images/x.png"
-  },
-  {
     "revision": "1ade6f9b00c80025fa3902b7db736ff9",
     "url": "assets/images/yellow.png"
   },
   {
-    "revision": "53cefca2a0f75654486b180949686165",
+    "revision": "29d06ddc732320e7f5ef4487f960b599",
+    "url": "assets/screenshots/large.png"
+  },
+  {
+    "revision": "06a0fa99b6438a57a0a66e7dfb859a0d",
+    "url": "assets/screenshots/small.png"
+  },
+  {
+    "revision": "75b87bb356c765c7ae66b09f95bc3d1c",
     "url": "favicon.ico"
   },
   {
-    "revision": "a8e2080fc5a4630ca3af9240c44a4893",
+    "revision": "614ab5f9be9e8a97e51cef7d66a46410",
     "url": "index.html"
   },
   {
-    "revision": "cf8e13230b636755cf34",
-    "url": "main.f45a58f3ddfc9bd593c9.bundle.js"
+    "revision": "039361f2e7dd2be8a689",
+    "url": "main.d776efc0822c79644811.bundle.js"
   },
   {
     "revision": "003187cab0ecf7a20e343e2ba6db4a34",
@@ -216,7 +216,7 @@ self.__precacheManifest = (self.__precacheManifest || []).concat([
     "url": "sw.js"
   },
   {
-    "revision": "5e69403aa42e950fedff",
-    "url": "vendors.0805bb80903235d40eaf.bundle.js"
+    "revision": "b520a78a3e5b3733be3c",
+    "url": "vendors.69223631c70404039eed.bundle.js"
   }
 ]);
