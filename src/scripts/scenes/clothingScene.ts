@@ -1,4 +1,3 @@
-import ExampleObject from '../objects/exampleObject';
 import {items} from '../objects/items';
 import { checkMarks } from '../objects/checkMarks';
 
@@ -84,6 +83,7 @@ export default class clothingScene extends Phaser.Scene {
     this.basket=this.physics.add.image(270,360,"basket");
     this.basket.setScale(0.5);
     
+    //Create the items
     this.shirt=new items(this, 200, 60, "shirt", 0.15, "No, es una camisa");
     this.pants=new items(this, 320, 240, "pants", 0.2, "No, es pantalones");
     this.shoes=new items(this, 285, 60, "shoes", 0.15, "No, son los zapatos");
@@ -102,9 +102,10 @@ export default class clothingScene extends Phaser.Scene {
 
     this.stuff = this.physics.add.group([this.shirt, this.pants, this.shoes, this.dress, this.shorts, this.pjs, this.skirt, this.sweater]);
     this.physics.add.overlap(this.basket, this.stuff, this.pick, undefined, this);
-    this.picked=new Array();   
-    this.removeClothes(); 
     
+    this.picked=new Array();   
+    
+    this.removeClothes(); 
 
     this.addChecks();
   }
@@ -119,7 +120,6 @@ export default class clothingScene extends Phaser.Scene {
       this.pickedList.push(this.picked[index]);
     }
     this.scene.start('mapScene', this.pickedList);
-
   }
 
   checkDone(){
@@ -141,108 +141,18 @@ export default class clothingScene extends Phaser.Scene {
   }
 
   pick(basket,item){
-    if (item == this.shirt){
-      this.word = "shirt";
-      if (this.items.indexOf(this.word) != -1){
-        this.shirt.disableBody(true,true);
-        this.checkmark.setAlpha(1.0);
-        this.picked.push("shirt");
-      }
-      else{
-        this.shirt.goBack();
-        this.reset(this.shirt);
-      }
+    var dict = {shirt: "shirt", skirt: "skirt", pjs: "pjs", sweater: "sweater", shoes: "shoes", pants: "pants", shorts: "shorts", dress: "dress"};
+    this.word = dict[item.name];
+
+    if (this.items.indexOf(this.word) != -1){
+      item.disableBody(true,true);
+      this.picked.push(this.word);
+      var add_checks = {0: this.checkmark, 1: this.checkmark2, 2: this.checkmark3, 3: this.checkmark4, 4: this.checkmark5};
+      add_checks[this.items.indexOf(this.word)].setAlpha(1.0);
     }
-
-    if (item == this.skirt){
-      this.word = "skirt";
-      if (this.items.indexOf(this.word) != -1){
-        this.skirt.disableBody(true,true);
-        this.picked.push("skirt");
-      }
-      else{
-        this.skirt.goBack();
-        this.reset(this.skirt);
-      }
-    }
-
-    if (item == this.pjs){
-      this.word = "pjs";
-      if (this.items.indexOf(this.word) != -1){
-        this.pjs.disableBody(true,true);
-        this.checkmark4.setAlpha(1.0);
-        this.picked.push("pjs");
-      }
-      else{
-        this.pjs.goBack();
-        this.reset(this.pjs);
-      }
-    }
-
-    if (item == this.sweater){
-      this.word = "sweater";
-      if (this.items.indexOf(this.word) != -1){
-        this.sweater.disableBody(true,true);
-        this.picked.push("sweater");
-      }
-      else{
-        this.sweater.goBack();
-        this.reset(this.sweater);
-      }
-
-      for (let index in this.picked){
-        this.pickedList.push(this.picked[index]);
-      }
-    }
-
-    if (item == this.shoes){
-      this.word = "shoes";
-      if (this.items.indexOf(this.word) != -1){
-        this.shoes.disableBody(true,true);
-        this.picked.push("shoes");
-      }
-      else{
-        this.shoes.goBack();
-        this.reset(this.shoes);
-      }
-    }
-
-    if (item == this.pants){
-      this.word = "pants";
-      if (this.items.indexOf(this.word) != -1){
-        this.pants.disableBody(true,true);
-        this.picked.push("pants");
-        this.checkmark.setAlpha(1.0);
-      }
-      else{
-        this.pants.goBack();
-        this.reset(this.pants);
-      }
-    }
-
-    if (item == this.shorts){
-      this.word = "shorts";
-      if (this.items.indexOf(this.word) != -1){
-        this.shorts.disableBody(true,true);
-        this.picked.push("shorts");
-      }
-      else{
-        this.shorts.goBack();
-        this.reset(this.shorts);
-      }
-    }
-
-    if (item == this.dress){
-      this.word = "dress";
-      if (this.items.indexOf(this.word) != -1){
-        this.dress.disableBody(true,true);
-        this.picked.push("dress");
-        this.checkmark3.setAlpha(1.0);
-      }
-      else{
-        this.dress.goBack();
-        this.reset(this.dress);
-      }
+    else{
+      item.goBack();
+      this.reset(item);
     }
 
     for (let index in this.picked){
@@ -277,30 +187,12 @@ export default class clothingScene extends Phaser.Scene {
   }
 
   removeClothes(){
+    var clothes = {"shirt": this.shirt, "shoes": this.shoes, "skirt": this.skirt, "sweater": this.sweater, "pjs": this.pjs, "dress": this.dress, "shorts": this.shorts, "pants": this.pants};
     for (let index in this.pickedList){
-      if (this.pickedList[index]=="shirt"){
-        this.shirt.disableBody(true, true);
-      }
-      if (this.pickedList[index]=="shoes"){
-        this.shoes.disableBody(true, true);
-      }
-      if (this.pickedList[index]=="skirt"){
-        this.skirt.disableBody(true, true);
-      }
-      if (this.pickedList[index]=="sweater"){
-        this.sweater.disableBody(true, true);
-      }
-      if (this.pickedList[index]=="pjs"){
-        this.pjs.disableBody(true, true);
-      }
-      if (this.pickedList[index]=="dress"){
-        this.dress.disableBody(true, true);
-      }
-      if (this.pickedList[index]=="shorts"){
-        this.shorts.disableBody(true, true);
-      }
-      if (this.pickedList[index]=="pants"){
-        this.pants.disableBody(true, true);
+      for (let thing in clothes){
+        if (this.pickedList[index]==thing){
+          clothes[thing].disableBody(true,true);
+        }
       }
     }
   }
@@ -310,53 +202,12 @@ export default class clothingScene extends Phaser.Scene {
   }
 
   addChecks(){
-    if (this.level=="1"){
-      for (let index in this.pickedList){
-        if (this.pickedList[index]=="shirt"){
-          this.checkmark.setAlpha(1.0);
+    var add_checks = {0: this.checkmark, 1: this.checkmark2, 2: this.checkmark3, 3: this.checkmark4, 4: this.checkmark5};
+        for (let index in this.pickedList){
+          if (this.items.includes(this.pickedList[index])){
+            add_checks[this.items.indexOf(this.pickedList[index])].setAlpha(1.0);
+          }
         }
-        if (this.pickedList[index]=="apple"){
-          this.checkmark2.setAlpha(1.0);
-        }
-        if (this.pickedList[index]=="plate"){
-          this.checkmark3.setAlpha(1.0);
-        }
-      }
-    }
-
-    if (this.level=="2"){
-      for (let index in this.pickedList){
-        if (this.pickedList[index]=="pants"){
-          this.checkmark.setAlpha(1.0);
-        }
-        if (this.pickedList[index]=="water"){
-          this.checkmark2.setAlpha(1.0);
-        }
-        if (this.pickedList[index]=="hat"){
-          this.checkmark3.setAlpha(1.0);
-        }
-      }
-    }
-
-    if (this.level=="3"){
-      for (let index in this.pickedList){
-        if (this.pickedList[index]=="banana"){
-          this.checkmark.setAlpha(1.0);
-        }
-        if (this.pickedList[index]=="greenBalloon"){
-          this.checkmark2.setAlpha(1.0);
-        }
-        if (this.pickedList[index]=="dress"){
-          this.checkmark3.setAlpha(1.0);
-        }
-        if (this.pickedList[index]=="pjs"){
-          this.checkmark4.setAlpha(1.0);
-        }
-        if (this.pickedList[index]=="soda"){
-          this.checkmark5.setAlpha(1.0);
-        }
-      }
-    }
   }
 
   reset(item: items){

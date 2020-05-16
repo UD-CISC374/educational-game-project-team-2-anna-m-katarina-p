@@ -1,4 +1,5 @@
-import ExampleObject from '../objects/exampleObject';
+import { items } from "../objects/items";
+import { checkMarks } from "../objects/checkMarks";
 
 export default class tutorialScene extends Phaser.Scene {
     private background: any;
@@ -32,17 +33,12 @@ export default class tutorialScene extends Phaser.Scene {
         this.add.text(40, 30, "la banana", {fill: "#000000", fontSize: "16px"});
 
         //Add a banana
-        this.banana=this.physics.add.image(250, 100, "banana");
-        this.banana.setScale(0.4);
-        this.banana.setInteractive();
-        this.input.setDraggable(this.banana);
+        this.banana = new items(this, 250, 100, "banana", 0.4, "No, es un banana");
         this.input.on('pointerdown', this.startDrag, this);
         this.add.text(175, 25, "Drag the banana to the \nbasket to collect it!", {fill: "#000000", fontSize: "16px"});
 
         //Make checkmark
-        this.checkmark=this.add.image(30,30, "checkmark");
-        this.checkmark.setScale(0.04);
-        this.checkmark.setAlpha(0.0);
+        this.checkmark = new checkMarks(this, 30, 30);
 
         //Make basket
         this.basket=this.physics.add.image(270, 360, "basket");

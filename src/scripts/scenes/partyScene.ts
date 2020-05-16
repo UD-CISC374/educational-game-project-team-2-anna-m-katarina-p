@@ -1,4 +1,3 @@
-import ExampleObject from '../objects/exampleObject';
 import {items} from '../objects/items';
 import {checkMarks} from '../objects/checkMarks';
 
@@ -102,7 +101,7 @@ export default class partyScene extends Phaser.Scene {
 
         this.stuff=this.physics.add.group([this.bowl, this.utensils, this.firework, this.greenBalloon, this.streamers, this.redBalloon, this.hat, this.plate]);
         this.physics.add.overlap(this.basket, this.stuff, this.pick, undefined, this);
-       
+        
         
         //Make array for picked items
         this.picked=new Array();
@@ -151,110 +150,24 @@ export default class partyScene extends Phaser.Scene {
 
     //Figure out what happens when you add item to basket
     pick(basket,item){
-      if (item == this.bowl){
-        this.word = "bowl";
-        if (this.items.indexOf(this.word) != -1){
-          this.bowl.disableBody(true,true);
-          this.picked.push("bowl");
-        }
-        else{
-          this.bowl.goBack();
-          this.reset(this.bowl);
-        }
+      var dict = {bowl: "bowl", firework: "firework", greenBalloon: "greenBalloon", hat: "hat", plate: "plate", redBalloon: "redBalloon", streamers: "streamers", utensils: "utensils"};
+      this.word = dict[item.name];
+
+      if (this.items.indexOf(this.word) != -1){
+        item.disableBody(true,true);
+        this.picked.push(this.word);
+        var add_checks = {0: this.checkmark, 1: this.checkmark2, 2: this.checkmark3, 3: this.checkmark4, 4: this.checkmark5};
+        add_checks[this.items.indexOf(this.word)].setAlpha(1.0);
       }
-  
-      if (item == this.firework){
-        this.word = "firework";
-        if (this.items.indexOf(this.word) != -1){
-          this.firework.disableBody(true,true);
-          this.picked.push("firework");
-        }
-        else{
-          this.firework.goBack();
-          this.reset(this.firework);
-        }
-      }
-  
-      if (item == this.greenBalloon){
-        this.word = "greenBalloon";
-        if (this.items.indexOf(this.word) != -1){
-          this.greenBalloon.disableBody(true,true);
-          this.picked.push("greenBalloon");
-          this.checkmark2.setAlpha(1.0);
-        }
-        else{
-          this.greenBalloon.goBack();
-          this.reset(this.greenBalloon);
-        }
-      }
-  
-      if (item == this.hat){
-        this.word = "hat";
-        if (this.items.indexOf(this.word) != -1){
-          this.hat.disableBody(true,true);
-          this.picked.push("hat");
-          this.checkmark3.setAlpha(1.0);
-        }
-        else{
-          this.hat.goBack();
-          this.reset(this.hat);
-        }
-      }
-  
-      if (item == this.plate){
-        this.word = "plate";
-        if (this.items.indexOf(this.word) != -1){
-          this.plate.disableBody(true,true);
-          this.checkmark3.setAlpha(1.0);
-          this.picked.push("plate");
-        }
-        else{
-          this.plate.goBack();
-          this.reset(this.plate);
-        }
-      }
-  
-      if (item == this.redBalloon){
-        this.word = "redBalloon";
-        if (this.items.indexOf(this.word) != -1){
-          this.redBalloon.disableBody(true,true);
-          this.picked.push("redBalloon");
-        }
-        else{
-          this.redBalloon.goBack();
-          this.reset(this.redBalloon);
-        }
-      }
-  
-      if (item == this.streamers){
-        this.word = "streamers";
-        if (this.items.indexOf(this.word) != -1){
-          this.streamers.disableBody(true,true);
-          this.picked.push("streamers")
-        }
-        else{
-          this.streamers.goBack();
-          this.reset(this.streamers);
-        }
-      }
-  
-      if (item == this.utensils){
-        this.word = "utensils";
-        if (this.items.indexOf(this.word) != -1){
-          this.utensils.disableBody(true,true);
-          this.picked.push("utensils");
-        }
-        else{
-          this.utensils.goBack();
-          this.reset(this.utensils);
-        }
+      else{
+        item.goBack();
+        this.reset(item);
       }
 
       for (let index in this.picked){
         this.pickedList.push(this.picked[index]);
         this.picked=[];
-      }
-      
+      }  
     }
 
     //Allow dragging of items
@@ -283,30 +196,12 @@ export default class partyScene extends Phaser.Scene {
       
       //Remove items if they've been selected
       removeParty(){
+        var parties = {"bowl": this.bowl, "firework": this.firework, "greenBalloon": this.greenBalloon, "hat": this.hat, "plate": this.plate, "redBalloon": this.redBalloon, "streamers": this.streamers, "utensils": this.utensils};
         for (let index in this.pickedList){
-          if (this.pickedList[index]=="bowl"){
-            this.bowl.disableBody(true, true);
-          }
-          if (this.pickedList[index]=="greenBalloon"){
-            this.greenBalloon.disableBody(true, true);
-          }
-          if (this.pickedList[index]=="streamers"){
-            this.streamers.disableBody(true, true);
-          }
-          if (this.pickedList[index]=="utensils"){
-            this.utensils.disableBody(true, true);
-          }
-          if (this.pickedList[index]=="plate"){
-            this.plate.disableBody(true, true);
-          }
-          if (this.pickedList[index]=="redBalloon"){
-            this.redBalloon.disableBody(true, true);
-          }
-          if (this.pickedList[index]=="hat"){
-            this.hat.disableBody(true, true);
-          }
-          if (this.pickedList[index]=="firework"){
-            this.firework.disableBody(true, true);
+          for (let thing in parties){
+            if (this.pickedList[index]==thing){
+              parties[thing].disableBody(true,true);
+            }
           }
         }
       }
@@ -318,51 +213,10 @@ export default class partyScene extends Phaser.Scene {
 
       //Add checkmarks if they're selected
       addChecks(){
-        if (this.level=="1"){
-          for (let index in this.pickedList){
-            if (this.pickedList[index]=="shirt"){
-              this.checkmark.setAlpha(1.0);
-            }
-            if (this.pickedList[index]=="apple"){
-              this.checkmark2.setAlpha(1.0);
-            }
-            if (this.pickedList[index]=="plate"){
-              this.checkmark3.setAlpha(1.0);
-            }
-          }
-        }
-
-        if (this.level=="2"){
-          for (let index in this.pickedList){
-            if (this.pickedList[index]=="pants"){
-              this.checkmark.setAlpha(1.0);
-            }
-            if (this.pickedList[index]=="water"){
-              this.checkmark2.setAlpha(1.0);
-            }
-            if (this.pickedList[index]=="hat"){
-              this.checkmark3.setAlpha(1.0);
-            }
-          }
-        }
-
-        if (this.level=="3"){
-          for (let index in this.pickedList){
-            if (this.pickedList[index]=="banana"){
-              this.checkmark.setAlpha(1.0);
-            }
-            if (this.pickedList[index]=="greenBalloon"){
-              this.checkmark2.setAlpha(1.0);
-            }
-            if (this.pickedList[index]=="dress"){
-              this.checkmark3.setAlpha(1.0);
-            }
-            if (this.pickedList[index]=="pjs"){
-              this.checkmark4.setAlpha(1.0);
-            }
-            if (this.pickedList[index]=="soda"){
-              this.checkmark5.setAlpha(1.0);
-            }
+        var add_checks = {0: this.checkmark, 1: this.checkmark2, 2: this.checkmark3, 3: this.checkmark4, 4: this.checkmark5};
+        for (let index in this.pickedList){
+          if (this.items.includes(this.pickedList[index])){
+            add_checks[this.items.indexOf(this.pickedList[index])].setAlpha(1.0);
           }
         }
       }

@@ -1,5 +1,3 @@
-import ExampleObject from '../objects/exampleObject';
-
 export default class finalScene extends Phaser.Scene{
     private background: any;
 

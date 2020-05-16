@@ -8,7 +8,7 @@ export class items extends Phaser.Physics.Arcade.Image{
         super(scene, x, y, name);
         scene.add.existing(this);
         scene.physics.add.existing(this);
-       
+        
         this.setScale(scale);
         this.setInteractive();
         scene.input.setDraggable(this);
@@ -27,9 +27,5 @@ export class items extends Phaser.Physics.Arcade.Image{
     goBack(){
         this.x=this.originalx;
         this.y=this.originaly;
-    }
-
-    returnName(): string{
-        return this.name;
     }
 }

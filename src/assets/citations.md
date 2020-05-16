@@ -1,5 +1,6 @@
 # Citations
 
+<https://game-icons.net/1x1/delapouite/shop.html>
 <https://commons.wikimedia.org/wiki/File:Red_X.svg>
 <https://www.netclipart.com/isee/Tbmox_clip-art-freeuse-library-junk-food-chili-hot/>
 <https://www.mycutegraphics.com/graphics/tshirt-images.html>

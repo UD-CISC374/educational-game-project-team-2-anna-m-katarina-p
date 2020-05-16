@@ -1,5 +1,3 @@
-import ExampleObject from '../objects/exampleObject';
-
 export default class mapScene extends Phaser.Scene {
     private foodButton: any;
     private partyButton: any;
