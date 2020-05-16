@@ -17,10 +17,10 @@ start thanks to your excellent Spanish skills!
 Drag the correct items into the basket to check off the items. Progress through
 all three lists to complete the game.
 
-## YouTube Demo
-
-<https://youtu.be/1_W415CHCD4>
-
 ## Screenshot
 
 ![Screenshot](/src/assets/screenshots/large.png)
+
+## YouTube Demo
+
+<https://youtu.be/1_W415CHCD4>
